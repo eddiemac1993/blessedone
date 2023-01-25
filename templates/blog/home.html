@@ -1,25 +1,42 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="container">
+    <h1 class="text-center mb-4">Latest Posts</h1>
+    <div class="row">
+        {% for post in posts %}
+            <div class="col-md-3 mb-4">
+                <div class="card position-relative">
+                    <img class="card-img-top img-fluid" src="{{ post.image.url }}" alt="Blessed Touch">
 
-<div class="row">
-  {% for post in posts %}
-    <div class="col-md-3 mb-4">
-      <div class="card">
-        <img class="card-img-top" src="{% if post.image %}{{ post.image.url }}{% else %}{{ 'default.jpg' }}{% endif %}" alt="Blessed Touch">
-        <div class="card-body">
-            <h5 class="card-title">{{ post.title }}</h5>
-            <p class="card-text">{{ post.content|truncatechars:100 }}</p>
-            <a href="{% url 'post-detail' post.id %}" class="btn btn-primary">View</a>
-            <div class="card-footer text-muted">
-                <small>{{ post.date_posted|date:"F d, Y" }} by <a href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a></small>
-                <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
-                <small>Price: {{ post.price }}</small>
+                    <div class="price-tag position-absolute text-light p-2"><img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+                    </div>
+
+                    <div class="card-body">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        <a href="{% url 'post-detail' post.id %}" class="btn btn-primary">View Details</a>
+                        <div class="card-footer d-flex justify-content-between">
+                            <div class="">
+                                <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+                            </div>
+                            <div>
+                                <div class="price-tag position-absolute text-light bg-dark p-2">ZMK {{ post.price }}</div>
+                                <h6> <a href="{% url 'user-posts' post.author.username %}"><span class="badge rounded-pill text-bg-light"> POSTED BY : {{ post.author }} </span></a></h6>
+                            </div>
+
+                        </div>
+                        <a href="{% url 'user-posts' post.author.username %}"><span class="badge rounded-pill text-bg-light">{{ post.author }} </span></a>
+                    </div>
+
+                </div>
+
             </div>
-        </div>
-      </div>
+        {% endfor %}
     </div>
-  {% endfor %}
 </div>
+
+
+
+
 
 {% if is_paginated %}
   {% if page_obj.has_previous %}

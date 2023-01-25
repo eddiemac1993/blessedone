@@ -1,20 +1,46 @@
 {% extends "base.html" %}
+
 {% block content %}
-  <article class="media content-section">
-    <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
-    <div class="media-body">
-      <div class="article-metadata">
-        <a class="mr-2" href="{% url 'user-posts' object.author.username %}">{{ object.author }}</a>
-        <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
-        {% if object.author == user %}
-          <div>
-            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
-            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
-          </div>
-        {% endif %}
-      </div>
-      <h2 class="article-title">{{ object.title }}</h2>
-      <p class="article-content">{{ object.content }}</p>
+  <h1>Post Details</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <img class="card-img-top" src="{{ object.image.url }}" alt="{{ object.title }}">
+                <div class="card-body">
+                    <h2 class="card-title">{{ object.title }}</h2>
+                    <p class="card-text">{{ object.content }}</p>
+                </div>
+                <div class="card-footer text-muted">
+
+                    {% if object.author == user %}
+                        <div>
+                            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
+                            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">Price:ZMK {{ object.price }}</li>
+                        <li class="list-group-item">Content: {{ object.content }}</li>
+                        <li class="list-group-item">Description: {{ object.description }}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
+                    <h5 class="card-title">{{ object.author }}</h5>
+                    <p class="card-text">{{ object.author.profile.bio }}</p>
+                    <small>{{ object.date_posted|date:"F d, Y" }} by <a href="{% url 'user-posts' object.author.username %}">{{ object.author }}</a></small>
+                </div>
+            </div>
+        </div>
     </div>
-  </article>
+</div>
 {% endblock content %}
