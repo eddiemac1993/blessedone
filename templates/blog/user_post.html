@@ -1,19 +1,30 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1 class="mb-3">Posts by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h1>
-    {% for post in posts %}
-        <article class="media content-section">
-          <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
-          <div class="media-body">
-            <div class="article-metadata">
-              <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
-              <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
-            </div>
-            <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
-            <p class="article-content">{{ post.content }}</p>
-          </div>
-        </article>
-    {% endfor %}
+    <div class="container mt-5">
+        <h1 class="mb-3">{{ page_obj.paginator.count }} - Items Posted by {{ view.kwargs.username }}</h1>
+        <div class="row">
+            {% for post in posts %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img class="card-img-top img-fluid" src="{{ post.image.url }}" alt="Author Image">
+                        <div class="card-body">
+                            <div class="card-text d-flex justify-content-between">
+                                <div class="">
+                                    <a class="text-dark" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
+                                </div>
+                                <div class="">
+                                    <small class="text-muted">On {{ post.date_posted }}</small>
+                                </div>
+                            </div>
+                            <h5 class="card-title">
+                                <a href="{% url 'post-detail' post.id %}">{{ post.title }}</a>
+                            </h5>
+                            
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     {% if is_paginated %}
 
       {% if page_obj.has_previous %}
