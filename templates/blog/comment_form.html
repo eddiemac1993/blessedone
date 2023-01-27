@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load social_share %}
+{% block content %}
+  <h1>Post Details</h1>
+<div class="container">
+
+    <form method="post" action="{% url 'comment_create' post.pk %}">
+{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Add comment">
+</form>
+
+       
+</div>
+{% endblock content %}

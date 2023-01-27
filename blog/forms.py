@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post
+from .models import Post, Comment
 
 class PostForm(forms.ModelForm):
     class Meta:
@@ -13,3 +13,15 @@ class PostForm(forms.ModelForm):
             'description': forms.Textarea(attrs={'class': 'form-control'}),
             'phone_number': forms.TextInput(attrs={'class': 'form-control'}),
         }
+
+
+class CommentForm(forms.ModelForm):
+    content = forms.CharField(widget=forms.Textarea(attrs={
+        'class': 'md-textarea form-control',
+        'placeholder': 'comment here ...',
+        'rows': '4',
+    }))
+
+    class Meta:
+        model = Comment
+        fields = ('content', )

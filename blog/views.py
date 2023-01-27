@@ -1,10 +1,11 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.db.models import Q
-from .models import Post
-from .forms import PostForm
+from .models import Post, Comment
+from .forms import PostForm, CommentForm
+from django.urls import reverse_lazy
 
 
 class SearchResultsView(ListView):
@@ -40,6 +41,36 @@ class UserPostListView(ListView):
 
 class PostDetailView(DetailView):
     model = Post
+    count_hit = True
+
+    form = CommentForm
+
+    def post(self, request, *args, **kwargs):
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            post = self.get_object()
+            form.instance.user = request.user
+            form.instance.post = post
+            form.save()
+
+            return redirect(reverse("post-detail", kwargs={
+                'pk': post.pk
+            }))
+
+    def get_context_data(self, **kwargs):
+        similar_posts = self.object.tags.similar_objects()[:3]
+        post_comments_count = Comment.objects.all().filter(post=self.object.id).count()
+        post_comments = Comment.objects.all().filter(post=self.object.id)
+        context = super().get_context_data(**kwargs)
+        context.update({
+            "similar_posts":similar_posts,
+            'form': self.form,
+            'post_comments': post_comments,
+            'post_comments_count': post_comments_count,
+        })
+
+
+        return context
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
@@ -55,6 +86,18 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         return super().get(request, *args, **kwargs)
 
 
+class CommentCreateView(LoginRequiredMixin, CreateView):
+    form_class = CommentForm # use this instead of fields
+    model = Comment
+    fields = ('text',)
+
+    def form_valid(self, form):
+        form.instance.post = Post.objects.get(pk=self.kwargs['pk'])
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('post-detail', kwargs={'pk': self.object.post.pk})
 
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
