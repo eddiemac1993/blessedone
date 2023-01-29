@@ -9,6 +9,7 @@ class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
     phone_number = models.CharField(max_length=20, null=True, blank=True, unique=True)
+    whatsapp_number = models.CharField(max_length=15, null=True, blank=True, unique=True)
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)

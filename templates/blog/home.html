@@ -1,37 +1,82 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="container">
-    <h1 class="text-center mb-4">Latest Posts</h1>
-<div class="row">
-{% for post in posts %}
-    <div class="col-md-3 mb-4">
-        <div class="card position-relative">
-            <img class="card-img-top img-fluid" src="{{ post.image.url }}" alt="Blessed Touch">
 
-            <div class="price-tag position-absolute text-light bg-dark p-2">ZMK {{ post.price }}</div>
-            <div class="card-body">
-                <h5 class="card-title">{{ post.title }}</h5>
-                <a href="{% url 'post-detail' post.id %}" class="btn btn-primary">View Details</a>
-                <div class="d-flex align-items-center">
-                            <div class="">
-                                <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
-                            </div>
-                            <div class="ml-2">
-                                <h6> POSTED BY : <a href="{% url 'user-posts' post.author.username %}"><span class="badge rounded-pill text-bg-light">{{ post.author }} </span></a></h6>
-                            </div>
+<div id="text-container" class="text-center mt-5 mb-5" style="color: black; border: 1px solid black; border-radius: 10px;">
+  <h2 id="big-text"></h2>
+  <h5 id="light-text">Welcome</h5>
+</div>
 
+<script>
+  var texts = ['ADVERTISEMENT', 'PARTNERSHIP', 'SPONSORSHIP'];
+  var i = 0;
+
+  setInterval(function() {
+    document.getElementById('big-text').innerHTML = texts[i];
+    i++;
+    if (i >= texts.length) {
+      i = 0;
+    }
+  }, 5000);
+</script>
+
+
+<hr>
+
+<style type="text/css">
+/* Style for the view details button */
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5
+
+</style>
+
+
+<div class="container bg-light">
+    <h1 class="text-left mb-4">Recent Posts</h1>
+    <div class="row">
+        {% for post in posts %}
+            <div class="col-md-3 mb-4">
+                <div class="card position-relative">
+                    <img class="card-img-top img-fluid" src="{{ post.image.url }}" alt="Blessed Touch" style="width: 100%; height: 200px; object-fit: cover; overflow: hidden;">
+                <div class="price-tag position-absolute text-light bg-dark p-2">ZMK {{ post.price }}</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <a href="{% url 'post-detail' post.id %}" class="btn btn-outline-primary mr-2 mb-2 btn-sm">
+    <i class="fas fa-eye"></i> View Details
+</a>
+
+
+<a href="tel:{{ post.phone_number }}"class="btn btn-outline-secondary mr-2 mb-2 btn-sm">
+    <i class="fas fa-phone"></i> {{ post.phone_number }}
+</a>
+
+<a href="https://wa.me/{{ post.whatsapp_number }}?text=Hello,%20I%20saw%20your%20post%20on%20the%20website%20and%20I%20would%20like%20to%20inquire%20about%20it." class="btn btn-outline-success mb-2 btn-sm">
+    <i class="fab fa-whatsapp"></i> {{ post.whatsapp_number }}
+</a>
+
+            </div>
+
+                <div class="card-footer">
+                    <small class="">
+                        <div class="ml-2">
+                            <i class="fas fa-user-circle"></i><a href="{% url 'user-posts' post.author.username %}"><span class="badge rounded-pill text-bg-light">{{ post.author }} </span></a>
                         </div>
+                        <div class="ml-2">
+                            <i class="fas fa-clock"></i> {{ post.date_posted|timesince }} ago
+                        </div>
+                    </small>
+                </div>
             </div>
         </div>
-        <div class="list-group-item">
-    <i class="fas fa-phone"></i> Phone : {{ post.phone_number }}
+    {% endfor %}
+</div>
 </div>
 
-    </div>
-{% endfor %}
-</div>
 
-</div
 
 
 
@@ -55,3 +100,4 @@
   {% endif %}
 {% endif %}
 {% endblock content %}
+<hr>
