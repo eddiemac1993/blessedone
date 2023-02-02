@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice</title>
+    <style>
+        /* Add CSS styles for the invoice */
+        * {
+            box-sizing: border-box;
+        }
+css
+Copy code
+    .invoice-container {
+        width: 80%;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .header h1 {
+        font-size: 36px;
+    }
+
+    .customer-details {
+        width: 50%;
+        float: left;
+    }
+
+    .order-details {
+        width: 50%;
+        float: right;
+    }
+
+    .order-details h2 {
+        font-size: 24px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        border: 1px solid #dddddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #dddddd;
+    }
+
+    .total {
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+    <div class="invoice-container">
+        <div class="header">
+            <h1><span> BLESSED</span> <span style="color:red">TOUCH</span>Invoice </h1>
+        </div>
+        <div class="customer-details">
+            <h2>Customer Details</h2>
+            <p>Name: {{ name }}</p>
+            <p>Email: {{ email }}</p>
+            <p>Street: {{ street }}</p>
+            <p>City: {{ city }}</p>
+            <p>Phone Number: {{ phone_number }}</p>
+        </div>
+        <div class="order-details">
+            <h2>Order Details</h2>
+            <table>
+                <tr>
+                    <th>Order ID</th>
+                    <td>{{ pk }}</td>
+                </tr>
+                <tr>
+                    <th>Items</th>
+                    <td>
+                        <ul>
+                            {% for item in items %}
+                                <li>{{ item.name }} - {{ item.price }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Total Price</th>
+                    <td class="total">{{ price }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <hr class="bg-white">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-center">
+                    <span>Copyright &copy; 2023</span>
+                    <span> BLESSED</span> <span style="color:red">TOUCH</span>
+                </p>
+            </div>
+        </div>
+</body>
+</html>

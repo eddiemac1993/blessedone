@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Receipt</title>
+</head>
+<body>
+    <h1>Order Receipt</h1>
+    <p>Order Number: {{ pk }}</p>
+    <p>Customer Information:</p>
+    <p>Name: {{ name }}</p>
+    <p>Email: {{ email }}</p>
+    <p>Street: {{ street }}</p>
+    <p>City: {{ city }}</p>
+    <p>Phone Number: {{ phone_number }}</p>
+    <p>Order Items:</p>
+    <ul>
+        {% for item in items %}
+        <li>{{ item.name }} - {{ item.price }}</li>
+        {% endfor %}
+    </ul>
+    <p>Total Amount: {{ price }}</p>
+</body>
+</html>

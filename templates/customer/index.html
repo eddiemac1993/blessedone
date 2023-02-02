@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid d-flex justify-content-between">
+    <ul class="navbar-nav d-flex align-items-center">
+      <li class="nav-item mr-2">
+        <a class="nav-link" href="{% url 'customer:about' %}">About Us</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'customer:menu' %}">Menu</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="container mb-5">
+    <div class="row justify-content mt-5">
+        <div class="col-mb-8 col-sm-12 offset-md-1 p-4 text-center">
+            <h1>QuickDrop-Online Delivery</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-1">
+        <div class="card col-md-5 col-sm-12 offset-md-1 p-4 text-center">
+            <h1>Place an Order</h1>
+            <a href="{% url 'customer:order' %}" class="btn btn-outline-primary">Order Now!</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
