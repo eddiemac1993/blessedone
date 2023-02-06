@@ -75,6 +75,11 @@
                         <label for="name">Phone_Number</label>
                         <input required class="form-control" type="text" placeholder="097123456" name="phone" />
                     </div></div>
+                    <select id="location" name="location" class="form-control">
+      {% for location in locations %}
+        <option value="{{ location.pk }}">{{ location.name }} ({{ location.delivery_fee }})</option>
+      {% endfor %}
+    </select>
                     </div>
                     </div>
 
@@ -106,21 +111,3 @@
     </div>
 </div>
 {% endblock %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

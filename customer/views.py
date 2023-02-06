@@ -1,9 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from django.core.mail import send_mail
-import json
 from django.db.models import Q
-from .models import MenuItem, OrderModel
+from .models import MenuItem, OrderModel, Location
 import pdfkit
 from django.http import HttpResponse
 from django.template.loader import render_to_string
@@ -21,11 +19,12 @@ class Order(View):
     def get(self, request, *args, **kwargs):
         foods = MenuItem.objects.filter(category__name__contains='food')
         hardware = MenuItem.objects.filter(category__name__contains='hardware')
-
+        locations = Location.objects.all()
 
         context = {
             'foods': foods,
             'hardware': hardware,
+            'locations': locations,
         }
 
         return render(request, 'customer/order.html', context)
@@ -36,6 +35,9 @@ class Order(View):
         street = request.POST.get('street')
         city = request.POST.get('city')
         phone_number = request.POST.get('phone_number')
+        location_id = request.POST.get('location')
+
+        location = Location.objects.get(pk=location_id)
 
         order_items = {
             'item': []
@@ -66,22 +68,10 @@ class Order(View):
             email=email,
             street=street,
             city=city,
-            phone_number=phone_number
+            phone_number=phone_number,
+            location=location
             )
         order.items.add(*item_ids)
-
-        # After everything is done, send confirmation email to the user
-        body = ('Thank you for your order! Your food is being made and will be delivered soon!\n'
-                f'Your total: {price}\n'
-                'Thank you again for your order!')
-
-        send_mail(
-            'Thank You For Your Order!',
-            body,
-            'example@example.com',
-            [email],
-            fail_silently=False
-        )
 
         return redirect('customer:order-confirmation', pk=order.pk)
 
@@ -90,30 +80,25 @@ class OrderConfirmation(View):
     def get(self, request, pk, *args, **kwargs):
         order = OrderModel.objects.get(pk=pk)
 
+        total_price = order.price + order.location.delivery_fee
         context = {
             'pk': order.pk,
             'items': order.items,
             'price': order.price,
+            'location': order.location,
+            'delivery_fee': order.location.delivery_fee,
+            'total_price': total_price,
         }
 
         return render(request, 'customer/order_confirmation.html', context)
 
-    def post(self, request, pk, *args, **kwargs):
-        data = json.loads(request.body)
-
-        if data['isPaid']:
-            order = OrderModel.objects.get(pk=pk)
-            order.is_paid = True
-            order.save()
-
-        return redirect('payment-confirmation')
-
 
 def get_invoice(request, pk):
     order = OrderModel.objects.get(pk=pk)
-
     items = order.items.all()
     price = sum(item.price for item in items)
+    delivery_fee = order.total_price() - order.price
+    total = price + delivery_fee
 
     # Get the customer details from the order object
     name = order.name
@@ -124,6 +109,7 @@ def get_invoice(request, pk):
 
     # Render the HTML template to be converted to PDF
     html = render_to_string('customer/invoice.html', {'items': items, 'pk': pk, 'price': price,
+                                                       'delivery_fee': delivery_fee, 'total_price': total,
                                                        'name': name, 'email': email, 'street': street,
                                                        'city': city, 'phone_number': phone_number})
 
@@ -133,7 +119,6 @@ def get_invoice(request, pk):
     response['Content-Disposition'] = 'attachment; filename="invoice.pdf"'
 
     return response
-
 
 
 class Menu(View):

@@ -16,8 +16,10 @@
         {% for item in items.all %}
             <p>{{ item.name }} <span class="pl-3">{{ item.price }}</span></p>
         {% endfor %}
-    <p class="font-weight-bold pt-4">Total: {{ price }}</p>
+<p class="font-weight-bold pt-4">Delivery Fee: {{ delivery_fee }}</p>
+<p class="font-weight-bold pt-4">Order Total: {{ total_price }}</p>
 </div>
+
 </div>
 <div class="row justify-content-center pb-2 pt-5">
     <div class="col-md-6 text-center">

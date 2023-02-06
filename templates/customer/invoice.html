@@ -63,7 +63,7 @@ Copy code
 <body>
     <div class="invoice-container">
         <div class="header">
-            <h1><span> BLESSED</span> <span style="color:red">TOUCH</span>Invoice </h1>
+            <h1><span> BLESSED</span> <span style="color:red">TOUCH</span> INVOICE </h1>
         </div>
         <div class="customer-details">
             <h2>Customer Details</h2>
@@ -94,17 +94,25 @@ Copy code
                     <th>Total Price</th>
                     <td class="total">{{ price }}</td>
                 </tr>
+                <tr>
+                    <th>Delivery Fee</th>
+                    <td class="delivery-fee">{{ delivery_fee }}</td>
+                </tr>
+                <tr>
+                    <th>Total (Including Delivery Fee)</th>
+                    <td class="total-with-delivery">{{ total_price }}</td>
+                </tr>
             </table>
         </div>
     </div>
     <hr class="bg-white">
-        <div class="row">
-            <div class="col-md-12">
-                <p class="text-center">
-                    <span>Copyright &copy; 2023</span>
-                    <span> BLESSED</span> <span style="color:red">TOUCH</span>
-                </p>
-            </div>
-        </div>
+<div class="row">
+    <div class="col-md-12">
+        <p class="text-center">
+            <span>Copyright &copy; 2023</span>
+            <span> BLESSED</span> <span style="color:red">TOUCH</span>
+        </p>
+    </div>
+</div>
 </body>
 </html>

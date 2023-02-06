@@ -1,0 +1,107 @@
+[33mcommit dc802df0985c871424624ff4fdfbbe31371d0e10[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: eddiemac1993 <manjoloe800@gmail.com>
+Date:   Sat Feb 4 08:24:32 2023 +0000
+
+    navigation
+
+[33mcommit ec60f6012b9d84055856527c5555db26b03debaf[m
+Author: eddiemac1993 <manjoloe800@gmail.com>
+Date:   Thu Feb 2 19:10:45 2023 +0000
+
+    new
+
+[33mcommit 5df9a577f59677341b05419f21fc3e8a60fc5329[m
+Author: eddiemac1993 <manjoloe800@gmail.com>
+Date:   Sun Jan 29 14:51:32 2023 +0000
+
+    favicon
+
+[33mcommit 86aa9df89d9fb4199d861123018b994bd29685af[m
+Author: eddiemac1993 <manjoloe800@gmail.com>
+Date:   Fri Jan 27 13:08:11 2023 +0000
+
+    commentsection
+
+[33mcommit c7ba30d3a943cb38f762f0bfdc9f5221332ec22b[m
+Author: eddiemac1993 <manjoloe800@gmail.com>
+Date:   Thu Jan 26 10:51:28 2023 +0000
+
+    made the card
+
+[33mcommit a4cf7cb709f687f90d1ac502b4f260c7f51a3ec2[m
+Author: eddiemac1993 <manjoloe800@gmail.com>
+Date:   Wed Jan 25 17:57:00 2023 +0000
+
+    added image for the blog
+
+[33mcommit d611e035ea61622d59cfee417e7a392c102baf86[m
+Author: eddiemac1993 <manjoloe800@gmail.com>
+Date:   Sat Jan 21 09:46:23 2023 +0000
+
+    Updating database tables
+
+[33mcommit d51ec46373dc709bd9cf31b71bfd18c0d1f75a0f[m
+Author: edwardbaju <manjoloe800@gmail.com>
+Date:   Fri Jan 20 15:32:02 2023 +0200
+
+    start1
+
+[33mcommit 59d9babea8c597d6d437c7536f899ee339e59797[m
+Author: edwardbaju <manjoloe800@gmail.com>
+Date:   Fri Jan 20 14:59:18 2023 +0200
+
+    start
+
+[33mcommit 684df48b79551c991346e892539e6055d6148672[m
+Author: edwardbaju <manjoloe800@gmail.com>
+Date:   Fri Jan 20 14:31:45 2023 +0200
+
+    done ready for production
+
+[33mcommit 352d566e837676d9509f3e4897431587453cd276[m
+Author: edwardbaju <manjoloe800@gmail.com>
+Date:   Fri Jan 20 09:59:16 2023 +0200
+
+    updating feature for profile
+
+[33mcommit 1654177785db84dc3bab4a8d740ba02412b5070f[m
+Author: edwardbaju <manjoloe800@gmail.com>
+Date:   Fri Jan 20 09:09:56 2023 +0200
+
+    profileimages and models
+
+[33mcommit 82f18e12ce5a4cf7f5c342b357ed7748371ee1d8[m
+Author: edwardbaju <manjoloe800@gmail.com>
+Date:   Fri Jan 20 08:26:04 2023 +0200
+
+    users profile
+
+[33mcommit 2930f7eebd359faebcf713782433e030ce6b1bde[m
+Author: edwardbaju <manjoloe800@gmail.com>
+Date:   Fri Jan 20 07:12:53 2023 +0200
+
+    user registration
+
+[33mcommit a4ce0ff4895565d4b9f54e36c263ada7c68cc0d8[m
+Author: edwardbaju <manjoloe800@gmail.com>
+Date:   Fri Jan 20 06:03:44 2023 +0200
+
+    database and models
+
+[33mcommit 0070e8b0c3fc6e35571400fda09055d43b8d5e5a[m
+Author: edwardbaju <manjoloe800@gmail.com>
+Date:   Fri Jan 20 05:39:48 2023 +0200
+
+    admin panel
+
+[33mcommit 1af542a181c057b32f30ae3622c2145484903008[m
+Author: edwardbaju <manjoloe800@gmail.com>
+Date:   Thu Jan 19 21:57:07 2023 +0200
+
+    template inheritance
+
+[33mcommit f7702d91762ef5846f644c91890df9c452847100[m
+Author: edwardbaju <manjoloe800@gmail.com>
+Date:   Thu Jan 19 20:02:08 2023 +0200
+
+    i start to build the application
