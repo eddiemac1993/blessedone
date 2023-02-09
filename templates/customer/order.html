@@ -3,48 +3,46 @@
 <div class="container mb-5">
     <div class="row justify-content-center mt-1">
         <div class="col-md-12 col-sm-12 p-4">
+
+            <a href="{% url 'customer:index' %}" class="btn btn-outline-success mb-2 btn-sm">
+    <i class="fas fa-arrow-left"></i> Go Back
+</a>
+
             <form method="POST">
                 {% csrf_token %}
                 <div class="pt-5">
-                    {% for food in foods %}
-                    <div class="row">
-                        <div class="col-md-2 col-sm-12">
-                            <img class="rounded" src="{{ food.image.url }}" width="150" height="100"/>
-                        </div>
-                        <div class="col-md-8 col-sm-12">
-                            <div class="d-flex flex-row">
-                                <div class="form-group form-check">
-                                    <input type="checkbox" name="items[]" class="form-check-input" value="{{ food.pk }}">
-                                    <label class="form-check-label">{{ food.name }}</label>
-                                </div>
-                                <p class="font-weight-bold pl-5">{{ food.price }}</p>
-                            </div>
-                            <p>{{ food.decription }}</p>
-                        </div>
-                    </div>
-                    <hr />
-                {% endfor %}
-                </div>
+                    {% for item in items %}
+  <div class="row">
+    <div class="col-md-2 col-sm-12">
+      <img class="rounded" src="{{ item.image.url }}" width="150" height="100"/>
+    </div>
+    <div class="col-md-8 col-sm-12">
+      <div class="d-flex flex-row">
+        <div class="form-group form-check">
+          <input type="checkbox" name="items[]" class="form-check-input" value="{{ item.pk }}">
+          <label class="form-check-label">{{ item.name }}</label>
+        </div>
+        <p class="font-weight-bold pl-5">K {{ item.price }}</p>
+      </div>
+      <p>{{ item.description }}</p>
+      <p><i class="fas fa-tag"></i>
+        {% for category in item.category.all %}
+          {{ category.name }}
+        {% endfor %}
+      </p>
+    </div>
+    <div class="col-md-2 col-sm-12">
+      {% if item.availability %}
+        <span style="color: green;">&#x25cf; Available</span>
+      {% else %}
+        <span style="color: red;">&#x25cf; Not Available</span>
+      {% endif %}
+    </div>
+  </div>
+  <hr />
+{% endfor %}
 
-                <div class="pt-5">
-                    {% for hardware in hardware %}
-                    <div class="row mt-4">
-                        <div class="col-md-2 col-sm-12">
-                            <img class="rounded" src="{{ hardware.image.url }}" width="150" height="100"/>
-                        </div>
-                        <div class="col-md-8 col-sm-12">
-                            <div class="d-flex flex-row">
-                                <div class="form-group form-check">
-                                    <input type="checkbox" name="items[]" class="form-check-input" value="{{ hardware.pk }}">
-                                    <label class="form-check-label">{{ hardware.name }}</label>
-                                </div>
-                                <p class="font-weight-bold pl-5">{{ hardware.price }}</p>
-                            </div>
-                            <p>{{ hardware.decription }}</p>
-                        </div>
-                    </div>
-                    <hr />
-                    {% endfor %}
+
 
                     <div class="form-group pt-3">
                         <label for="name">Full Name</label>
@@ -74,14 +72,14 @@
                         <div class="form-group pt-3">
                         <label for="name">Phone_Number</label>
                         <input required class="form-control" type="text" placeholder="097123456" name="phone" />
-                    </div></div>
-                    <select id="location" name="location" class="form-control">
+                    </div><select id="location" name="location" class="form-control">
       {% for location in locations %}
         <option value="{{ location.pk }}">{{ location.name }} ({{ location.delivery_fee }})</option>
       {% endfor %}
-    </select>
+    </select></div>
+
                     </div>
-                    </div>
+                    </div><hr/>
 
 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#submitModal">

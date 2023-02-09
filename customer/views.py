@@ -17,13 +17,11 @@ class About(View):
 
 class Order(View):
     def get(self, request, *args, **kwargs):
-        foods = MenuItem.objects.filter(category__name__contains='food')
-        hardware = MenuItem.objects.filter(category__name__contains='hardware')
+        items = MenuItem.objects.filter(availability=True)
         locations = Location.objects.all()
 
         context = {
-            'foods': foods,
-            'hardware': hardware,
+            'items': items,
             'locations': locations,
         }
 
@@ -105,13 +103,12 @@ def get_invoice(request, pk):
     email = order.email
     street = order.street
     city = order.city
-    phone_number = order.phone_number
 
     # Render the HTML template to be converted to PDF
     html = render_to_string('customer/invoice.html', {'items': items, 'pk': pk, 'price': price,
                                                        'delivery_fee': delivery_fee, 'total_price': total,
                                                        'name': name, 'email': email, 'street': street,
-                                                       'city': city, 'phone_number': phone_number})
+                                                       'city': city })
 
     # Convert the HTML to PDF and return it as response
     pdf = pdfkit.from_string(html, False)
@@ -119,6 +116,7 @@ def get_invoice(request, pk):
     response['Content-Disposition'] = 'attachment; filename="invoice.pdf"'
 
     return response
+
 
 
 class Menu(View):
