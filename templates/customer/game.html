@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bible Quiz</title>
+<style>
+  .question {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 50px;
+  }
+
+  .choices {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .choice {
+    padding: 10px 20px;
+    background-color: lightgray;
+    border: 1px solid gray;
+    border-radius: 5px;
+    margin: 10px 0;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .choice:hover {
+    background-color: gray;
+    color: white;
+  }
+
+  .score {
+    text-align: right;
+    font-size: 20px;
+    margin-top: 20px;
+  }
+
+  .restart-button {
+    clear: both;
+    text-align: right;
+    padding: 10px 20px;
+    background-color: lightgray;
+    border: 1px solid gray;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .restart-button:hover {
+    background-color: gray;
+    color: white;
+  }
+</style>
+
+
+</head>
+<body><div class="">BIBLE TRIVIA: How Well Do You Know Your Bible?</div>
+  <div class="question"></div>
+  <div class="restart-button">Restart</div>
+  <div class="choices"></div>
+  <div class="score">Score: 0</div>
+
+    <script>
+      const questions = [  {    question: "What was the first book of the Bible?",    choices: ["Genesis", "Exodus", "Leviticus", "Numbers"],
+    answer: "Genesis"
+  },
+  {
+    question: "Who was the father of John the Baptist?",
+    choices: ["Zechariah", "Joseph", "Simon", "Matthan"],
+    answer: "Zechariah"
+  },
+  {
+    question: "Who was the wisest man in the Bible?",
+    choices: ["Solomon", "Ezra", "Daniel", "Job"],
+    answer: "Solomon"
+  },
+  {
+    question: "Who wrote the majority of the Old Testament books?",
+    choices: ["Moses", "David", "Isaiah", "Jeremiah"],
+    answer: "Moses"
+  },
+  {
+    question: "What was the name of the first man created by God?",
+    choices: ["Adam", "Noah", "Abraham", "Isaac"],
+    answer: "Adam"
+  },
+  {
+    question: "What is the name of the first woman created by God?",
+    choices: ["Eve", "Sarah", "Rebecca", "Rachel"],
+    answer: "Eve"
+  },
+  {
+    question: "Who was the mother of Jesus?",
+    choices: ["Mary", "Sarah", "Elizabeth", "Ruth"],
+    answer: "Mary"
+  },
+  {
+    question: "What is the shortest book in the New Testament?",
+    choices: ["2 John", "3 John", "Jude", "Philemon"],
+    answer: "3 John"
+  },
+  {
+    question: "What is the name of the sea that Moses and the Israelites crossed?",
+    choices: ["Red Sea", "Dead Sea", "Mediterranean Sea", "Sea of Galilee"],
+    answer: "Red Sea"
+  },
+  {
+    question: "Who was the first king of Israel?",
+    choices: ["David", "Saul", "Solomon", "Rehoboam"],
+    answer: "Saul"
+  },
+  {
+    question: "What is the name of the city where Jesus was crucified?",
+    choices: ["Jerusalem", "Bethlehem", "Nazareth", "Capernaum"],
+    answer: "Jerusalem"
+  },
+  {
+    question: "Who wrote the first 5 books of the Bible?",
+    choices: ["Moses", "David", "Solomon", "Isaiah"],
+    answer: "Moses"
+  },
+  {
+    question: "What is the name of the first book in the Pentateuch?",
+    choices: ["Exodus", "Genesis", "Leviticus", "Numbers"],
+    answer: "Genesis"
+  },
+  {
+    question: "What is the name of the mountain where Moses received the Ten Commandments?",
+    choices: ["Mount Sinai", "Mount Carmel", "Mount Tabor", "Mount Ararat"],
+    answer: "Mount Sinai"
+  },
+        // Add more questions here
+      ];
+
+      let currentQuestion = 0;
+      let score = 0;
+
+      const questionEl = document.querySelector(".question");
+      const choicesEl = document.querySelector(".choices");
+      const scoreEl = document.querySelector(".score");
+      const restartButtonEl = document.querySelector(".restart-button");
+
+      function renderQuestion() {
+        const question = questions[currentQuestion];
+        questionEl.textContent = question.question;
+
+        choicesEl.innerHTML = "";
+        for (const choice of question.choices) {
+          const choiceEl = document.createElement("div");
+          choiceEl.classList.add("choice");
+          choiceEl.textContent = choice;
+          choiceEl.addEventListener("click", () => {
+            if (choice === question.answer) {
+              score += 20;
+              scoreEl.textContent = `Score: ${score}`;
+              if (currentQuestion === questions.length - 1) {
+                alert("You win!");
+                restartButtonEl.style.display = "block";
+              } else {
+                currentQuestion++;
+                renderQuestion();
+              }
+            } else {
+              score -= 10;
+              scoreEl.textContent = `Score: ${score}`;
+            }
+          });
+          choicesEl.appendChild(choiceEl);
+        }
+      }
+
+      renderQuestion();
+
+      restartButtonEl.addEventListener("click", () => {
+        currentQuestion = 0;
+        score = 0;
+        scoreEl.textContent = `Score: ${score}`;
+        renderQuestion();
+        restartButtonEl.style.display = "none";
+      });
+    </script>
+  </body>
+</html>
+
+
+{% endblock %}

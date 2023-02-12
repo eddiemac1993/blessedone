@@ -68,16 +68,16 @@ Copy code
         <div class="customer-details">
             <h2>Customer Details</h2>
             <p>Name: {{ name }}</p>
-            <p>Email: {{ email }}</p>
+            <p>Referral ID: {{ email }}</p>
             <p>Street: {{ street }}</p>
-            <p>City: {{ city }}</p>
+            <p>{{ location.name }}</p>
         </div>
         <div class="order-details">
             <h2>Order Details</h2>
             <table>
                 <tr>
-                    <th>Order ID</th>
-                    <td>{{ pk }}</td>
+                    <th>Invoice No.</th>
+                    <td>100{{ pk }}</td>
                 </tr>
                 <tr>
                     <th>Items</th>

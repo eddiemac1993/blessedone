@@ -1,31 +1,71 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container mb-5">
-    <div class="row justify-content mt-5">
-        <div class="col-mb-8 col-sm-12 offset-md-1 p-4 text-center">
-            <h1>About Us</h1>
-        </div>
+
+  <head>
+    <title>About Us</title>
+    <style>
+      .container {
+        width: 80%;
+        margin: 0 auto;
+        text-align: center;
+      }
+      h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+      }
+      p {
+        font-size: 18px;
+        line-height: 1.5;
+        margin-bottom: 20px;
+      }
+      .application {
+        background-color: #f2f2f2;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 20px;
+      }
+      .application h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+      .application ol {
+        font-size: 18px;
+        margin-bottom: 20px;
+        padding-left: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>About Us</h1>
+      <p>
+        Welcome to our About page! We are a customer-focused company that is committed to providing the best products and services to our clients. Our goal is to use technology to make people's lives easier and help them achieve their goals. We have a team of talented experts who work tirelessly to research and develop the latest technologies, and our focus on quality is evident in every aspect of our business.
+      </p>
+      <p>
+        We believe in offering high-quality products and services that exceed customer expectations and our support team is always available to answer any questions or concerns. Whether you're looking for a new product, want to learn more about our company, or just want to reach out, we're here to help.
+      </p>
+      <p>
+        Thank you for visiting our About page and we look forward to serving you in the future.
+      </p>
+      <div class="application">
+        <h2>Delivery Application</h2>
+        <p>
+          In addition to the about page, our website offers a delivery application where customers can place their orders for delivery. Here's how it works:
+        </p>
+        <ol>
+          <li>Go to the menu and browse the items available for ordering.</li>
+          <li>Select the items you want by clicking the small box next to each item.</li>
+          <li>Fill out the form with your name, reference ID (if applicable), delivery location, and delivery fee.</li>
+          <li>Submit your order by clicking the "Submit Order" button.</li>
+          <li>A confirmation drop-down menu will appear to verify your order.</li>
+          <li>If everything is correct, you can download the invoice if you wish, but you'll still need to complete the transaction by sending the order through the WhatsApp button.</li>
+          <li>Our orders are cash on delivery, so you'll pay when the delivery is made.</li>
+        </ol>
+        <p>
+          If you have any questions or concerns, our support team is always available to help. Thank you for using our delivery application!
+        </p>
+      </div>
     </div>
-    <div class="row justify-content-center mt-1">
-        <div class="col-md-10 col-sm-12 offset-md-1 p-4 text-center">
-            <p>Welcome to our About page!
-
-We are a dynamic and innovative company dedicated to delivering the best products and services to our customers. Our goal is to help people achieve their goals and make their lives easier through the use of technology.
-
-We have a talented team of experts who work hard to research and develop the latest technologies, and our commitment to excellence is evident in every aspect of our business. We believe in providing high-quality products and services that exceed customer expectations, and our dedicated support team is always available to answer any questions or concerns.
-
-Whether you're looking for a new product, want to learn more about our company, or just want to get in touch, we're here to help. Thank you for visiting our About page, and we look forward to serving you in the future.
-</p>
-<p>
-
-We are a dynamic and innovative company dedicated to delivering the best products and services to our customers. Our goal is to help people achieve their goals and make their lives easier through the use of technology.
-
-We have a talented team of experts who work hard to research and develop the latest technologies, and our commitment to excellence is evident in every aspect of our business. We believe in providing high-quality products and services that exceed customer expectations, and our dedicated support team is always available to answer any questions or concerns.
-
-Whether you're looking for a new product, want to learn more about our company, or just want to get in touch, we're here to help. Thank you for visiting our About page, and we look forward to serving you in the future.
-</p>
-        </div>
-    </div>
-</div>
+  </body>
 {% endblock %}

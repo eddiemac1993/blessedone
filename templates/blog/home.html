@@ -33,6 +33,34 @@
     line-height: 1.5
 
 </style>
+<?php
+
+$filename = 'path/to/original/image.jpg';
+
+// Get original image size
+list($width, $height) = getimagesize($filename);
+
+// Calculate new size
+$new_width = 500;
+$new_height = 300;
+
+// Create new image resource
+$new_image = imagecreatetruecolor($new_width, $new_height);
+
+// Load original image into resource
+$original_image = imagecreatefromjpeg($filename);
+
+// Resize original image into new image
+imagecopyresampled($new_image, $original_image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+
+// Save new image
+imagejpeg($new_image, 'path/to/resized/image.jpg', 80);
+
+// Free up memory
+imagedestroy($original_image);
+imagedestroy($new_image);
+
+?>
 
 
 <div class="container bg-light">
@@ -41,7 +69,7 @@
         {% for post in posts %}
             <div class="col-md-3 mb-4">
                 <div class="card position-relative">
-                    <img class="card-img-top img-fluid" src="{{ post.image.url }}" alt="Blessed Touch" style="width: 100%; height: 200px; object-fit: cover; overflow: hidden;">
+                   <img class="card-img-top img-fluid" src="{{ post.image.url }}" alt="Blessed Touch" style="width: 100%; height: 200px; object-fit: cover; overflow: hidden;">
                 <div class="price-tag position-absolute text-light bg-dark p-2">ZMK {{ post.price }}</div>
                 <div class="card-body">
                     <h5 class="card-title">{{ post.title }}</h5>
@@ -50,13 +78,14 @@
 </a>
 
 
-<a href="tel:{{ post.phone_number }}"class="btn btn-outline-secondary mr-2 mb-2 btn-sm">
-    <i class="fas fa-phone"></i> {{ post.phone_number }}
+<a href="tel:+26{{ post.phone_number }}" class="btn btn-outline-secondary mr-2 mb-2 btn-sm">
+    <i class="fas fa-phone"></i> +26{{ post.phone_number }}
 </a>
 
-<a href="https://wa.me/{{ post.whatsapp_number }}?text=Hello,%20I%20saw%20your%20post%20on%20the%20website%20and%20I%20would%20like%20to%20inquire%20about%20it." class="btn btn-outline-success mb-2 btn-sm">
-    <i class="fab fa-whatsapp"></i> {{ post.whatsapp_number }}
+<a href="https://wa.me/26{{ post.whatsapp_number }}?text=Hello,%20I%20saw%20your%20post%20on%20the%20website%20and%20I%20would%20like%20to%20inquire%20about%20it." class="btn btn-outline-success mb-2 btn-sm">
+    <i class="fab fa-whatsapp"></i> +26 {{ post.whatsapp_number }}
 </a>
+
 
             </div>
 
@@ -75,7 +104,6 @@
     {% endfor %}
 </div>
 </div>
-
 
 
 

@@ -15,6 +15,11 @@ class About(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'customer/about.html')
 
+class Game(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'customer/game.html')
+
+
 class Order(View):
     def get(self, request, *args, **kwargs):
         items = MenuItem.objects.filter(availability=True)
@@ -31,7 +36,6 @@ class Order(View):
         name = request.POST.get('name')
         email = request.POST.get('email')
         street = request.POST.get('street')
-        city = request.POST.get('city')
         phone_number = request.POST.get('phone_number')
         location_id = request.POST.get('location')
 
@@ -65,7 +69,6 @@ class Order(View):
             name=name,
             email=email,
             street=street,
-            city=city,
             phone_number=phone_number,
             location=location
             )
@@ -137,7 +140,7 @@ class MenuSearch(View):
         menu_items = MenuItem.objects.filter(
             Q(name__icontains=query) |
             Q(price__icontains=query) |
-            Q(decription__icontains=query)
+            Q(description__icontains=query)
         )
 
         context = {
@@ -145,3 +148,17 @@ class MenuSearch(View):
         }
 
         return render(request, 'customer/menu.html', context)
+
+
+class OrderSearch(MenuSearch):
+    def get(self, request, *args, **kwargs):
+        query = request.GET.get('q')
+        items = MenuItem.objects.filter(Q(name__icontains=query) | Q(price__icontains=query))
+        locations = Location.objects.all()
+
+        context = {
+            'items': items,
+            'locations': locations,
+        }
+
+        return render(request, 'customer/order.html', context)
