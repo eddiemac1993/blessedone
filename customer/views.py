@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from decimal import Decimal
 from django.views import View
 from django.db.models import Q
-from .models import MenuItem, OrderModel, Location
+from .models import MenuItem, OrderModel, Location, OrderItem
 import pdfkit
 from django.http import HttpResponse
 from django.template.loader import render_to_string
@@ -44,31 +45,21 @@ class Order(View):
         location_id = request.POST.get('location')
         agent_id = request.POST.get('agent')
         agent = User.objects.get(pk=agent_id)
-
         location = Location.objects.get(pk=location_id)
-
-        order_items = {
-            'item': []
-        }
+        order_items = []
 
         items = request.POST.getlist('items[]')
+        quantities = request.POST.getlist('quantities[]')
 
-        for item in items:
+        for item, quantity in zip(items, quantities):
             menu_item = MenuItem.objects.get(pk=int(item))
-            item_data = {
-                'id': menu_item.pk,
-                'name': menu_item.name,
-                'price': menu_item.price,
-            }
+            order_item = OrderItem.objects.create(
+                item=menu_item,
+                quantity=int(quantity)
+            )
+            order_items.append(order_item)
 
-            order_items['item'].append(item_data)
-
-        price = 0
-        item_ids = []
-
-        for item in order_items['item']:
-            price += item['price']
-            item_ids.append(item['id'])
+        price = sum([item.item.price * item.quantity for item in order_items])
 
         order = OrderModel.objects.create(
             price=price,
@@ -79,8 +70,8 @@ class Order(View):
             phone_number=phone_number,
             location=location,
             agent=agent
-            )
-        order.items.add(*item_ids)
+        )
+        order.order_items.add(*order_items)
 
         return redirect('customer:order-confirmation', pk=order.pk)
 
@@ -92,7 +83,7 @@ class OrderConfirmation(View):
         total_price = order.price + order.location.delivery_fee
         context = {
             'pk': order.pk,
-            'items': order.items,
+            'order_items': order.order_items.all(),
             'price': order.price,
             'location': order.location,
             'delivery_fee': order.location.delivery_fee,
@@ -104,8 +95,8 @@ class OrderConfirmation(View):
 
 def get_invoice(request, pk):
     order = OrderModel.objects.get(pk=pk)
-    items = order.items.all()
-    price = sum(item.price for item in items)
+    items = order.order_items.all()
+    price = sum(item.item.price * item.quantity for item in items)
     delivery_fee = order.total_price() - order.price
     total = price + delivery_fee
 
@@ -116,13 +107,11 @@ def get_invoice(request, pk):
     street = order.street
     city = order.city
 
-    # Get the agent (if set) from the order object
-    agents = User.objects.filter(groups__name='Agent')
 
     # Render the HTML template to be converted to PDF
     html = render_to_string('customer/invoice.html', {'items': items, 'pk': pk, 'price': price,
                                                    'delivery_fee': delivery_fee, 'total_price': total,
-                                                   'name': name, 'specifics': specifics, 'email': email, 'street': street,
+                                                   'name': name,'specifics': specifics, 'email': email, 'street': street,
                                                    'city': city, 'order': order})
 
     # Convert the HTML to PDF and return it as response

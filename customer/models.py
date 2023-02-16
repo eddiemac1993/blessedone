@@ -27,11 +27,19 @@ class Location(models.Model):
     def __str__(self):
         return self.name
 
+
+class OrderItem(models.Model):
+    item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+
+    def __str__(self):
+        return f'{self.item.name} x{self.quantity}'
+
+
 class OrderModel(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     price = models.DecimalField(max_digits=7, decimal_places=2, default=0.0, null=True)
-    items = models.ManyToManyField(
-        'MenuItem', related_name='order', blank=True)
+    order_items = models.ManyToManyField(OrderItem, related_name='order', blank=True)
     name = models.CharField(max_length=50, blank=True)
     specifics = models.EmailField(default="example@email.com")
     email = models.EmailField(default="example@email.com")
@@ -47,7 +55,6 @@ class OrderModel(models.Model):
         if self.location:
             total += self.location.delivery_fee
         return total
-
 
     def __str__(self):
         return f'Order: {self.created_on.strftime("%b %d %I: %M %p")}'

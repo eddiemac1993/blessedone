@@ -98,9 +98,9 @@
                     <th>Items</th>
                     <td>
                         <ul>
-                            {% for item in items %}
-                                <li>{{ item.name }} - {{ item.price }}</li>
-                            {% endfor %}
+                            {% for order_item in items %}
+    <li>{{ order_item.item.name }} | {{ order_item.item.price }} x {{ order_item.quantity }}</li>
+{% endfor %}
                         </ul>
                     </td>
                 </tr>
@@ -118,6 +118,10 @@
                 </tr>
             </table>
         </div>
+    </div>
+    {% for order_item in items %}
+            <div class="font-weight-bold">{{ order_item.item.name }}</div><p>{{ order_item.item.description }}</p><hr/>
+        {% endfor %}
     </div>
     <hr class="bg-white">
 <div class="row">
