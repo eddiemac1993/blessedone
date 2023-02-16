@@ -8,8 +8,19 @@
         * {
             box-sizing: border-box;
         }
-css
-Copy code
+
+    .stamp {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        padding: 10px;
+        background-color: #f44336;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        transform: rotate(-30deg);
+     }
+
     .invoice-container {
         width: 80%;
         margin: 0 auto;
@@ -68,7 +79,8 @@ Copy code
         <div class="customer-details">
             <h2>Customer Details</h2>
             <p>Name: {{ name }}</p>
-            <p>Referral ID: {{ email }}</p>
+            <p>Quantity | Specifics: {{ specifics }}</p>
+            <p>Agent ID: {{ email }}</p>
             <p>Street: {{ street }}</p>
             <p>{{ location.name }}</p>
         </div>
@@ -113,5 +125,16 @@ Copy code
         </p>
     </div>
 </div>
+<div class="stamp">
+  ORDERED ON <br>
+  <span id="date"></span>
+</div>
+
+<script>
+  var today = new Date();
+  var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  document.getElementById("date").innerHTML = date;
+</script>
+
 </body>
 </html>

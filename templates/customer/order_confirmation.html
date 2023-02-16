@@ -29,9 +29,12 @@
 </div>
 <div class="row justify-content-center pb-2 pt-2">
   <div class="col-md-6 text-center">
+
+      <!-- this is the download button for invoice
     <a href="{% url 'customer:invoice' pk=pk %}" class="btn btn-primary">
       <i class="fa fa-download" aria-hidden="true" style="font-size:24px;"></i> Invoice
-    </a>
+    </a> -->
+
     <a href="https://api.whatsapp.com/send?phone=260970349470&text=Invoice%20Link:%20https://blessedtouchs.pythonanywhere.com/customer/order/{{ pk }}/invoice" class="btn btn-success" style="margin-left: 10px;">
   <i class="fab fa-whatsapp" aria-hidden="true" style="color: white; font-size: 24px;"></i> Send on WhatsApp
 </a>

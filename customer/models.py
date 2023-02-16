@@ -28,10 +28,11 @@ class Location(models.Model):
 
 class OrderModel(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
-    price = models.DecimalField(max_digits=7, decimal_places=2)
+    price = models.DecimalField(max_digits=7, decimal_places=2, default=0.0, null=True)
     items = models.ManyToManyField(
         'MenuItem', related_name='order', blank=True)
     name = models.CharField(max_length=50, blank=True)
+    specifics = models.EmailField(default="example@email.com")
     email = models.EmailField(default="example@email.com")
     street = models.CharField(max_length=50, blank=True)
     city = models.CharField(max_length=50, blank=True)
