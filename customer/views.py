@@ -154,7 +154,11 @@ class MenuSearch(View):
 class OrderSearch(MenuSearch):
     def get(self, request, *args, **kwargs):
         query = request.GET.get('q')
-        items = MenuItem.objects.filter(Q(name__icontains=query) | Q(price__icontains=query))
+        items = MenuItem.objects.filter(
+            Q(name__icontains=query) |
+            Q(price__icontains=query) |
+            Q(category__name__icontains=query) # use name__icontains on the related Category model
+        )
         locations = Location.objects.all()
 
         context = {
