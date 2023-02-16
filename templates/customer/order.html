@@ -67,7 +67,12 @@
     <label for="name">Agent ID</label>
     <input class="form-control" type="text" placeholder="Mobile-Money User ID (optional)" name="email"/>
 </div>
-
+<label for="agent">Referral Agent:</label>
+    <select name="agent">
+    {% for user in users %}
+        <option value="{{ user.id }}">{{ user.username }}</option>
+    {% endfor %}
+</select>
                     <div class="row">
                         <div class="col-md-4 col-sm-12">
                     <div class="form-group pt-3">

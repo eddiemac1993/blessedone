@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class MenuItem(models.Model):
     name = models.CharField(max_length=100)
@@ -39,6 +40,7 @@ class OrderModel(models.Model):
     phone_number = models.CharField(max_length=15, null=True)
     location = models.ForeignKey(Location, on_delete=models.SET_NULL, related_name='order', null=True, blank=True)
     is_shipped = models.BooleanField(default=False)
+    agent = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='orders', null=True, blank=True)
 
     def total_price(self):
         total = self.price

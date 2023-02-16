@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
 from django.views import View
 from django.db.models import Q
 from .models import MenuItem, OrderModel, Location
@@ -24,10 +25,12 @@ class Order(View):
     def get(self, request, *args, **kwargs):
         items = MenuItem.objects.filter(availability=True)
         locations = Location.objects.all()
+        users = User.objects.all()
 
         context = {
             'items': items,
             'locations': locations,
+            'users': users,
         }
 
         return render(request, 'customer/order.html', context)
@@ -39,6 +42,8 @@ class Order(View):
         street = request.POST.get('street')
         phone_number = request.POST.get('phone_number')
         location_id = request.POST.get('location')
+        agent_id = request.POST.get('agent')
+        agent = User.objects.get(pk=agent_id)
 
         location = Location.objects.get(pk=location_id)
 
@@ -72,7 +77,8 @@ class Order(View):
             email=email,
             street=street,
             phone_number=phone_number,
-            location=location
+            location=location,
+            agent=agent
             )
         order.items.add(*item_ids)
 
@@ -110,11 +116,14 @@ def get_invoice(request, pk):
     street = order.street
     city = order.city
 
+    # Get the agent (if set) from the order object
+    agents = User.objects.filter(groups__name='Agent')
+
     # Render the HTML template to be converted to PDF
     html = render_to_string('customer/invoice.html', {'items': items, 'pk': pk, 'price': price,
-                                                       'delivery_fee': delivery_fee, 'total_price': total,
-                                                       'name': name, 'specifics': specifics, 'email': email, 'street': street,
-                                                       'city': city })
+                                                   'delivery_fee': delivery_fee, 'total_price': total,
+                                                   'name': name, 'specifics': specifics, 'email': email, 'street': street,
+                                                   'city': city, 'order': order})
 
     # Convert the HTML to PDF and return it as response
     pdf = pdfkit.from_string(html, False)
