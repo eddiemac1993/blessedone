@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from decimal import Decimal
 from django.views import View
 from django.db.models import Q
 from .models import MenuItem, OrderModel, Location, OrderItem

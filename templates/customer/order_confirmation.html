@@ -17,22 +17,23 @@
         {% for item in order_items %}
   <div class="row">
     <div class="col-md-6 col-sm-12">
-      <p>{{ item.item.name }} - {{ item.item.price }}<small> | (Quantity: {{ item.quantity }})</small></p>
+      <p>{{ item.item.name }} K {{ item.item.price }}<small> x (Quantity: {{ item.quantity }})</small></p>
     </div>
     <div class="col-md-6 col-sm-12">
 
     </div>
   </div>
-{% endfor %}
-<p class="font-weight-bold pt-4">Delivery Fee: {{ delivery_fee }}</p>
-<p class="font-weight-bold pt-4">Order Total: {{ total_price }}</p>
+{% endfor %}<hr/>
+<p class="font-weight-bold pt-4">Delivery Fee: {{ location }} : K {{ delivery_fee }}</p>
+<p class="font-weight-bold pt-4">Order Total: K {{ total_price }}</p>
 </div>
+</div><hr/>
+
 </div>
 <div class="row justify-content-center pb-2 pt-5">
     <div class="col-md-6 text-center">
         <h3>Pay With Cash At Delivery</h3>
     </div>
-</div>
 </div>
 <div class="row justify-content-center pb-2 pt-2">
   <div class="col-md-6 text-center">
@@ -43,7 +44,7 @@
     </a> -->
 
     <a href="https://api.whatsapp.com/send?phone=260970349470&text=Invoice%20Link:%20https://blessedtouchs.pythonanywhere.com/customer/order/{{ pk }}/invoice" class="btn btn-success" style="margin-left: 10px;">
-  <i class="fab fa-whatsapp" aria-hidden="true" style="color: white; font-size: 24px;"></i> Send on WhatsApp
+  <i class="fab fa-whatsapp" aria-hidden="true" style="color: white; font-size: 24px;"></i> Order Using WhatsApp
 </a>
   </div>
 </div>
