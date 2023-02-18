@@ -5,7 +5,7 @@
 <div class="container mb-5">
     <div class="row justify-content-center mt-1">
         <div class="col-md-5 col-sm-12 p-4 text-center">
-            <h1>Order Submitted!</h1>
+            <h1>Order Confirmation</h1>
             <a href="{% url 'customer:order' %}" class="btn btn-outline-success mb-2 btn-sm">
     <i class="fas fa-arrow-left"></i> Go Back
 </a>
@@ -17,7 +17,7 @@
         {% for item in order_items %}
   <div class="row">
     <div class="col-md-6 col-sm-12">
-      <p>{{ item.item.name }} K {{ item.item.price }}<small> x {{ item.quantity }}</small></p>
+      <li>{{ item.quantity }} x {{ item.item.name }} - k{{ item.item.price }} each</li>
     </div>
     <div class="col-md-6 col-sm-12">
 

@@ -25,19 +25,19 @@
       <img class="rounded" src="{{ item.image.url }}" width="150" height="100"/>
     </div>
     <div class="col-md-8 col-sm-12">
-     <div class="d-flex flex-row">
-    <div class="form-group form-check">
-        <input type="checkbox" name="items[]" class="form-check-input" value="{{ item.pk }}">
-        <label class="form-check-label">{{ item.name }}</label>
-        <div class="d-flex justify-content-between">
-            <div class="input-group">
-              <label class="input-group-text font-weight-bold mr-3" for="quantity">Quantity:</label>
-              <input type="number" name="quantities[]" id="quantity" class="form-control" value="1" inputmode="numeric" step="1">
-              <label class="input-group-text font-weight-bold ml-3">K {{ item.price }}</label>
-            </div>
-        </div>
-    </div>
-</div>
+<div class="d-flex flex-row">
+                                    <div class="form-group form-check">
+                                        <input type="checkbox" name="items[]" class="form-check-input" value="{{ item.pk }}" id="item_{{ item.pk }}">
+                                        <label class="form-check-label" for="item_{{ item.pk }}">{{ item.name }}</label>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="input-group">
+                                                <label class="input-group-text font-weight-bold mr-3" for="quantity_{{ item.pk }}">Quantity:</label>
+                                                <input type="number" name="quantities[]" id="quantity_{{ item.pk }}" class="form-control" value="1" inputmode="numeric" step="1">
+                                                <label class="input-group-text font-weight-bold ml-3">K {{ item.price }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
       <p>{{ item.description }}</p>
       <p><i class="fas fa-tag"></i>
