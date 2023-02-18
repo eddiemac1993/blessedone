@@ -1,3 +1,4 @@
+{% load static %}
 <footer class="navbar-dark bg-steel py-3 text-white">
     <div class="container">
         <div class="row">
@@ -18,12 +19,13 @@
                 </ul>
             </div>
             <div class="col-md-3"><br/>
-        <h5 class="text-uppercase text-white">Follow Us</h5><hr>
-        <ul class="list-unstyled">
-            <li><a href="https://www.facebook.com/profile.php?id=100089608791020">
-              <i class="fab fa-facebook-f text-white"> facebook</li></i></a>
-        </ul>
-      </div><br/>
+                <h5 class="text-uppercase text-white">Follow Us</h5><hr>
+                <ul class="list-unstyled">
+                    <li><a href="https://www.facebook.com/profile.php?id=100089608791020">
+                        <i class="fab fa-facebook-f text-white"> facebook</i></a>
+                    </li>
+                </ul>
+            </div><br/>
             <div class="col-md-3"><br/>
                 <h4 class="text-uppercase text-white">Mission</h4><hr>
                 <p>Our mission is to provide high-quality services and products to our customers, while also promoting a positive impact on our community and environment.</p>
@@ -31,9 +33,14 @@
         </div>
         <hr class="bg-white">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <p class="text-center">
-                    <span>Copyright &copy; 2023</span>
+                    Proudly Zambian <img src="{% static 'zambianflag.jpg' %}" alt="Zambian flag" style="height: 20px;">
+                </p>
+            </div>
+            <div class="col-md-6">
+                <p class="text-center">
+                    Copyright &copy; 2023
                     <span> BLESSED</span> <span style="color:red">TOUCH</span>
                 </p>
             </div>

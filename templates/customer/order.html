@@ -25,14 +25,20 @@
       <img class="rounded" src="{{ item.image.url }}" width="150" height="100"/>
     </div>
     <div class="col-md-8 col-sm-12">
-      <div class="d-flex flex-row">
-        <div class="form-group form-check">
-          <input type="checkbox" name="items[]" class="form-check-input" value="{{ item.pk }}">
-          <label class="form-check-label">{{ item.name }}</label>
-          <input type="number" name="quantities[]" class="form-control btn btn-outline-primary always-visible" value="1" inputmode="numeric" step="1">
+     <div class="d-flex flex-row">
+    <div class="form-group form-check">
+        <input type="checkbox" name="items[]" class="form-check-input" value="{{ item.pk }}">
+        <label class="form-check-label">{{ item.name }}</label>
+        <div class="d-flex justify-content-between">
+            <div class="input-group">
+              <label class="input-group-text font-weight-bold mr-3" for="quantity">Quantity:</label>
+              <input type="number" name="quantities[]" id="quantity" class="form-control" value="1" inputmode="numeric" step="1">
+              <label class="input-group-text font-weight-bold ml-3">K {{ item.price }}</label>
+            </div>
         </div>
-        <p class="font-weight-bold pl-5">K {{ item.price }}</p>
-      </div>
+    </div>
+</div>
+
       <p>{{ item.description }}</p>
       <p><i class="fas fa-tag"></i>
         {% for category in item.category.all %}
