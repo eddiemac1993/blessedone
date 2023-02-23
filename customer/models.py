@@ -8,6 +8,7 @@ class MenuItem(models.Model):
     price = models.DecimalField(max_digits=5, decimal_places=2)
     category = models.ManyToManyField('category', related_name='item')
     availability = models.BooleanField(default=True)
+    is_verified = models.BooleanField(default=False)  # New field for verified items
 
     def __str__(self):
         return self.name

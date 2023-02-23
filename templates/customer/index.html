@@ -24,17 +24,38 @@
       </a>
     </div>
   </div>
-  <div class="container mt-5">
+<div class="container mt-3">
   <div class="row justify-content-center">
     <div class="col-md-8 text-center">
-      <p class="text-muted">Only available in Livingstone</p>
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select a City
+          <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <li class="active"><a href="#" onclick="updateSelectedCity('Livingstone')">Livingstone</a></li>
+          <li><a href="#" onclick="updateSelectedCity('Choma')">Choma</a></li>
+          <li><a href="#" onclick="updateSelectedCity('Lusaka')">Lusaka</a></li>
+          <li><a href="#" onclick="updateSelectedCity('Mazabuka')">Mazabuka</a></li>
+          <li><a href="#" onclick="updateSelectedCity('Kabwe')">Kabwe</a></li>
+        </ul>
+      </div>
+      <br>
+      <span class="selected-city">Selected city: Livingstone</span>
     </div>
   </div>
 </div>
+
+<script>
+function updateSelectedCity(city) {
+  document.querySelector('.selected-city').innerHTML = 'Selected city: ' + city;
+}
+</script>
+
+
+
 </nav>
 
-<div class="container mb-5">
-    <div class="row justify-content mt-5">
+<div class="container mb-2">
+    <div class="row justify-content mt-2">
         <div class="col-mb-8 col-sm-12 offset-md-1 p-4 text-center">
             <h1>QuickDrop-Online Delivery</h1>
         </div>

@@ -23,7 +23,10 @@ class Game(View):
 
 class Order(View):
     def get(self, request, *args, **kwargs):
-        items = MenuItem.objects.filter(availability=True).order_by('-id')
+        # Get items that are available and verified
+        items = MenuItem.objects.filter(Q(availability=True) | Q(is_verified=True)).order_by('-id')
+
+        # Get all locations and users
         locations = Location.objects.all()
         users = User.objects.all()
 
