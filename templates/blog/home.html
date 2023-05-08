@@ -69,7 +69,7 @@ imagedestroy($new_image);
         {% for post in posts %}
             <div class="col-md-3 mb-4">
                 <div class="card position-relative">
-                   <img class="card-img-top img-fluid" src="{{ post.image.url }}" alt="Blessed Touch" style="width: 100%; height: 200px; object-fit: cover; overflow: hidden;">
+                   <img class="card-img-top" src="{{ post.image.url }}" alt="Blessed Touch" style="width: 100%; height: 200px; object-fit: cover; overflow: hidden;">
                 <div class="card-body">
                     <h5 class="card-title">{{ post.title }}</h5>
                     <a href="{% url 'post-detail' post.id %}" class="btn btn-outline-primary mr-2 mb-2 btn-sm">

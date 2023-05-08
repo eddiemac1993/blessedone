@@ -2,80 +2,50 @@
 {% load static %}
 {% block content %}
 
-
-
 <nav class="navbar navbar-expand-lg d-flex justify-content-center">
   <div class="container-fluid">
     <div class="d-flex">
-      <a class="btn btn-secondary mr-3" href="{% url 'customer:menu' %}">
+        <a class="btn btn-secondary mr-3" href="{% url 'customer:menu' %}">
         <i class="fas fa-bars"></i>
       </a>
-      <a class="btn btn-secondary mr-3" href="{% url 'customer:about' %}">
-        <i class="fas fa-info-circle"></i>
+        <a class="btn btn-secondary mr-3" href="/">
+        <span class="selected-city badge ">Only: Livingstone</span>
       </a>
-      <a class="btn btn-secondary mr-3" href="{% url 'blog-home' %}">
-        <i class="fas fa-bullhorn"></i>
-      </a>
-      <a class="btn btn-secondary mr-3" href="{% url 'customer:game' %}">
-          <i class="fas fa-gamepad"></i>
-        </a>
-      <a class="btn btn-secondary" href="https://api.whatsapp.com/send?phone=260970349470&text=I%20want%20to%20know%20more">
-        <i class="fab fa-whatsapp"></i>
-      </a>
+      
+      <a class="nav-link" href="https://api.whatsapp.com/send?phone=260970349470&text=I%20want%20to%20know%20more">
+            <i class="fab fa-whatsapp"></i> Contact Us
+          </a>
     </div>
   </div>
-<div class="container mt-3">
-  <div class="row justify-content-center">
-    <div class="col-md-8 text-center">
-      <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select a City
-          <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-          <li class="active"><a href="#" onclick="updateSelectedCity('Livingstone')"><span class="badge text-bg-info">Livingstone</span></a></li>
-          <li><a href="#" onclick="updateSelectedCity('Choma')"><span class="badge text-bg-info">TestChoma</span></a></li>
-
-        </ul>
-      </div>
-      <br>
-      <span class="selected-city badge text-bg-info">Selected city: Livingstone</span>
-    </div>
-  </div>
-</div>
-
-<script>
-function updateSelectedCity(city) {
-  document.querySelector('.selected-city').innerHTML = 'Selected city: ' + city;
-}
-</script>
-
-
-
 </nav>
 
 <div class="container mb-2">
-    <div class="row justify-content mt-2">
+    <div class="row justify-content mt-1">
         <div class="col-mb-8 col-sm-12 offset-md-1 p-4 text-center">
-            <h1>QuickDrop-Online Delivery</h1>
+            
         </div>
-    </div>
+        </div>
     <div class="row justify-content-center mt-1">
+        <h1>QuickDrop Delivery</h1>
+            <p>Order your favorite Items from your favorite Stores and we'll deliver them to you.</p>
+    
         <div class="card col-md-5 col-sm-12 offset-md-1 p-4 text-center">
             <h1>Place an Order</h1>
             <a href="{% url 'customer:order' %}" class="btn btn-outline-primary">Order Now!</a>
         </div>
     </div>
 </div>
-<div class="container mb-5">
-    <h1>Become Our Partners</h1><hr/>
 
+<div class="container mb-5">
+    <h1>Become Our Partners</h1>
+    <p>Join our network and reach more customers with QuickDrop.</p>
+        <hr/>
     <div class="row justify-content-center mt-1">
         <div class="card col-md-5 col-sm-12 offset-md-1 p-4 text-center">
-
             <a href="{% url 'blog-home' %}" class="btn btn-primary">Our Partners list</a>
         </div>
     </div>
 </div>
-
 
         </div>
     </div>
