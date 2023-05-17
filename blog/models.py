@@ -5,6 +5,7 @@ from django.urls import reverse
 from PIL import Image
 from taggit.managers import TaggableManager
 
+
 class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()

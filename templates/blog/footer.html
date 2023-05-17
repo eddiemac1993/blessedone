@@ -1,49 +1,59 @@
 {% load static %}
-<footer class="navbar-dark bg-steel py-3 text-white">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3"><br/>
-                <h4 class="text-uppercase text-white">Contacts</h4><hr>
-                <ul class="list-unstyled">
-                    <li>Email: manjolee800@gmail.com</li>
-                    <li>Phone: 0954155050, 0970349470</li>
-                    <li>Address: Livingstone, Zambia</li>
-                </ul>
-            </div>
-            <div class="col-md-3"><br/>
-                <h4 class="text-uppercase text-white">Announcements</h4><hr>
-                <ul class="list-unstyled">
-                    <li>New product launch</li>
-                    <li>Upcoming sale</li>
-                    <li>Community event</li>
-                </ul>
-            </div>
-            <div class="col-md-3"><br/>
-                <h5 class="text-uppercase text-white">Follow Us</h5><hr>
-                <ul class="list-unstyled">
-                    <li><a href="https://www.facebook.com/profile.php?id=100089608791020">
-                        <i class="fab fa-facebook-f text-white"> facebook</i></a>
-                    </li>
-                </ul>
-            </div><br/>
-            <div class="col-md-3"><br/>
-                <h4 class="text-uppercase text-white">Mission</h4><hr>
-                <p>Our mission is to provide high-quality services and products to our customers, while also promoting a positive impact on our community and environment.</p>
-            </div>
-        </div>
-        <hr class="bg-white">
-        <div class="row">
-            <div class="col-md-6">
-                <p class="text-center">
-                    Proudly Zambian <img src="{% static 'zambianflag.jpg' %}" alt="Zambian flag" style="height: 20px;">
-                </p>
-            </div>
-            <div class="col-md-6">
-                <p class="text-center">
-                    Copyright &copy; 2023
-                    <span> BLESSED</span> <span style="color:red">TOUCH</span>
-                </p>
-            </div>
-        </div>
+<footer class="navFooterLine text-light py-1" style="background-color: #232f3e;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h3 class="navFooterColHead h6">Get to Know Us</h3>
+        <ul class="list-unstyled small">
+          <li><a href="#" class="text-light text-decoration-none">BlessedTouch</a></li>
+          <li><a href="{% static 'blog-about' %}" class="text-light text-decoration-none">About BlessedTouch</a></li>
+          <li><a href="#" class="text-light text-decoration-none">Investor Relations</a></li>
+          <li><a href="#" class="text-light text-decoration-none">Devices</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <h3 class="navFooterColHead h6">Partner with Us</h3>
+        <ul class="list-unstyled small">
+          <li><a href="#" class="text-light text-decoration-none">Sell on Our Platform</a></li>
+          <li><a href="#" class="text-light text-decoration-none">Ads</a></li>
+          <li><a href="#" class="text-light text-decoration-none">Become an Affiliate</a></li>
+          <li><a href="#" class="text-light text-decoration-none">Fulfillment by Blessedtouch</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <h3 class="navFooterColHead h6">Contact Us</h3>
+        <ul class="list-unstyled small">
+          <li>
+            <a href="https://api.whatsapp.com/send?phone=260970349470&text=I%20want%20to%20know%20more" class="text-light text-decoration-none">
+              <i class="fab fa-whatsapp mr-2"></i> Whatsapp
+            </a>
+          </li>
+          <li><a href="#" class="text-light text-decoration-none"><i class="fab fa-google"></i> Google</a></li>
+          <li><a href="#" class="text-light text-decoration-none"><i class="fab fa-facebook-f mr-2"></i> Facebook</a></li>
+        </ul>
+      </div>
     </div>
+  </div>
+  <footer class="text-light py-1">
+  <div class="container">
+    <div class="icp-container-wrapper">
+      <div class="icp-container-desktop d-flex align-items-center justify-content-center justify-content-md-start">
+        <div class="col-md-6 text-center text-md-left mb-2 mb-md-0">
+          <p class="mb-0 small">
+            Proudly Zambian
+            <img src="{% static 'zambianflag.jpg' %}" alt="Zambian flag" style="height: 20px;" class="ml-2">
+          </p>
+        </div>
+        <a class="icp-button btn btn-outline-light btn-sm mx-1" href="#"><span class="icp-button-globe-2"></span>English</a>
+        <a class="icp-button btn btn-outline-light btn-sm mx-1" href="#"><span class="icp-nav-globe-img-2"></span>Zambia</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</footer>
+
+
+
+<footer class="text-center bg-dark text-light py-2">
+  <p class="mb-0 small">&copy; BlessedTouch. All rights reserved.</p>
 </footer>

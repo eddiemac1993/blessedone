@@ -8,6 +8,7 @@ from .forms import PostForm, CommentForm
 from django.urls import reverse_lazy
 
 
+
 class SearchResultsView(ListView):
     model = Post
     template_name = 'blog/search_results.html'

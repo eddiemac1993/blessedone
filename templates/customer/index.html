@@ -1,53 +1,73 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block content %}
 
-<nav class="navbar navbar-expand-lg d-flex justify-content-center">
-  <div class="container-fluid">
-    <div class="d-flex">
-        <a class="btn btn-secondary mr-3" href="{% url 'customer:menu' %}">
-        <i class="fas fa-bars"></i>
-      </a>
-        <a class="btn btn-secondary mr-3" href="/">
-        <span class="selected-city badge ">Only: Livingstone</span>
-      </a>
-      
-      <a class="nav-link" href="https://api.whatsapp.com/send?phone=260970349470&text=I%20want%20to%20know%20more">
-            <i class="fab fa-whatsapp"></i> Contact Us
-          </a>
-    </div>
+<section class="hero" style="background-image: url('{% static 'White Yellow Minimalist Delivery Services Instagram Story (1).png' %}');">
+  <div class="container">
+    <h1 style="color: #232f3e; font-size: 30px; font-weight: bold; text-transform: uppercase;">Quick<span style="color: #FF9900;">Drop</span></h1>
+    <p style="color: white; font-size: 20px; margin-top: 20px;">Order your favorite items from your favorite stores and we'll deliver them to you.</p><br/>
+    <a href="{% url 'customer:order' %}" style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: #FF9900; border-radius: 4px; transition: background-color 0.3s;">Place an Order</a>
   </div>
-</nav>
+</section>
 
-<div class="container mb-2">
-    <div class="row justify-content mt-1">
-        <div class="col-mb-8 col-sm-12 offset-md-1 p-4 text-center">
-            
+
+
+<div class="my-4">
+  <a href="{% url 'customer:create-ad' %}" class="btn btn-primary mr-2">Post an Ad</a>
+  <a href="{% url 'customer:ad-list' %}" class="btn btn-secondary">Advertisements</a>
+</div>
+
+<section class="featured-products">
+    <div class="container">
+        <h2>Featured Products</h2>
+        <div class="product-grid">
+            <div class="product-item">
+                <img src="https://m.media-amazon.com/images/I/71qid7QFWJL._SX3000_.jpg" alt="Product 1">
+                <h3>Product 1</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <a href="#" class="btn">Add to Cart</a>
+            </div>
+            <div class="product-item">
+                <img src="https://m.media-amazon.com/images/I/71qid7QFWJL._SX3000_.jpg" alt="Product 2">
+                <h3>Product 2</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <a href="#" class="btn">Add to Cart</a>
+            </div>
+            <!-- Add more product items as needed -->
         </div>
-        </div>
-    <div class="row justify-content-center mt-1">
-        <h1>QuickDrop Delivery</h1>
-            <p>Order your favorite Items from your favorite Stores and we'll deliver them to you.</p>
-    
-        <div class="card col-md-5 col-sm-12 offset-md-1 p-4 text-center">
-            <h1>Place an Order</h1>
-            <a href="{% url 'customer:order' %}" class="btn btn-outline-primary">Order Now!</a>
-        </div>
+    </div>
+</section>
+
+
+<main>
+
+<hr>
+<div class="container py-5">
+    <h1 class="text-center mb-4">Our Trusted Partners</h1>
+    <div class="row">
+        {% for post in posts %}
+            <div class="col text-center">
+                <img src="{{ post.image.url }}" alt="Partner Logo" style="height: 50px; width: 50px; object-fit: cover;" class="rounded-circle">
+                <p class="mt-2">
+                    <i class="fas fa-user-circle"></i>
+                    <a href="{% url 'user-posts' post.author.username %}" class="text-decoration-none">
+                        <span class="text-dark small">{{ post.title }}</span>
+                    </a>
+                </p>
+            </div>
+        {% endfor %}
     </div>
 </div>
 
-<div class="container mb-5">
-    <h1>Become Our Partners</h1>
-    <p>Join our network and reach more customers with QuickDrop.</p>
-        <hr/>
-    <div class="row justify-content-center mt-1">
-        <div class="card col-md-5 col-sm-12 offset-md-1 p-4 text-center">
-            <a href="{% url 'blog-home' %}" class="btn btn-primary">Our Partners list</a>
-        </div>
+<div class="container">
+    <div class="partner-section">
+        <h3>Become Our Partner</h3>
+        <p>Join our network and reach more customers with QuickDrop.</p>
+        <a href="{% url 'blog-home' %}" class="btn">Our Partners List</a>
     </div>
 </div>
+</main>
 
-        </div>
-    </div>
-    <br>
+
 {% endblock %}

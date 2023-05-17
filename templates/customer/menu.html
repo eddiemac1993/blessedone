@@ -1,24 +1,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <div class="container">
     <div class="row justify-content-center mt-5">
         <div class="col-md-6 col-sm-12 text-center">
-            <h1>What's On Our Marketpalce?</h1>
+            <h1 class="display-4">Discover Our Marketplace</h1>
+            <p class="lead">Find your favorite meals and drinks from our selection of quality products</p>
         </div>
     </div>
-
-    <div class="row justify-content-center mt-5">
-        <div class="col-md-8 col-sm-12 text-center">
-            <form method="GET" action="{% url 'customer:menu-search' %}">
-                <div class="md-form mt-0 active-cyan-2">
-                    <input class="form-control" name="q" type="text" placeholder="Search Our Marketplace" aria-label="Search" value="{{ request.GET.q }}">
+<div class="row justify-content-center mt-5">
+    <div class="col-md-8 col-sm-12 text-center">
+        <form method="GET" action="{% url 'customer:menu-search' %}">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control rounded-pill" name="q" placeholder="Search our marketplace" aria-label="Search" value="{{ request.GET.q }}">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary rounded-pill" type="submit"><i class="fas fa-search"></i></button>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
-
-    <div class="row justify-content-center">
+</div>
+<div class="row justify-content-center">
         {% for item in menu_items %}
         <div class="col-md-4 col-sm-12 text-center mb-5 mt-5">
             <img class="rounded" src="{{ item.image.url }}" width="300" height="300">
@@ -30,3 +33,6 @@
     </div>
 </div>
 {% endblock content %}
+
+
+

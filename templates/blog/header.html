@@ -1,42 +1,16 @@
-<header class="site-header">
-  <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
-    <div class="container">
-      <a class="navbar-brand mr-4" href="{% url 'customer:index' %}"><i class="fas fa-home"></i><span> BLESSED</span> <span style="color:red">TOUCH</span></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarToggle">
-      <form class="form-inline my-2 my-lg-0">
-  <div class="input-group mx-auto" style="max-width:500px">
-    <input type="text" class="form-control" placeholder="Search Blessedtouch" aria-label="Search" name="q">
-    <div class="input-group-append">
-      <button class="btn btn-secondary" type="submit">
-        <i class="fa fa-search"></i>
-      </button>
-    </div>
+{% load static %}
+<header class="fixed-top">
+  <div class="nav-container">
+    <a href="{% url 'customer:index' %}" class="logo">
+      <img src="{% static 'logo.png' %}" alt="logo" class="logo-img">
+    </a>
+    <nav class="nav-menu">
+      <ul>
+        <li><a href="{% url 'customer:menu' %}" class="icp-button btn btn-outline-light btn-sm mx-1">Marketplace</a></li>
+        <li><a href="{% url 'blog-home' %}" class="icp-button btn btn-outline-light btn-sm mx-1">Advertisement</a></li>
+      </ul>
+    </nav>
   </div>
-</form>
-    <div class="navbar-nav mr-auto">
-
-      <a class="nav-item nav-link" href="{% url 'blog-about' %}">About | BlessedTouch</a>
-    </div>
-    <!-- Navbar Right Side
-    <div class="container">
-            <div class="navbar-nav">
-
-          {% if user.is_authenticated %}
-            <a class="nav-item nav-link" href="{% url 'customer:index' %}"><i class="fas fa-truck"></i> QuickDrop</a>
-            <a class="nav-item nav-link" href="{% url 'post-create' %}"><i class="fas fa-pen-square"></i> New Post</a>
-            <a class="nav-item nav-link" href="{% url 'profile' %}"><i class="fas fa-user-circle"></i> Profile</a>
-            <a class="nav-item nav-link" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
-          {% else %}
-            <a class="nav-item nav-link" href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Login</a>
-            <a class="nav-item nav-link" href="{% url 'register' %}"><i class="fas fa-user-plus"></i> Register</a>
-          {% endif %}
-        </div>
-    </div>-->
-  </div>
-</div>
-  </nav>
 </header>
-
+<br/>
+<br/>

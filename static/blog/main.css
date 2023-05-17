@@ -1,91 +1,145 @@
+/* set box-sizing to border-box */
+*, *::before, *::after {
+box-sizing: border-box;
+}
+
+/* set default font-family, font-size, and line-height */
 body {
-  background: #fafafa;
-  color: #333333;
-  margin-top: 5rem;
+font-family: sans-serif;
+font-size: 16px;
+line-height: 1.5;
+background-color: #fafafa;
+color: #333333;
+margin: 0;
+padding: 0;
 }
 
+/* set font-weight and margin for headings */
 h1, h2, h3, h4, h5, h6 {
-  color: #444444;
+margin-top: 0;
+margin-bottom: 0.5em;
+font-weight: 600;
+color: #444444;
 }
 
-ul {
-  margin: 0;
+/* reset list styles */
+ul, ol {
+margin: 0;
+padding: 0;
+list-style: none;
 }
 
-.bg-steel {
-  background-color: #5f788a;
+/* set background-color and padding for header */
+.site-header {
+background-color: #343a40;
+padding: 1rem;
 }
 
-.site-header .navbar-nav .nav-link {
-  color: #cbd5db;
+/* style links in header */
+.site-header .nav-link {
+color: #cbd5db;
+text-decoration: none;
 }
 
-.site-header .navbar-nav .nav-link:hover {
-  color: #ffffff;
+.site-header .nav-link:hover {
+color: #ffffff;
 }
 
-.site-header .navbar-nav .nav-link.active {
-  font-weight: 500;
+.site-header .nav-link.active {
+font-weight: 500;
 }
 
+/* set padding, border, and background-color for content section */
 .content-section {
-  background: #ffffff;
-  padding: 10px 20px;
-  border: 1px solid #dddddd;
-  border-radius: 3px;
-  margin-bottom: 20px;
+background-color: #ffffff;
+border: 1px solid #dddddd;
+border-radius: 3px;
+padding: 1rem;
+margin-bottom: 1.5rem;
 }
 
+/* set color and margin for article title */
 .article-title {
-  color: #444444;
+color: #444444;
+margin-top: 0;
+margin-bottom: 0.5rem;
 }
 
-a.article-title:hover {
-  color: #428bca;
-  text-decoration: none;
+/* style links within article title */
+.article-title a {
+color: #444444;
+text-decoration: none;
 }
 
+.article-title a:hover {
+color: #428bca;
+}
+
+/* set margin and padding for article content */
 .article-content {
-  white-space: pre-line;
+margin-bottom: 1rem;
+white-space: pre-line;
 }
 
-.article-img {
-  height: 65px;
-  width: 65px;
-  margin-right: 16px;
-}
-
+/* style article metadata */
 .article-metadata {
-  padding-bottom: 1px;
-  margin-bottom: 4px;
-  border-bottom: 1px solid #e3e3e3
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+font-size: 0.9rem;
+margin-bottom: 0.5rem;
+border-bottom: 1px solid #e3e3e3;
+padding-bottom: 0.5rem;
+}
+
+.article-metadata > * {
+margin-right: 1rem;
+margin-bottom: 0.5rem;
+}
+
+/* style article metadata links */
+.article-metadata a {
+color: inherit;
+text-decoration: none;
 }
 
 .article-metadata a:hover {
-  color: #333;
-  text-decoration: none;
+color: #333;
 }
 
-.article-svg {
-  width: 25px;
-  height: 25px;
-  vertical-align: middle;
+/* style article image */
+.article-img {
+height: 65px;
+width: 65px;
+margin-right: 1rem;
+}
+
+/* style account image */
+.account-img {
+height: 125px;
+width: 125px;
+margin-right: 1rem;
+margin-bottom: 1rem;
+}
+
+/* style account heading */
+.account-heading {
+font-size: 2.5rem;
+margin-top: 0;
+margin-bottom: 0.5rem;
+}
+
+/* responsive styles */
+@media (max-width: 600px) {
+.article-img {
+display: none;
 }
 
 .account-img {
-  height: 125px;
-  width: 125px;
-  margin-right: 20px;
-  margin-bottom: 16px;
+display: none;
 }
 
-.account-heading {
-  font-size: 2.5rem;
+.text-container {
+font-size: 14px;
 }
-
-
-@media (max-width: 600px) {
-  .text-container {
-    font-size: 12px;
-  }
 }

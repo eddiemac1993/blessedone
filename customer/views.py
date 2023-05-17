@@ -2,23 +2,41 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.views import View
 from django.db.models import Q
-from .models import MenuItem, OrderModel, Location, OrderItem
+from .models import MenuItem, OrderModel, Location, OrderItem, Ad
 import pdfkit
 from django.http import HttpResponse
 from django.template.loader import render_to_string
+from blog.views import PostListView
+from .forms import AdForm
 
 
-class Index(View):
-    def get(self, request, *args, **kwargs):
-        return render(request, 'customer/index.html')
+def create_ad(request):
+    if request.method == 'POST':
+        form = AdForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('customer:ad-list')
+    else:
+        form = AdForm()
+    return render(request, 'customer/create_ad.html', {'form': form})
+
+def ad_list(request):
+    ads = Ad.objects.all()
+    return render(request, 'customer/ad_list.html', {'ads': ads})
+
+
+
+class Index(PostListView):
+    template_name = 'customer/index.html'
+    context_object_name = 'posts'
+    ordering = ['-date_posted']
+    paginate_by = 5
+
 
 class About(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'customer/about.html')
 
-class Game(View):
-    def get(self, request, *args, **kwargs):
-        return render(request, 'customer/game.html')
 
 
 class Order(View):
