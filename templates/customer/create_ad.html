@@ -1,10 +1,37 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-<h2>Create Ad</h2>
-<form method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Create</button>
-</form>
+<br/>
+<br/>
+<div class="container">
+    <a href="{% url 'customer:index' %}" class="btn btn-outline-success mb-2 btn-sm rounded-pill">
+        <i class="fas fa-arrow-left"></i> Go Back
+    </a>
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">Create Ad</h2>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        {{ formset.management_form }}
+                        {% for image_form in formset %}
+                        <div class="form-group">
+                            {{ image_form.image.label_tag }}
+                            {{ image_form.image }}
+                        </div>
+                        {% empty %}
+                        <p>No images available.</p>
+                        {% endfor %}
+                        <div class="d-grid mt-4">
+                            <button class="btn btn-warning btn-lg" type="submit">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

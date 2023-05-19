@@ -13,61 +13,68 @@
 
 
 
-<div class="my-4">
-  <a href="{% url 'customer:create-ad' %}" class="btn btn-primary mr-2">Post an Ad</a>
-  <a href="{% url 'customer:ad-list' %}" class="btn btn-secondary">Advertisements</a>
-</div>
-
 <section class="featured-products">
     <div class="container">
-        <h2>Featured Products</h2>
-        <div class="product-grid">
-            <div class="product-item">
-                <img src="https://m.media-amazon.com/images/I/71qid7QFWJL._SX3000_.jpg" alt="Product 1">
-                <h3>Product 1</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <a href="#" class="btn">Add to Cart</a>
+        <h2 class="section-title">Advertise with Us</h2>
+        <div class="row">
+            <div class="col-lg-8 col-md-6">
+                <img src="https://m.media-amazon.com/images/I/71qid7QFWJL._SX3000_.jpg" alt="Advertisement" class="product-image img-fluid">
+                <div class="hero" style="https://m.media-amazon.com/images/I/71qid7QFWJL._SX3000_.jpg" alt="Advertisement" class="product-image img-fluid">
+  <div class="container">
+    <h3 style="color: #232f3e; font-size: 30px; font-weight: bold; text-transform: uppercase;">Promote Your Business</h3>
+    <p style="color: white; font-size: 20px; margin-top: 20px;">Reach a wider audience and boost your sales by posting your ads on our platform.</p><br/>
+    </div>
+</div>
             </div>
-            <div class="product-item">
-                <img src="https://m.media-amazon.com/images/I/71qid7QFWJL._SX3000_.jpg" alt="Product 2">
-                <h3>Product 2</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <a href="#" class="btn">Add to Cart</a>
+
+
+
+
+
+            <div class="col-lg-4 col-md-6"><hr>
+                <div class="product-item">
+                    <img src="{% static 'logo.png' %}" alt="Advertisement" class="product-image img-fluid">
+                    <h3 class="product-title">Increase Your Visibility</h3>
+                    <p class="product-description">Get noticed by potential customers and expand your brand's reach.</p>
+                    <a href="{% url 'customer:create-ad' %}" class="btn btn-primary">Post an Ad</a>
+                </div>
             </div>
-            <!-- Add more product items as needed -->
         </div>
     </div>
 </section>
 
 
+
+
 <main>
-
-<hr>
-<div class="container py-5">
-    <h1 class="text-center mb-4">Our Trusted Partners</h1>
-    <div class="row">
-        {% for post in posts %}
-            <div class="col text-center">
-                <img src="{{ post.image.url }}" alt="Partner Logo" style="height: 50px; width: 50px; object-fit: cover;" class="rounded-circle">
-                <p class="mt-2">
-                    <i class="fas fa-user-circle"></i>
+    <hr>
+    <div class="container py-5">
+        <h1 class="text-center mb-4">Our Partners</h1>
+        <div class="row justify-content-center">
+            {% for post in posts %}
+                <div class="col-6 col-md-4 col-lg-2 text-center mb-4">
                     <a href="{% url 'user-posts' post.author.username %}" class="text-decoration-none">
-                        <span class="text-dark small">{{ post.title }}</span>
-                    </a>
-                </p>
-            </div>
-        {% endfor %}
-    </div>
-</div>
+                        <img src="{{ post.image.url }}" alt="Partner Logo" style="height: 50px; width: 50px; object-fit: cover; border: 2px solid black; border-radius: 50%; padding: 5px;" class="rounded-circle">
 
-<div class="container">
-    <div class="partner-section">
-        <h3>Become Our Partner</h3>
-        <p>Join our network and reach more customers with QuickDrop.</p>
-        <a href="{% url 'blog-home' %}" class="btn">Our Partners List</a>
+                        <p class="mt-2">
+                            <i class="fas fa-user-circle"></i>
+                            <span class="text-dark font-weight-bold small">{{ post.title }}</span>
+                        </p>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
     </div>
-</div>
+
+
+        <div class="partner-section text-center">
+            <h3>Become Our Partner</h3>
+            <p>Join our network and reach more customers with QuickDrop.</p>
+            <a href="{% url 'blog-home' %}" class="btn btn-primary">Our Partners List</a>
+        </div>
+
 </main>
+
 
 
 {% endblock %}

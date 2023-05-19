@@ -1,34 +1,34 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
 <div class="container mb-5">
     <div class="row justify-content-center mt-1">
         <div class="col-md-5 col-sm-12 p-4 text-center">
             <h1>Order Confirmation</h1>
             <a href="{% url 'customer:order' %}" class="btn btn-outline-success mb-2 btn-sm">
-    <i class="fas fa-arrow-left"></i> Go Back
-</a>
+                <i class="fas fa-arrow-left"></i> Go Back
+            </a>
         </div>
     </div>
-<div class="row justify-content-center mt-5">
-    <div class="col-md-5 col-sm-12 text-center">
-        <h3 class="pb-3">Order Summary:</h3>
-        {% for item in order_items %}
-  <div class="row">
-    <div class="col-md-6 col-sm-12">
-      <li>{{ item.quantity }} x {{ item.item.name }} - k{{ item.item.price }} each</li>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-5 col-sm-12 text-center">
+            <h3 class="pb-3">Order Summary:</h3>
+            {% for item in order_items %}
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <li>{{ item.quantity }} x {{ item.item.name }} - k{{ item.item.price }} each</li>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <!-- Additional column for potential content -->
+                </div>
+            </div>
+            {% endfor %}
+            <hr />
+            <p class="font-weight-bold pt-4">Delivery Fee: {{ location }} : K {{ delivery_fee }}</p>
+            <p class="font-weight-bold pt-4">Order Total: K {{ total_price }}</p>
+        </div>
     </div>
-    <div class="col-md-6 col-sm-12">
-
-    </div>
-  </div>
-{% endfor %}<hr/>
-<p class="font-weight-bold pt-4">Delivery Fee: {{ location }} : K {{ delivery_fee }}</p>
-<p class="font-weight-bold pt-4">Order Total: K {{ total_price }}</p>
-</div>
-</div><hr/>
-
+    <hr />
 </div>
 <div class="row justify-content-center pb-2 pt-3">
     <div class="col-md-6 text-center">
@@ -36,16 +36,10 @@
     </div>
 </div>
 <div class="row justify-content-center pb-2 pt-2">
-  <div class="col-md-6 text-center">
-
-      <!-- this is the download button for invoice
-    <a href="{% url 'customer:invoice' pk=pk %}" class="btn btn-primary">
-      <i class="fa fa-download" aria-hidden="true" style="font-size:24px;"></i> Invoice
-    </a> -->
-
-    <a href="https://api.whatsapp.com/send?phone=260970349470&text=Invoice%20Order:%20https://blessedtouchs.pythonanywhere.com/customer/order/{{ pk }}/invoice" class="btn btn-success" style="margin-left: 10px;">
-  <i class="fab fa-whatsapp" aria-hidden="true" style="color: white; font-size: 24px;"></i> Order Using WhatsApp
-</a>
-  </div>
+    <div class="col-md-6 text-center">
+        <a href="https://api.whatsapp.com/send?phone=260970349470&amp;text=Invoice%20Order:%20https://blessedtouchs.pythonanywhere.com/customer/order/{{ pk }}/invoice" class="btn btn-success" style="margin-left: 10px;">
+            <i class="fab fa-whatsapp" aria-hidden="true" style="color: white; font-size: 24px;"></i> Order Using WhatsApp
+        </a>
+    </div>
 </div>
 {% endblock content %}

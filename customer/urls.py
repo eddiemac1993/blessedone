@@ -15,5 +15,4 @@ urlpatterns = [
     path('order/', Order.as_view(), name='order'),
     path('order-confirmation/<int:pk>/', OrderConfirmation.as_view(), name='order-confirmation'),
     path('customer/order/<int:pk>/invoice/', views.get_invoice, name='invoice'),
-    
 ]

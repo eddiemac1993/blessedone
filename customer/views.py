@@ -2,27 +2,49 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.views import View
 from django.db.models import Q
-from .models import MenuItem, OrderModel, Location, OrderItem, Ad
+from .models import MenuItem, OrderModel, Location, OrderItem
 import pdfkit
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from blog.views import PostListView
-from .forms import AdForm
+from .forms import AdForm, AdImageFormSet
+from .models import Ad, AdImage
 
+def ad_list(request):
+    query = request.GET.get('q')
+
+    if query:
+        ads = Ad.objects.filter(
+            Q(title__icontains=query) |
+            Q(description__icontains=query) |
+            Q(phone_number__icontains=query) |
+            Q(location__icontains=query)
+        ).order_by('-id')
+    else:
+        ads = Ad.objects.all().order_by('-id')
+
+    return render(request, 'customer/ad_list.html', {'ads': ads})
 
 def create_ad(request):
     if request.method == 'POST':
         form = AdForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('customer:ad-list')
+        formset = AdImageFormSet(request.POST, request.FILES)
+
+        if form.is_valid() and formset.is_valid():
+            ad = form.save()  # Save the Ad object
+            for image_form in formset:
+                image = image_form.cleaned_data.get('image')
+                if image:
+                    AdImage.objects.create(ad=ad, image=image)
+
+            return redirect('customer:ad-list')  # Redirect to ad list page
+
     else:
         form = AdForm()
-    return render(request, 'customer/create_ad.html', {'form': form})
+        formset = AdImageFormSet()
 
-def ad_list(request):
-    ads = Ad.objects.all()
-    return render(request, 'customer/ad_list.html', {'ads': ads})
+    context = {'form': form, 'formset': formset}
+    return render(request, 'customer/create_ad.html', context)
 
 
 

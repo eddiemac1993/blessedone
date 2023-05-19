@@ -9,81 +9,108 @@
             box-sizing: border-box;
         }
 
-    .stamp {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        padding: 10px;
-        background-color: #f44336;
-        color: white;
-        font-size: 16px;
-        font-weight: bold;
-        transform: rotate(-30deg);
-     }
+        .stamp {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 10px;
+            background-color: #f44336;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            transform: rotate(-30deg);
+        }
 
-    .invoice-container {
-        width: 80%;
-        margin: 0 auto;
-        padding: 20px;
-    }
+        .invoice-container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            font-family: Arial, sans-serif;
+        }
 
-    .header {
-        text-align: center;
-        margin-bottom: 20px;
-    }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-    .header h1 {
-        font-size: 36px;
-    }
+        .header h1 {
+            font-size: 36px;
+            margin: 0;
+        }
 
-    .customer-details {
-        width: 50%;
-        float: left;
-    }
+        .company-logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-    .order-details {
-        width: 50%;
-        float: right;
-    }
+        .company-logo img {
+            max-width: 200px;
+        }
 
-    .order-details h2 {
-        font-size: 24px;
-    }
+        .customer-details {
+            width: 50%;
+            float: left;
+        }
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-    }
+        .order-details {
+            width: 50%;
+            float: right;
+        }
 
-    th, td {
-        border: 1px solid #dddddd;
-        padding: 8px;
-        text-align: left;
-    }
+        .order-details h2 {
+            font-size: 24px;
+            margin: 0;
+        }
 
-    th {
-        background-color: #dddddd;
-    }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
 
-    .total {
-        font-weight: bold;
-    }
-</style>
+        th, td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #dddddd;
+        }
+
+        .total {
+            font-weight: bold;
+        }
+
+        .item-description {
+            margin-bottom: 10px;
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 12px;
+            color: #888888;
+        }
+    </style>
 </head>
 <body>
+    {% load static %}
     <div class="invoice-container">
         <div class="header">
-            <h1><span> BLESSED</span> <span style="color:red">TOUCH</span> INVOICE </h1>
+            <h1>BLESSEDTOUCH INVOICE</h1>
+        </div>
+        <div class="company-logo">
+            <img src="{% static 'logo.png' %}" alt="logo" class="logo-img">
         </div>
         <div class="customer-details">
             <h2>Customer Details</h2>
             <p>Name: {{ name }}</p>
             <p>Specifics: {{ specifics }}</p>
             {% if order.agent %}
-    <p>Agent ID: {{ order.agent.username }}</p>
-{% endif %}
-
+                <p>Agent ID: {{ order.agent.username }}</p>
+            {% endif %}
             <p>Street: {{ street }}</p>
             <p>{{ location.name }}</p>
         </div>
@@ -99,8 +126,8 @@
                     <td>
                         <ul>
                             {% for order_item in items %}
-    <li>{{ order_item.item.name }} | {{ order_item.item.price }} x {{ order_item.quantity }}</li>
-{% endfor %}
+                                <li>{{ order_item.item.name }} | {{ order_item.item.price }} x {{ order_item.quantity }}</li>
+                            {% endfor %}
                         </ul>
                     </td>
                 </tr>
@@ -120,28 +147,29 @@
         </div>
     </div>
     {% for order_item in items %}
-            <div class="font-weight-bold">{{ order_item.item.name }}</div><p>{{ order_item.item.description }}</p><hr/>
-        {% endfor %}
-    </div>
+        <div class="item-description">
+            <div class="font-weight-bold">{{ order_item.item.name }}</div>
+            <p>{{ order_item.item.description }}</p>
+            <hr/>
+        </div>
+    {% endfor %}
     <hr class="bg-white">
-<div class="row">
-    <div class="col-md-12">
-        <p class="text-center">
-            <span>Copyright &copy; 2023</span>
-            <span> BLESSED</span> <span style="color:red">TOUCH</span>
-        </p>
+    <div class="row">
+        <div class="col-md-12">
+            <p class="text-center footer">
+                &copy; {{ current_year }} BLESSED<span style="color: red;">TOUCH</span>
+            </p>
+        </div>
     </div>
-</div>
-<div class="stamp">
-  ORDERED ON <br>
-  <span id="date"></span>
-</div>
+    <div class="stamp">
+        ORDERED ON <br>
+        <span id="date"></span>
+    </div>
 
-<script>
-  var today = new Date();
-  var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-  document.getElementById("date").innerHTML = date;
-</script>
-
+    <script>
+        var today = new Date();
+        var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        document.getElementById("date").innerHTML = date;
+    </script>
 </body>
 </html>
