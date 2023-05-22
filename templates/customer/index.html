@@ -18,19 +18,21 @@
         <h2 class="section-title">Advertise with Us</h2>
         <div class="row">
             <div class="col-lg-8 col-md-6">
-                <img src="https://m.media-amazon.com/images/I/71qid7QFWJL._SX3000_.jpg" alt="Advertisement" class="product-image img-fluid">
-                <div class="hero" style="https://m.media-amazon.com/images/I/71qid7QFWJL._SX3000_.jpg" alt="Advertisement" class="product-image img-fluid">
-  <div class="container">
-    <h3 style="color: #232f3e; font-size: 30px; font-weight: bold; text-transform: uppercase;">Promote Your Business</h3>
-    <p style="color: white; font-size: 20px; margin-top: 20px;">Reach a wider audience and boost your sales by posting your ads on our platform.</p><br/>
-    </div>
-</div>
+                <div class="ad-image-container">
+                    <img src="https://m.media-amazon.com/images/I/71qid7QFWJL._SX3000_.jpg" alt="Advertisement" class="product-image img-fluid">
+                    <a href="{% url 'customer:ad-list' %}" class="ad-link">
+                        <div class="ad-link-content">
+                            Advertisement
+                        </div>
+                    </a>
+                </div>
+                <div class="hero">
+                    <div class="container">
+                        <h3 style="color: #232f3e; font-size: 30px; font-weight: bold; text-transform: uppercase;">Promote Your Business</h3>
+                        <p style="color: white; font-size: 20px; margin-top: 20px;">Reach a wider audience and boost your sales by posting your ads on our platform.</p><br/>
+                    </div>
+                </div>
             </div>
-
-
-
-
-
             <div class="col-lg-4 col-md-6"><hr>
                 <div class="product-item">
                     <img src="{% static 'logo.png' %}" alt="Advertisement" class="product-image img-fluid">
@@ -42,6 +44,33 @@
         </div>
     </div>
 </section>
+
+<style>
+.ad-image-container {
+    position: relative;
+}
+
+.ad-link {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: orange;
+    text-decoration: none;
+    border: 1px solid orange;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.ad-link-content {
+    margin: 0;
+}
+</style>
+
+
 
 
 

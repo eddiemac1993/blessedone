@@ -10,6 +10,7 @@ from blog.views import PostListView
 from .forms import AdForm, AdImageFormSet
 from .models import Ad, AdImage
 
+
 def ad_list(request):
     query = request.GET.get('q')
 
@@ -23,7 +24,10 @@ def ad_list(request):
     else:
         ads = Ad.objects.all().order_by('-id')
 
-    return render(request, 'customer/ad_list.html', {'ads': ads})
+    categories = dict(Ad.CATEGORY_CHOICES)  # Convert tuple of choices to a dictionary
+
+    return render(request, 'customer/ad_list.html', {'ads': ads, 'categories': categories})
+
 
 def create_ad(request):
     if request.method == 'POST':
