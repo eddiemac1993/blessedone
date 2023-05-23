@@ -51,8 +51,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title text-uppercase">{{ ad.title|upper }}</h5>
-                            <p class="card-text description">{{ ad.description }}</p>
+                            <a href="{% url 'customer:ad-detail' ad.id %}" class="btn btn-primary card-title text-uppercase">{{ ad.title|upper }}</a>
                             {% if ad.price %}
                                 <p class="card-text"><strong>Price:</strong> K {{ ad.price }}</p>
                             {% endif %}
@@ -67,10 +66,21 @@
                             </li>
                             <li class="list-group-item"><i class="fas fa-map-marker-alt me-2"></i>{{ ad.location }}</li>
                         </ul>
+                        
+                        <!-- Comment count -->
+<div class="card-footer">
+  <small class="text-muted">
+    <a href="{% url 'customer:ad-detail' ad.id %}">
+      {{ ad.comments.count }} comments
+    </a>
+  </small>
+</div>
+
                     </div>
                 </div>
             {% endif %}
         {% endfor %}
     </div>
 </div>
+
 {% endblock %}

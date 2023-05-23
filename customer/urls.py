@@ -15,4 +15,8 @@ urlpatterns = [
     path('order/', Order.as_view(), name='order'),
     path('order-confirmation/<int:pk>/', OrderConfirmation.as_view(), name='order-confirmation'),
     path('customer/order/<int:pk>/invoice/', views.get_invoice, name='invoice'),
+
+    # Add the following URL pattern for adding comments
+    path('ad/<int:ad_id>/add-comment/', views.add_comment, name='add-comment'),
+    path('ad-detail/<int:ad_id>/', views.ad_detail, name='ad-detail'),
 ]

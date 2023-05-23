@@ -1,0 +1,84 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<br/>
+<br/>
+
+<div class="container">
+    <div class="mb-2">
+        <a href="{% url 'customer:index' %}" class="btn btn-outline-primary btn-sm rounded-pill">
+            <i class="fas fa-arrow-left"></i> Go Back
+        </a>
+        <a href="{% url 'customer:create-ad' %}" class="btn btn-primary btn-sm rounded-pill">
+            <i class="fas fa-plus"></i> Post an Ad
+        </a>
+    </div>
+
+    <hr>
+    <h2>{{ ad.title }} | Detail</h2>
+
+    <div class="row">
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card">
+                <div id="carousel-{{ ad.id }}" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        {% for image in ad.images.all %}
+                            <div class="carousel-item{% if forloop.first %} active{% endif %}">
+                                <img src="{{ image.image.url }}" alt="{{ ad.title }}" class="card-img-top">
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-text description">Description: {{ ad.description }}</p>
+                    {% if ad.price %}
+                        <p class="card-text"><strong>Price:</strong> K {{ ad.price }}</p>
+                    {% endif %}
+                    {% if ad.category %}
+                        <p class="card-text"><strong>Category:</strong> {{ ad.get_category_display }}</p>
+                    {% endif %}
+                    <p class="card-text text-muted small">Posted {{ ad.created_at|timesince }} ago</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <a href="tel:{{ ad.phone_number }}" class="card-link"><i class="fas fa-phone me-2"></i>{{ ad.phone_number }}</a>
+                    </li>
+                    <li class="list-group-item"><i class="fas fa-map-marker-alt me-2"></i>{{ ad.location }}</li>
+                </ul>
+            </div>
+        </div>
+
+       <!-- Comment Form -->
+<div class="col-lg-9 col-md-6">
+    <form action="{% url 'customer:add-comment' ad.id %}" method="POST">
+        {% csrf_token %}
+        {{ comment_form.content }}
+        <button type="submit" class="btn btn-primary">Add Comment</button>
+    </form>
+
+    <hr>
+
+    <!-- Comments -->
+    <h5>Comments:</h5>
+    {% for comment in ad.comments.all reversed %}
+        <div class="card mb-2">
+            <div class="card-body">
+                <p>{{ comment.content }}</p>
+                <p class="card-text text-muted small">Commented on {{ comment.created_at|timesince }} ago</p>
+            </div>
+        </div>
+    {% empty %}
+        <p>No comments yet.</p>
+    {% endfor %}
+</div>
+
+        
+    </div>
+</div>
+{% endblock %}
+
+
+

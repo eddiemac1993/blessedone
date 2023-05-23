@@ -1,5 +1,5 @@
 from django import forms
-from .models import Ad, AdImage
+from .models import Ad, AdImage, Comment
 
 class AdForm(forms.ModelForm):
     title = forms.CharField(
@@ -36,3 +36,13 @@ AdImageFormSet = forms.inlineformset_factory(
     can_delete=True,
     max_num=5,
 )
+
+
+class CommentForm(forms.ModelForm):
+    content = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter your comment', 'rows': '3'})
+    )
+
+    class Meta:
+        model = Comment
+        fields = ['content']

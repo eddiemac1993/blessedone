@@ -18,11 +18,18 @@ class Ad(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, null=True, blank=True)
     created_at = models.DateTimeField(default=datetime.now)
+    likes = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.title
 
+class Comment(models.Model):
+    ad = models.ForeignKey(Ad, related_name='comments', on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DateTimeField(default=datetime.now)
 
+    def __str__(self):
+        return f"Comment on Ad '{self.ad.title}'"
 
 class AdImage(models.Model):
     ad = models.ForeignKey(Ad, related_name='images', on_delete=models.CASCADE)

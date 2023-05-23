@@ -1,117 +1,73 @@
 {% extends "base.html" %}
-{% load social_share %}
+{% load static %}
 {% block content %}
-  <h1>Post Details</h1>
-<div class="container">
-    <div class="row">
-        <div class="col-md-8">
-            <div class="card mb-4">
-                <img class="card-img-top" src="{{ object.image.url }}" alt="{{ object.title }}">
-                <div class="card-body">
-                    <h2 class="card-title">{{ object.title }}</h2>
-                    <p class="card-text">{{ object.content }}</p>
-                </div>
-                <div class="card-footer text-muted">
 
-                    {% if object.author == user %}
-                        <div>
-                            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
-                            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card mb-4">
-                <div class="card-body">
-                    <ul class="list-group">
-                        <li class="list-group-item">Price:ZMK {{ object.price }}</li>
-                        <li class="list-group-item">
-    <i class="fas fa-phone"></i> Phone : {{ object.phone_number }}
-</li>
+<!-- Navigation section -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="py-3 container">
+      <br/>
+    <a class="navbar-brand" href="#"><span class="small">{{ object.title }} | Profile</span></a>
+  </div>
+</nav>
 
-                        <li class="list-group-item">Content: {{ object.content }}</li>
-                        <li class="list-group-item">Description: {{ object.description }}</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card mb-4">
-                <div class="card-body">
-                    <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
-                    <h5 class="card-title">{{ object.author }}</h5>
-
-{% load social_share %}
-
-{% post_to_facebook object_or_url "Post to Facebook!" %}
-{% post_to_twitter "New Song: {{object.title}}. Check it out!" object_or_url "Post to Twitter" %}
-{% post_to_gplus object_or_url "Post to Google+!" %}
-{% post_to_linkedin object_or_url %}
-{% send_email object.title "New Song: {{object.title}}. Check it out!" object_or_url "Share via email" %}
-{% post_to_whatsapp object_or_url "Share via WhatsApp" %}
-{% save_to_pinterest object_or_url %}
-{% add_pinterest_script %}
-
-                    <p class="card-text">{{ object.author.profile.bio }}</p>
-                    <small>{{ object.date_posted|date:"F d, Y" }} by <a href="{% url 'user-posts' object.author.username %}">{{ object.author }}</a></small>
-                </div>
-
-            </div>
-
-
-
-
-
-            <!--comments-->
-            <div class="section ">
-                <div class="container ">
-                    <h2>Comments({{post_comments_count}})</h2>
-                    <div class="row ">
-                        <div class="col-lg-8 mx-auto ">
-                            <!--display coment-->
-
-                            <div class="media-list">
-                                {% for comment in post_comments %}
-                                <div>
-                                    <div class="media-body">
-                                        <div class="small-1">
-                                            <b> {{comment.user}}</b>
-                                            <time class="ml-4 opaciy-70 small-3"> {{comment.date}}</time>
-                                        </div>
-                                        <p> {{comment.content}}</p>
-                                    </div>
-                                </div>
-                                {% endfor %}
-                            </div>
-
-
-                            <!--display the form-->
-                            <form method="POST" action="{% url 'post-detail' post.id %}">
-                                {% csrf_token %}
-                                <div class="form-group">
-                                    {{form}}
-                                </div>
-                                <button class="btn btn-primary btn-block " type="submit">Comment</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        </div>
+<!-- Hero section -->
+<section class="hero" style="background-image: url('{% static 'White Yellow Minimalist Delivery Services Instagram Story (1).png' %}');">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 text-center">
+        <h1 class="display-4 font-weight-bold">{{ object.title }}</h1>
+        <p style="color: white; font-size: 20px; margin-top: 20px;">{{ object.content }}</p><br/>
+        <a href="{% url 'user-posts' object.author.username %}" style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: #FF9900; border-radius: 4px; transition: background-color 0.3s;">{{ object.author }}</a>
+      </div>
     </div>
-</div>
+
+  </div>
+</section>
+
+<!-- Another section with the image -->
+<section class="image-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 text-center">
+        <img src="{{ object.image.url }}" alt="Image" class="img-fluid">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About section -->
+<section class="about py-5 bg-gray">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 text-center">
+        <h2 class="display-4 font-weight-bold">About Us</h2>
+        <p class="lead">{{ object.description }}</p>
+      </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+      <div class="col-md-3 text-center">
+        <img src="{{ object.author.profile.image.url }}" alt="About Image" class="img-fluid rounded-circle mt-4">
+        <h4 class="mt-3">BlessedTouch</h4>
+        <p>Web Marketing</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer section -->
+<footer id="footer" class="py-5 bg-dark text-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h3>{{ object.title }} Contacts</h3>
+        <p>Email: {{ request.user.email }}</p>
+        <p>Phone: {{ object.phone_number }}</p>
+        <div class="social-icons">
+          <!-- Add your social icons here -->
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
 {% endblock content %}

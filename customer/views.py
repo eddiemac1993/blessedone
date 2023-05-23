@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.views import View
 from django.db.models import Q
@@ -7,8 +7,10 @@ import pdfkit
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from blog.views import PostListView
-from .forms import AdForm, AdImageFormSet
-from .models import Ad, AdImage
+from .forms import AdForm, AdImageFormSet, CommentForm
+from .models import Ad, AdImage, Comment
+from django.db.models import Count
+from django.db.models.functions import Coalesce
 
 
 def ad_list(request):
@@ -22,11 +24,22 @@ def ad_list(request):
             Q(location__icontains=query)
         ).order_by('-id')
     else:
-        ads = Ad.objects.all().order_by('-id')
+        ads = Ad.objects.all().annotate(like_count=Count('likes')).order_by('-like_count', '-id')
 
-    categories = dict(Ad.CATEGORY_CHOICES)  # Convert tuple of choices to a dictionary
+    categories = dict(Ad.CATEGORY_CHOICES)
 
-    return render(request, 'customer/ad_list.html', {'ads': ads, 'categories': categories})
+    # Retrieve comments count for each ad
+    ad_comments_count = Ad.objects.annotate(comment_count=Coalesce(Count('comments'), 0)).values('id', 'comment_count')
+
+    ad_comments = {}
+    for entry in ad_comments_count:
+        ad_id = entry['id']
+        comment_count = entry['comment_count']
+        ad_comments[ad_id] = comment_count
+
+    liked_ads = request.session.get('liked_ads', [])  # Get liked ads from session or initialize as empty list
+
+    return render(request, 'customer/ad_list.html', {'ads': ads, 'categories': categories, 'ad_comments': ad_comments, 'liked_ads': liked_ads})
 
 
 def create_ad(request):
@@ -35,21 +48,54 @@ def create_ad(request):
         formset = AdImageFormSet(request.POST, request.FILES)
 
         if form.is_valid() and formset.is_valid():
-            ad = form.save()  # Save the Ad object
+            ad = form.save()
             for image_form in formset:
                 image = image_form.cleaned_data.get('image')
                 if image:
                     AdImage.objects.create(ad=ad, image=image)
 
-            return redirect('customer:ad-list')  # Redirect to ad list page
+            return redirect('customer:ad-list')
 
     else:
         form = AdForm()
         formset = AdImageFormSet()
 
-    context = {'form': form, 'formset': formset}
+    comment_form = CommentForm()  # Create an instance of the CommentForm
+
+    context = {'form': form, 'formset': formset, 'comment_form': comment_form}
     return render(request, 'customer/create_ad.html', context)
 
+
+def ad_detail(request, ad_id):
+    ad = get_object_or_404(Ad, pk=ad_id)
+    comments = ad.comments.all()
+
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            content = comment_form.cleaned_data['content']
+            comment = Comment(ad=ad, content=content)
+            comment.save()
+            return redirect('customer:ad-detail', ad_id=ad_id)
+    else:
+        comment_form = CommentForm()
+
+    return render(request, 'customer/ad_detail.html', {'ad': ad, 'comments': comments, 'comment_form': comment_form})
+
+def add_comment(request, ad_id):
+    ad = get_object_or_404(Ad, pk=ad_id)
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.ad = ad
+            comment.save()
+            return redirect('customer:ad-detail', ad_id=ad_id)
+    else:
+        form = CommentForm()
+
+    return render(request, 'customer/add_comment.html', {'form': form})
 
 
 class Index(PostListView):
