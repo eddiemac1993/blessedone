@@ -20,7 +20,7 @@
                 </form>
             </div>
 
-            <form method="POST">
+            <form id="order-form" method="POST">
                 {% csrf_token %}
                 <div class="pt-5">
                     <style>
@@ -69,6 +69,14 @@
 
                         .menu-item-availability .not-available {
                             background-color: #d9534f;
+                        }
+
+                        /* Additional CSS styles for the "Scroll to Order" button */
+                        .scroll-to-order-button {
+                            position: fixed;
+                            bottom: 20px;
+                            right: 20px;
+                            z-index: 1000;
                         }
                     </style>
                     {% for item in items %}
@@ -120,8 +128,8 @@
                     <hr />
 
                     <div class="form-group pt-3">
-                        <label for="name">Full Name</label>
-                        <input required class="form-control" type="text" placeholder="Your Name" name="name">
+                        <label for="full-name">Full Name</label>
+                        <input required class="form-control" type="text" placeholder="Your Name" name="name" id="full-name">
                     </div>
 
                     <div class="form-group pt-3">
@@ -183,8 +191,18 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Scroll to Order button -->
+                <button class="scroll-to-order-button btn btn-primary" type="button" onclick="scrollToOrderForm()">Scroll to Order</button>
             </form>
         </div>
     </div>
 </div>
+
+<script>
+    function scrollToOrderForm() {
+        const fullNameInput = document.getElementById('full-name');
+        fullNameInput.scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
 {% endblock %}

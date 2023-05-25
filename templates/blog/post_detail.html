@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% load static %}
+
 {% block content %}
 
 <!-- Navigation section -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="py-3 container">
-      <br/>
     <a class="navbar-brand" href="#"><span class="small">{{ object.title }} | Profile</span></a>
   </div>
 </nav>
@@ -16,16 +16,16 @@
     <div class="row justify-content-center">
       <div class="col-md-6 text-center">
         <h1 class="display-4 font-weight-bold">{{ object.title }}</h1>
-        <p style="color: white; font-size: 20px; margin-top: 20px;">{{ object.content }}</p><br/>
-        <a href="{% url 'user-posts' object.author.username %}" style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: #FF9900; border-radius: 4px; transition: background-color 0.3s;">{{ object.author }}</a>
+        <p class="lead text-white">{{ object.content }}</p>
+        <br/>
+        <a href="{% url 'user-posts' object.author.username %}" class="btn btn-primary">{{ object.author }}</a>
       </div>
     </div>
-
   </div>
 </section>
 
 <!-- Another section with the image -->
-<section class="image-section">
+<section class="image-section py-5">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-6 text-center">
@@ -36,7 +36,7 @@
 </section>
 
 <!-- About section -->
-<section class="about py-5 bg-gray">
+<section class="about py-5 bg-light">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-6 text-center">
@@ -47,12 +47,15 @@
     <div class="row justify-content-center mt-5">
       <div class="col-md-3 text-center">
         <img src="{{ object.author.profile.image.url }}" alt="About Image" class="img-fluid rounded-circle mt-4">
-        <h4 class="mt-3">BlessedTouch</h4>
-        <p>Web Marketing</p>
+        <h4 class="mt-3">{{ object.author.profile.name }}</h4>
+        <p>{{ object.author.profile.role }}</p>
       </div>
     </div>
   </div>
 </section>
+
+<!-- Include posts section -->
+<a href="{% url 'user-posts' object.author.username %}" class="btn btn-primary mt-3"> More Posts</a>
 
 <!-- Footer section -->
 <footer id="footer" class="py-5 bg-dark text-light">
@@ -60,7 +63,7 @@
     <div class="row">
       <div class="col-md-12 text-center">
         <h3>{{ object.title }} Contacts</h3>
-        <p>Email: {{ request.user.email }}</p>
+        <p>Email: {{ object.author.email }}</p>
         <p>Phone: {{ object.phone_number }}</p>
         <div class="social-icons">
           <!-- Add your social icons here -->

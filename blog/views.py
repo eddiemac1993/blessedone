@@ -6,6 +6,8 @@ from django.db.models import Q
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
 from django.urls import reverse_lazy
+from django.core.paginator import Paginator
+
 
 
 
@@ -42,36 +44,43 @@ class UserPostListView(ListView):
 
 class PostDetailView(DetailView):
     model = Post
-    count_hit = True
-
-    form = CommentForm
+    template_name = 'blog/post_detail.html'
+    context_object_name = 'post'
+    form_class = CommentForm
 
     def post(self, request, *args, **kwargs):
-        form = CommentForm(request.POST)
+        form = self.form_class(request.POST)
         if form.is_valid():
             post = self.get_object()
             form.instance.user = request.user
             form.instance.post = post
             form.save()
-
-            return redirect(reverse("post-detail", kwargs={
-                'pk': post.pk
-            }))
+            return redirect(reverse("post-detail", kwargs={'pk': post.pk}))
+        else:
+            return self.get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        similar_posts = self.object.tags.similar_objects()[:3]
-        post_comments_count = Comment.objects.all().filter(post=self.object.id).count()
-        post_comments = Comment.objects.all().filter(post=self.object.id)
         context = super().get_context_data(**kwargs)
+        post = self.get_object()
+        similar_posts = post.tags.similar_objects()[:3]
+        post_comments_count = Comment.objects.filter(post=post).count()
+        post_comments = Comment.objects.filter(post=post)
         context.update({
-            "similar_posts":similar_posts,
-            'form': self.form,
+            "similar_posts": similar_posts,
+            'form': self.form_class(),
             'post_comments': post_comments,
             'post_comments_count': post_comments_count,
+            'username': self.kwargs.get('username'),
+            'image_url': post.image.url,  # Add image_url variable
+            'date_posted': post.date_posted,  # Add date_posted variable
         })
-
-
         return context
+
+
+
+
+
+
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
