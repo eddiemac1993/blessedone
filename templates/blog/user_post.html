@@ -12,7 +12,7 @@
                     <div class="d-flex justify-content-between">
                         <small class="text-muted">On {{ post.date_posted }}</small>
                     </div>
-                    <a href="{% url 'post-detail' post.id %}" class="btn btn-primary mt-3"> More</a>
+                    <a href="{% url 'post-detail' post.id %}" class="btn btn-primary mt-3"> {{ view.kwargs.username }}</a>
                 </div>
             </div>
         </div>

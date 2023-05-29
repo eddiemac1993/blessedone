@@ -8,7 +8,7 @@ from django.http import HttpResponse
 from django.template.loader import render_to_string
 from blog.views import PostListView
 from .forms import AdForm, AdImageFormSet, CommentForm
-from .models import Ad, AdImage, Comment
+from .models import Ad, AdImage, Comment, Event
 from django.db.models import Count
 from django.db.models.functions import Coalesce
 
@@ -39,7 +39,10 @@ def ad_list(request):
 
     liked_ads = request.session.get('liked_ads', [])  # Get liked ads from session or initialize as empty list
 
-    return render(request, 'customer/ad_list.html', {'ads': ads, 'categories': categories, 'ad_comments': ad_comments, 'liked_ads': liked_ads})
+    events = Event.objects.all()  # Fetch the events from the database
+
+    return render(request, 'customer/ad_list.html', {'ads': ads, 'categories': categories, 'ad_comments': ad_comments, 'liked_ads': liked_ads, 'events': events})
+
 
 
 def create_ad(request):
@@ -102,7 +105,6 @@ class Index(PostListView):
     template_name = 'customer/index.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']
-    paginate_by = 5
 
 
 class About(View):

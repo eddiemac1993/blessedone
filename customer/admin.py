@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import MenuItem, Category, OrderModel, Location, Ad, AdImage
+from .models import MenuItem, Category, OrderModel, Location, Ad, AdImage, Event
 
 @admin.register(Ad)
 class AdAdmin(admin.ModelAdmin):
@@ -12,8 +12,9 @@ class AdAdmin(admin.ModelAdmin):
 class AdImageAdmin(admin.ModelAdmin):
     list_display = ('ad', 'image')
     list_filter = ('ad',)
-    
+
 admin.site.register(MenuItem)
 admin.site.register(Category)
 admin.site.register(OrderModel)
 admin.site.register(Location)
+admin.site.register(Event)

@@ -6,9 +6,6 @@ from django.db.models import Q
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
 from django.urls import reverse_lazy
-from django.core.paginator import Paginator
-
-
 
 
 class SearchResultsView(ListView):
@@ -21,21 +18,19 @@ class SearchResultsView(ListView):
         return object_list
 
 
-
 class PostListView(ListView):
     model = Post
     template_name = 'blog/home.html'
     context_object_name = 'posts'
     ordering = ['date_posted']
-    paginate_by = 10
-
+    paginate_by = None  # Disable pagination
 
 class UserPostListView(ListView):
     model = Post
     template_name = 'blog/user_post.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']
-    paginate_by = 10
+    paginate_by = None  # Disable pagination
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
@@ -75,12 +70,6 @@ class PostDetailView(DetailView):
             'date_posted': post.date_posted,  # Add date_posted variable
         })
         return context
-
-
-
-
-
-
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):

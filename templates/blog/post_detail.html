@@ -15,10 +15,9 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-6 text-center">
-        <h1 class="display-4 font-weight-bold">{{ object.title }}</h1>
-        <p class="lead text-white">{{ object.content }}</p>
+        <h1 class="text-white display-4 font-weight-bold">{{ object.title }}</h1>
         <br/>
-        <a href="{% url 'user-posts' object.author.username %}" class="btn btn-primary">{{ object.author }}</a>
+        <a href="{% url 'user-posts' object.author.username %}" class="btn btn-primary">{{ object.author }} Posts</a>
       </div>
     </div>
   </div>
@@ -41,6 +40,7 @@
     <div class="row justify-content-center">
       <div class="col-md-6 text-center">
         <h2 class="display-4 font-weight-bold">About Us</h2>
+        <p class="lead text-white">{{ object.content }}</p>
         <p class="lead">{{ object.description }}</p>
       </div>
     </div>
@@ -51,11 +51,11 @@
         <p>{{ object.author.profile.role }}</p>
       </div>
     </div>
+    <a href="{% url 'user-posts' object.author.username %}" class="btn btn-primary mt-3"> {{ object.author }} Posts Here</a>
   </div>
 </section>
 
-<!-- Include posts section -->
-<a href="{% url 'user-posts' object.author.username %}" class="btn btn-primary mt-3"> More Posts</a>
+
 
 <!-- Footer section -->
 <footer id="footer" class="py-5 bg-dark text-light">

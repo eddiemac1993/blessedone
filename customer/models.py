@@ -1,6 +1,19 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime
+from django.utils import timezone
+
+
+class Event(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    created_on = models.DateTimeField(default=timezone.now)
+    location = models.CharField(max_length=255)
+    sponsored = models.BooleanField(default=False)
+    image = models.ImageField(upload_to='event_images/', null=True, blank=True)
+
+    def __str__(self):
+        return self.title
 
 
 class Ad(models.Model):
@@ -8,6 +21,7 @@ class Ad(models.Model):
         ('agriculture', 'Agriculture'),
         ('hardware', 'Hardware'),
         ('food', 'Food'),
+        ('job', 'jobs'),
         # Add more categories here
     )
 
