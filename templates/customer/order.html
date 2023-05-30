@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load custom_filters %}
+
 
 {% block content %}
 <div class="container mb-5">
@@ -97,13 +99,14 @@
                                                     for="quantity_{{ item.pk }}">Quantity:</label>
                                                 <input type="number" name="quantities[]" id="quantity_{{ item.pk }}"
                                                     class="form-control" value="1" inputmode="numeric" step="1">
-                                                <label class="input-group-text font-weight-bold ml-3">K {{ item.price }}</label>
+                                                <label class="input-group-text font-weight-bold ml-3">K {{ item.price }} each</label>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <p class="menu-item-description">{{ item.description }}</p>
+                                <p>Delivered Time: {{ item.DeliveredTime }}</p>
                                 <p class="menu-item-category">
                                     <i class="fas fa-tag"></i>
                                     {% for category in item.category.all %}
@@ -193,7 +196,7 @@
                 </div>
 
                 <!-- Scroll to Order button -->
-                <button class="scroll-to-order-button btn btn-primary" type="button" onclick="scrollToOrderForm()">Scroll to Order</button>
+                <button class="scroll-to-order-button btn btn-primary" type="button" onclick="scrollToOrderForm()"><i class="fas fa-arrow-down"></i> Scroll to Order</button>
             </form>
         </div>
     </div>

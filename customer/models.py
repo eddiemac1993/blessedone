@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.utils import timezone
 
 
@@ -11,6 +11,7 @@ class Event(models.Model):
     location = models.CharField(max_length=255)
     sponsored = models.BooleanField(default=False)
     image = models.ImageField(upload_to='event_images/', null=True, blank=True)
+    link = models.URLField(default='https://blessedtouchs.pythonanywhere.com/ad-list/')
 
     def __str__(self):
         return self.title
@@ -49,10 +50,13 @@ class AdImage(models.Model):
     ad = models.ForeignKey(Ad, related_name='images', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='ads/')
 
+def default_delivered_time():
+    return str(timedelta(minutes=40))
 
 class MenuItem(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
+    DeliveredTime = models.TextField(default=default_delivered_time)
     image = models.ImageField(upload_to='menu_images/')
     price = models.DecimalField(max_digits=5, decimal_places=2)
     category = models.ManyToManyField('Category', related_name='items')

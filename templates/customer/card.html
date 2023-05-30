@@ -1,0 +1,133 @@
+{% load static %}
+<div class="row">
+    {% for ad in ads %}
+        {% if not request.GET.category or request.GET.category == ad.category %}
+
+
+
+
+{% if forloop.counter0|divisibleby:5 %}
+    <!-- Display event item here -->
+    {% for event in events %}
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card">
+                {% if event.sponsored %}
+                    <div class="card-header">
+                        <div class="d-flex align-items-center">
+                            <img src="{% static 'logo.png' %}" alt="User Avatar" class="avatar me-2" style="width: 30px; height: 30px;">
+                            <h5 class="card-title">Sponsored Ad</h5>
+                        </div>
+                    </div>
+                {% endif %}
+                <img src="{{ event.image.url }}" alt="User Post Image" class="" style="height: 320px;">
+                <div class="card-body">
+                    <div class="card-text">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ event.title }}</h5>
+                            <p class="card-text">{{ event.description }}</p>
+                            <p style="font-size: 14px;">
+        <span style="display: inline-block; vertical-align: middle;">
+            <i class="fas fa-hand-pointer" style="margin-right: 5px;"></i>
+        </span>
+        <span style="display: inline-block; vertical-align: middle;">
+            <a href="{{ event.link }}" style="font-size: 12px; text-decoration: none;">Click here for more details</a>
+        </span>
+    </p>
+                        </div>
+                        <div class="share-buttons">
+                            <div class="row">
+                                <div class="col">
+                                    <a href="whatsapp://send?text={{ event.title }} - {{ event.description }} - {{ request.build_absolute_uri }}" class="btn btn-sm btn-success rounded me-1" style="text-decoration: none;">
+    <i class="fab fa-whatsapp"></i> Share on WhatsApp
+</a>
+                                </div>
+<div class="col">
+    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" class="btn btn-sm btn-primary rounded me-1" style="text-decoration: none;">
+        <i class="fab fa-facebook"></i> Share on Facebook
+    </a>
+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card">
+                    <div id="carousel-{{ ad.id }}" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            {% for image in ad.images.all %}
+                                <div class="carousel-item{% if forloop.first %} active{% endif %}">
+                                    <img src="{{ image.image.url }}" alt="{{ ad.title }}" class="card-img-top">
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <a href="{% url 'customer:ad-detail' ad.id %}" class="btn btn-primary card-title text-uppercase">{{ ad.title|upper }}</a>
+                        <div class="trapezium-orange"></div>
+                        <div>
+                            {% if ad.price %}
+                                <p class="card-text"><strong>Price:</strong> K {{ ad.price }}</p>
+                            {% else %}
+                                <p class="card-text"><strong>Price:</strong> N/A</p>
+                            {% endif %}
+                            {% if ad.category %}
+                                <p class="card-text"><strong>Category:</strong> {{ ad.get_category_display }}</p>
+                            {% else %}
+                                <p class="card-text"><strong>Category:</strong> N/A</p>
+                            {% endif %}
+                        </div>
+                        <p class="card-text text-muted small" style="font-style: italic; margin-bottom: 5px;">
+                            Posted {{ ad.created_at|timesince }} ago
+                        </p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" style="background-color: #f8f9fa;">
+                            <a href="tel:{{ ad.phone_number }}" class="card-link" style="text-decoration: none; color: #333;">
+                                <i class="fas fa-phone me-2" style="color: #888;"></i>{{ ad.phone_number }}
+                            </a>
+                        </li>
+                        <li class="list-group-item" style="background-color: #f8f9fa;">
+                            <i class="fas fa-map-marker-alt me-2" style="color: #888;"></i>
+                            <a href="https://www.google.com/maps/search/?api=1&query={{ ad.location }}" class="card-link" style="text-decoration: none; color: #333;">
+                                {{ ad.location }}
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="card-footer" style="background-color: #f8f9fa; padding: 10px;">
+                        <small class="text-muted">
+                            <a href="{% url 'customer:ad-detail' ad.id %}" style="text-decoration: none; color: #333;">
+                                {{ ad.comments.count }} comments
+                            </a>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+
+    {% if ads|length|divisibleby:5 %}
+        <!-- Display event item here -->
+        {% for event in events %}
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card">
+                    {% if event.sponsored %}
+                        <div class="card-sponsor-badge">Sponsored</div>
+                    {% endif %}
+                    <img src="{{ event.image.url }}" alt="{{ event.title }}" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ event.title }}</h5>
+                        <p class="card-text">{{ event.description }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>

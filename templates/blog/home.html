@@ -7,28 +7,31 @@
         {% for post in posts %}
             <div class="col">
                 <div class="card shadow-sm">
-                   <img class="card-img-top" src="{{ post.image.url }}" alt="Partner Logo" style="height: 200px; object-fit: cover;">
+                    <img class="card-img-top rounded" src="{{ post.image.url }}" alt="Partner Logo" style="height: 200px; object-fit: cover;">
                     <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-user-circle"></i> <a href="{% url 'user-posts' post.author.username %}"><span class="badge bg-light text-dark">{{ post.title }}</span></a></h5>
+                        <h5 class="card-title">
+                            <i class="fas fa-user-circle"></i>
+                            <a href="{% url 'user-posts' post.author.username %}">
+                                <span class="badge bg-light text-dark">{{ post.title }}</span>
+                            </a>
+                        </h5>
                         <div class="d-flex justify-content-between align-items-center">
                             <small class="text-muted">
-                                <i class="fas fa-clock"></i>Joined {{ post.date_posted|timesince }} ago
+                                <i class="fas fa-clock"></i> Joined {{ post.date_posted|timesince }} ago
                             </small>
                         </div>
                         <hr>
-
                         <div class="btn-group">
-                            <a href="{% url 'post-detail' post.id %}" class="text-primary">
+                            <a href="{% url 'post-detail' post.id %}" class="btn btn-primary">
                                 <i class="fas fa-eye"></i> View
                             </a>
-                            <a href="tel:+26{{ post.phone_number }}" class="text-secondary">
+                            <a href="tel:+26{{ post.phone_number }}" class="btn btn-secondary">
                                 <i class="fas fa-phone"></i> Call
                             </a>
-                            <a href="https://wa.me/26{{ post.whatsapp_number }}?text=Hello,%20I%20saw%20your%20post%20on%20the%20website%20and%20I%20would%20like%20to%20inquire%20about%20it." class="text-success">
-                                <i class="fab fa-whatsapp"></i> WatsApp
+                            <a href="https://wa.me/26{{ post.whatsapp_number }}?text=Hello,%20I%20saw%20your%20post%20on%20the%20website%20and%20I%20would%20like%20to%20inquire%20about%20it." class="btn btn-success">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
                             </a>
                         </div>
-
                     </div>
                 </div>
             </div>

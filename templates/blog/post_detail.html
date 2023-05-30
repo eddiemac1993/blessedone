@@ -17,7 +17,7 @@
       <div class="col-md-6 text-center">
         <h1 class="text-white display-4 font-weight-bold">{{ object.title }}</h1>
         <br/>
-        <a href="{% url 'user-posts' object.author.username %}" class="btn btn-primary">{{ object.author }} Posts</a>
+        <a href="{% url 'user-posts' object.author.username %}" class="btn btn-warning">{{ object.author }} Posts</a>
       </div>
     </div>
   </div>
@@ -28,7 +28,7 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-6 text-center">
-        <img src="{{ object.image.url }}" alt="Image" class="img-fluid">
+        <img src="{{ object.image.url }}" alt="Image" class="img-fluid rounded">
       </div>
     </div>
   </div>
@@ -39,8 +39,8 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-6 text-center">
-        <h2 class="display-4 font-weight-bold">About Us</h2>
-        <p class="lead text-white">{{ object.content }}</p>
+        <h2 class="display-4 font-weight-bold">About Us</h2><hr>
+        <p class="lead text-black">{{ object.content }}</p><hr>
         <p class="lead">{{ object.description }}</p>
       </div>
     </div>
@@ -51,7 +51,6 @@
         <p>{{ object.author.profile.role }}</p>
       </div>
     </div>
-    <a href="{% url 'user-posts' object.author.username %}" class="btn btn-primary mt-3"> {{ object.author }} Posts Here</a>
   </div>
 </section>
 

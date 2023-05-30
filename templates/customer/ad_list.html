@@ -18,28 +18,27 @@
 
     <hr>
     <h2>Advertisement</h2>
+
+
 <div class="container">
-    <div class="row">
-        <div class="col">
-            <div class="mb-3">
-                <h4>Filter by Category:</h4>
-                <div class="btn-group d-flex flex-wrap" role="group" aria-label="Category Buttons">
-                    <a href="{% url 'customer:ad-list' %}" class="btn btn-outline-primary {% if not request.GET.category %}active{% endif %}">
-                        <span class="badge bg-primary text-white {% if not request.GET.category %}active{% endif %}">All</span>
-                    </a>
-                    {% for key, value in categories.items %}
-                        <a href="{% url 'customer:ad-list' %}?category={{ key }}" class="btn btn-outline-primary {% if request.GET.category == key %}active{% endif %}">
-                            <span class="badge bg-primary text-white {% if request.GET.category == key %}active{% endif %}">{{ value }}</span>
-                        </a>
-                    {% endfor %}
-                </div>
-            </div>
+  <div class="row">
+    <div class="col">
+      <div class="mb-3">
+        <h4>Filter by Category:</h4>
+        <div class="btn-group d-flex flex-wrap" role="group" aria-label="Category Buttons">
+          <a href="{% url 'customer:ad-list' %}" class="btn btn-outline-primary {% if not request.GET.category %}active{% endif %}">
+            <span class="badge bg-primary text-white {% if not request.GET.category %}active{% endif %}">All</span>
+          </a>
+          {% for key, value in categories.items %}
+          <a href="{% url 'customer:ad-list' %}?category={{ key }}" class="btn btn-outline-primary {% if request.GET.category == key %}active{% endif %}">
+            <span class="badge bg-primary text-white {% if request.GET.category == key %}active{% endif %}">{{ value }}</span>
+          </a>
+          {% endfor %}
         </div>
+      </div>
     </div>
+  </div>
 </div>
-
-
-
 
 
     <form class="mb-3" action="{% url 'customer:ad-list' %}" method="GET">
@@ -48,82 +47,8 @@
             <button class="btn btn-primary" type="submit">Search</button>
         </div>
     </form>
+{% include 'customer/card.html' %}
 
-    <div class="row">
-        {% for ad in ads %}
-            {% if not request.GET.category or request.GET.category == ad.category %}
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="card">
-                        <div id="carousel-{{ ad.id }}" class="carousel slide" data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                                {% for image in ad.images.all %}
-                                    <div class="carousel-item{% if forloop.first %} active{% endif %}">
-                                        <img src="{{ image.image.url }}" alt="{{ ad.title }}" class="card-img-top">
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <a href="{% url 'customer:ad-detail' ad.id %}" class="btn btn-primary card-title text-uppercase" style="display: block; width: 100%; height: 100%; text-align: center; font-size: 24px; background-color: #000; color: #fff; text-decoration: none;">{{ ad.title|upper }}</a>
-                            <div>
-                                {% if ad.price %}
-                                    <p class="card-text"><strong>Price:</strong> K {{ ad.price }}</p>
-                                {% else %}
-                                    <p class="card-text"><strong>Price:</strong> N/A</p>
-                                {% endif %}
-                                {% if ad.category %}
-                                    <p class="card-text"><strong>Category:</strong> {{ ad.get_category_display }}</p>
-                                {% else %}
-                                    <p class="card-text"><strong>Category:</strong> N/A</p>
-                                {% endif %}
-                            </div>
-                            <p class="card-text text-muted small" style="font-style: italic; margin-bottom: 5px;">
-                                Posted {{ ad.created_at|timesince }} ago
-                            </p>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item" style="background-color: #f8f9fa;">
-                                <a href="tel:{{ ad.phone_number }}" class="card-link" style="text-decoration: none; color: #333;">
-                                    <i class="fas fa-phone me-2" style="color: #888;"></i>{{ ad.phone_number }}
-                                </a>
-                            </li>
-                            <li class="list-group-item" style="background-color: #f8f9fa;">
-                                <i class="fas fa-map-marker-alt me-2" style="color: #888;"></i>
-                                <a href="https://www.google.com/maps/search/?api=1&query={{ ad.location }}" class="card-link" style="text-decoration: none; color: #333;">
-                                    {{ ad.location }}
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="card-footer" style="background-color: #f8f9fa; padding: 10px;">
-                            <small class="text-muted">
-                                <a href="{% url 'customer:ad-detail' ad.id %}" style="text-decoration: none; color: #333;">
-                                    {{ ad.comments.count }} comments
-                                </a>
-                            </small>
-                        </div>
-                    </div>
-                </div>
-                {% if forloop.counter|divisibleby:5 and not forloop.last %}
-                    <!-- Display event item here -->
-{% for event in events %}
-    <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card">
-            {% if event.sponsored %}
-                <div class="card-sponsor-badge">Sponsored</div>
-            {% endif %}
-            <img src="{{ event.image.url }}" alt="{{ event.title }}" class="card-img-top">
-            <div class="card-body">
-                <h5 class="card-title">{{ event.title }}</h5>
-                <p class="card-text">{{ event.description }}</p>
-            </div>
-        </div>
-    </div>
-{% endfor %}
-
-                {% endif %}
-            {% endif %}
-        {% endfor %}
-    </div>
 </div>
 
 {% endblock %}
