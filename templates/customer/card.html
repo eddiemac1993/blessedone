@@ -55,61 +55,65 @@
     {% endfor %}
 {% endif %}
 
+<div class="col-lg-3 col-md-6 mb-4">
+    <div class="card">
+        <div id="carousel-{{ ad.id }}" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for image in ad.images.all %}
+                    <div class="carousel-item{% if forloop.first %} active{% endif %}">
+                        <img src="{{ image.image.url }}" alt="{{ ad.title }}" class="card-img-top">
+                        <div class="image-overlay" style="position: absolute; bottom: 0; right: 0; padding: 8px; color: white; font-size: 14px;">
+                            <a href="{% url 'customer:ad-detail' ad.id %}" style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: #FF9900; border-radius: 4px; transition: background-color 0.3s;">{{ ad.title|upper }}</a>
 
-
-
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="card">
-                    <div id="carousel-{{ ad.id }}" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            {% for image in ad.images.all %}
-                                <div class="carousel-item{% if forloop.first %} active{% endif %}">
-                                    <img src="{{ image.image.url }}" alt="{{ ad.title }}" class="card-img-top">
-                                </div>
-                            {% endfor %}
                         </div>
                     </div>
-                    <div class="card-body">
-                        <a href="{% url 'customer:ad-detail' ad.id %}" class="btn btn-primary card-title text-uppercase">{{ ad.title|upper }}</a>
-                        <div class="trapezium-orange"></div>
-                        <div>
-                            {% if ad.price %}
-                                <p class="card-text"><strong>Price:</strong> K {{ ad.price }}</p>
-                            {% else %}
-                                <p class="card-text"><strong>Price:</strong> N/A</p>
-                            {% endif %}
-                            {% if ad.category %}
-                                <p class="card-text"><strong>Category:</strong> {{ ad.get_category_display }}</p>
-                            {% else %}
-                                <p class="card-text"><strong>Category:</strong> N/A</p>
-                            {% endif %}
-                        </div>
-                        <p class="card-text text-muted small" style="font-style: italic; margin-bottom: 5px;">
-                            Posted {{ ad.created_at|timesince }} ago
-                        </p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item" style="background-color: #f8f9fa;">
-                            <a href="tel:{{ ad.phone_number }}" class="card-link" style="text-decoration: none; color: #333;">
-                                <i class="fas fa-phone me-2" style="color: #888;"></i>{{ ad.phone_number }}
-                            </a>
-                        </li>
-                        <li class="list-group-item" style="background-color: #f8f9fa;">
-                            <i class="fas fa-map-marker-alt me-2" style="color: #888;"></i>
-                            <a href="https://www.google.com/maps/search/?api=1&query={{ ad.location }}" class="card-link" style="text-decoration: none; color: #333;">
-                                {{ ad.location }}
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="card-footer" style="background-color: #f8f9fa; padding: 10px;">
-                        <small class="text-muted">
-                            <a href="{% url 'customer:ad-detail' ad.id %}" style="text-decoration: none; color: #333;">
-                                {{ ad.comments.count }} comments
-                            </a>
-                        </small>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
+        </div>
+        <div class="card-body">
+
+            <div>
+                {% if ad.price %}
+                    <p class="card-text"><strong>Price:</strong> K {{ ad.price }}</p>
+                {% else %}
+                    <p class="card-text"><strong>Price:</strong> N/A</p>
+                {% endif %}
+                {% if ad.category %}
+                    <p class="card-text"><strong>Category:</strong> {{ ad.get_category_display }}</p>
+                {% else %}
+                    <p class="card-text"><strong>Category:</strong> N/A</p>
+                {% endif %}
+            </div>
+            <p class="card-text text-muted small" style="font-style: italic; margin-bottom: 5px;">
+                Posted {{ ad.created_at|timesince }} ago
+            </p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item" style="background-color: #f8f9fa;">
+                <a href="tel:{{ ad.phone_number }}" class="card-link" style="text-decoration: none; color: #333;">
+                    <i class="fas fa-phone me-2" style="color: #888;"></i>{{ ad.phone_number }}
+                </a>
+            </li>
+            <li class="list-group-item" style="background-color: #f8f9fa;">
+                <i class="fas fa-map-marker-alt me-2" style="color: #888;"></i>
+                <a href="https://www.google.com/maps/search/?api=1&query={{ ad.location }}" class="card-link" style="text-decoration: none; color: #333;">
+                    {{ ad.location }}
+                </a>
+            </li>
+        </ul>
+        <div class="card-footer" style="background-color: #f8f9fa; padding: 10px;">
+            <small class="text-muted">
+                <a href="{% url 'customer:ad-detail' ad.id %}" style="text-decoration: none; color: #333;">
+                    {{ ad.comments.count }} comments
+                </a>
+            </small>
+        </div>
+    </div>
+</div>
+
+
+
+
         {% endif %}
     {% endfor %}
 
