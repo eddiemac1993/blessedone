@@ -1,32 +1,22 @@
 {% load static %}
 
-<style>
-  .zambian-flag {
-    border-radius: 20%;
-  }
-
-  .text-decoration-none:hover {
-    text-decoration: underline;
-  }
-</style>
-
-<footer class="navFooterLine text-light py-4" style="background-color: #232f3e;">
+<footer class="bg-dark text-light py-4">
   <div class="container">
     <div class="row">
       <div class="col-md-4">
-        <h2 class="navFooterColHead h6"><strong>Get to Know Us</strong></h2>
+        <h2 class="h6"><strong>Get to Know Us</strong></h2>
         <ul class="list-unstyled small">
           <li><a href="{% url 'blog-about' %}" class="text-light text-decoration-none">About BlessedTouch</a></li>
         </ul>
       </div>
       <div class="col-md-4">
-        <h2 class="navFooterColHead h6"><strong>Advertise with Us</strong></h2>
+        <h2 class="h6"><strong>Advertise with Us</strong></h2>
         <ul class="list-unstyled small">
-          <li><a href="{% url 'customer:create-ad' %}" class="text-light text-decoration-none">Adverise on Our Platform</a></li>
+          <li><a href="{% url 'customer:create-ad' %}" class="text-light text-decoration-none">Advertise on Our Platform</a></li>
         </ul>
       </div>
       <div class="col-md-4">
-        <h2 class="navFooterColHead h6"><strong>Contact Us</strong></h2>
+        <h2 class="h6"><strong>Contact Us</strong></h2>
         <ul class="list-unstyled small">
           <li>
             <a href="https://api.whatsapp.com/send?phone=260970349470&text=I%20want%20to%20know%20more" class="text-light text-decoration-none">
@@ -36,29 +26,10 @@
         </ul>
       </div>
     </div>
-  </div>
-</footer>
-
-<footer class="text-center bg-dark text-light py-3" aria-label="Footer">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6">
-        <p class="mb-0">
-          <small>Proudly Zambian</small>
-          <img src="{% static 'zambianflag.jpg' %}" alt="Zambian flag" style="height: 20px;" class="zambian-flag ml-2">
-        </p>
-      </div>
-      <div class="col-md-6">
-        <a class="icp-button btn btn-outline-light btn-sm mx-1" href="#"><span class="icp-button-globe-2"></span>English</a>
-        <a class="icp-button btn btn-outline-light btn-sm mx-1" href="#"><span class="icp-nav-globe-img-2"></span>Zambia</a>
-        <a class="icp-button btn btn-outline-light btn-sm mx-1" href="#"><span class="icp-nav-globe-img-2"></span>Kwacha - ZMK</a>
-      </div>
-    </div>
     <div class="row mt-2">
-      <div class="col">
-        <small>2023 &copy; BlessedTouch. All rights reserved.</small>
+      <div class="col text-center">
+        <p class="text-center mb-0">2023 &copy; BlessedTouch. All rights reserved. Proudly Zambian</p>
       </div>
     </div>
   </div>
 </footer>
-
