@@ -1,0 +1,211 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .search-form {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #FF9900;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+
+        .search-button {
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #FF9900;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .search-button:hover {
+            background-color: #FF6600;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #FF9900;
+        }
+
+        .no-files {
+            text-align: center;
+            color: #666;
+        }
+
+        .back-btn {
+            color: black;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .back-btn:hover {
+            background-color: #FF9900;
+        }
+
+        .upload-btn {
+            color: black;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .upload-btn:hover {
+            background-color: #FF9900;
+        }
+
+        .pdf-item {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+
+        .pdf-item a {
+            display: flex;
+            align-items: center;
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .pdf-item a:hover {
+            color: #FF9900;
+        }
+
+        .pdf-date {
+            color: #666;
+        }
+
+        .share-icon {
+            color: white;
+            text-decoration: none;
+            background-color: #FF9900;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            margin-left: 10px;
+        }
+
+        .share-icon i {
+            margin-right: 5px;
+        }
+
+        .share-icon:hover {
+            background-color: #FF6600;
+        }
+
+        .pdf-card-container {
+            margin-top: 20px;
+        }
+
+        hr {
+            margin-top: 20px;
+            border: none;
+            border-top: 1px solid #ccc;
+        }
+    </style>
+
+    <a href="{% url 'customer:index' %}" class="back-btn mb-1 py-3 mt-2 btn btn-outline-primary btn-sm rounded-pill">
+        <i class="fas fa-arrow-left"></i> Go Back <i class="fas fa-home"></i>
+    </a>
+
+    <h1>The PDF Education Resource Library<br>for Starting Up a Business</h1>
+
+    <form method="GET" action="{% url 'pdf_manager:pdf_list' %}" class="search-form">
+        <input type="text" name="q" placeholder="Search PDF Files" class="search-input" value="{{ query }}">
+        <button type="submit" class="search-button">Search</button>
+    </form>
+
+    <a href="{% url 'pdf_manager:pdf_upload' %}" class="upload-btn">
+        <i class="fas fa-upload"></i> Upload An Education PDF <i class="fas fa-file-pdf"></i>
+    </a>
+
+    {% if pdf_files %}
+        <div class="pdf-card-container">
+            <ul class="pdf-list">
+                {% for pdf_file in pdf_files %}
+                    <li>
+                        <div class="pdf-item">
+                            <a href="{{ pdf_file.pdf.url }}">
+                               <i class="fas fa-download"></i> | <i class="fas fa-file-pdf"></i> <strong> {{ pdf_file.title }}</strong> | {{ pdf_file.pdf.name }}
+                            </a>
+
+
+
+
+                            <div class="pdf-details">
+                                <span class="pdf-date">Posted On: {{ pdf_file.upload_date|date:'F d, Y' }} |
+    {% for pdf_file in pdf_files %}
+        {{ pdf_file.category.name }}
+    {% endfor %}</span>
+                                <a class="share-icon btn btn-warning" href="whatsapp://send?text={{ pdf_file.title|urlencode }} {{ pdf_file.pdf.url|urlencode }}">
+                                    <i class="fab fa-whatsapp"></i> Share On WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% else %}
+        <p class="no-files">No PDF files found.</p>
+    {% endif %}
+</body>
+{% endblock content %}
+<hr/>

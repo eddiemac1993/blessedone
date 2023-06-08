@@ -8,7 +8,7 @@
         <div class="col-md-12 col-sm-12 p-4">
 
             <a href="{% url 'customer:index' %}" class="btn btn-outline-success mb-2 btn-sm rounded-pill">
-                <i class="fas fa-arrow-left"></i> Go Back
+                <i class="fas fa-arrow-left"></i> Go Back <i class="fas fa-home"></i>
             </a>
 
             <div class="pt-3">
@@ -130,46 +130,50 @@
 
                     <hr />
 
-                    <div class="form-group pt-3">
-                        <label for="full-name">Full Name</label>
-                        <input required class="form-control" type="text" placeholder="Your Name" name="name" id="full-name">
-                    </div>
+<div class="form-group pt-3">
+    <label for="full-name">Full Name</label>
+    <input required class="form-control" type="text" placeholder="Your Name" name="name" id="full-name">
+</div>
 
-                    <div class="form-group pt-3">
-                        <label for="name">Specifics</label>
-                        <input class="form-control" type="text" placeholder="Specifics (optional)" name="specifics">
-                    </div>
+<div class="form-group pt-3">
+    <label for="specifics">Specifics</label>
+    <input class="form-control" type="text" placeholder="Specifics (optional)" name="specifics" id="specifics">
+</div>
 
-                    <div class="form-group pt-3">
-                        <label for="name">Phone:</label>
-                        <input class="form-control" type="text" placeholder="Phone number" name="email">
-                    </div>
+<div class="form-group pt-3">
+    <label for="phone">Phone:</label>
+    <input class="form-control" type="text" placeholder="Phone number" name="phone" id="phone">
+</div>
+<div class="form-group pt-3">
+<label for="agent">Referral Agent:</label>
+<select name="agent" class="form-control">
+    {% for user in users %}
+    <option value="{{ user.id }}">{{ user.username }}</option>
+    {% endfor %}
+</select>
+</div>
 
-                    <label for="agent">Referral Agent:</label>
-                    <select name="agent" class="form-control">
-                        {% for user in users %}
-                        <option value="{{ user.id }}">{{ user.username }}</option>
-                        {% endfor %}
-                    </select>
+<div class="row">
+    <div class="col-md-4 col-sm-12">
+        <div class="form-group pt-3">
+            <label for="street">Street Address</label>
+            <input required class="form-control" type="text" placeholder="1234 Main St" name="street" id="street">
+        </div>
+    </div>
+</div>
 
-                    <div class="row">
-                        <div class="col-md-4 col-sm-12">
-                            <div class="form-group pt-3">
-                                <label for="name">Street Address</label>
-                                <input required class="form-control" type="text" placeholder="1234 Main St" name="street">
-                            </div>
-                        </div>
+<div class="row">
+    <div class="col-md-4 col-sm-12 pt-3">
+        <label for="location">Location: </label>
+        <select id="location" name="location" class="form-control">
+            {% for location in locations %}
+            <option value="{{ location.pk }}"> {{ location.name }} (ZMK {{ location.delivery_fee }})</option>
+            {% endfor %}
+        </select>
+    </div>
+</div>
+<hr />
 
-                        <div class="col-md-4 col-sm-12">
-                            <select id="location" name="location" class="form-control">
-                                {% for location in locations %}
-                                <option value="{{ location.pk }}">{{ location.name }} ({{ location.delivery_fee }})</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <hr />
 
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#submitModal">
@@ -201,7 +205,7 @@
         </div>
     </div>
 </div>
-
+</div>
 <script>
     function scrollToOrderForm() {
         const fullNameInput = document.getElementById('full-name');

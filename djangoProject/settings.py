@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
 
     'blog.apps.BlogConfig',
+    'pdf_manager',
     'users.apps.UsersConfig',
     'customer',
     'deliver',

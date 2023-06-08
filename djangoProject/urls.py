@@ -50,6 +50,7 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('', include('customer.urls')),
     path('deliver/', include('deliver.urls')),
+    path('pdf/', include('pdf_manager.urls', namespace='pdf_manager')),
 ]
 
 
