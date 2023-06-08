@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<style>
+    body {
+        padding-top: 20px;
+        background-color: #f7f7f7;
+    }
+
+    .card {
+        margin: 20px auto;
+        max-width: 600px;
+        padding: 20px;
+    }
+</style>
+  <div class="card">
+        <h1>Delete Item</h1>
+
+        <p>Are you sure you want to delete this item?</p>
+
+        <form method="POST" action="{% url 'deliver:delete_item' menu_item.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a href="{% url 'deliver:menu_dashboard' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+{% endblock %}

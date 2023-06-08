@@ -1,58 +1,49 @@
-from django.shortcuts import render
-from django.views import View
-from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
-from django.utils.timezone import datetime
-from customer.models import OrderModel
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import MenuItemForm, CategoryForm
+from customer.models import MenuItem, Category
+
+def menu_dashboard(request):
+    form = MenuItemForm(request.POST or None, request.FILES or None)
+    category_form = CategoryForm(request.POST or None)
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('deliver:menu_dashboard')
+
+        if category_form.is_valid():
+            category_form.save()
+            return redirect('deliver:menu_dashboard')
+
+    menu_items = MenuItem.objects.all()
+    categories = Category.objects.all()
+    context = {
+        'form': form,
+        'menu_items': menu_items,
+        'category_form': category_form,
+        'categories': categories
+    }
+    return render(request, 'deliver/menu_dashboard.html', context)
 
 
-class Dashboard(LoginRequiredMixin, UserPassesTestMixin, View):
-    def get(self, request, *args, **kwargs):
-        # get the current date
-        today = datetime.today()
-        orders = OrderModel.objects.filter(
-            created_on__year=today.year, created_on__month=today.month, created_on__day=today.day)
 
-        # loop through the orders and add the price value, check if order is not shipped
-        unshipped_orders = []
-        total_revenue = 0
-        for order in orders:
-            total_revenue += order.price
+def delete_item(request, item_id):
+    item = get_object_or_404(MenuItem, pk=item_id)
+    if request.method == 'POST':
+        item.delete()
+        return redirect('deliver:menu_dashboard')
 
-            if not order.is_shipped:
-                unshipped_orders.append(order)
-
-        # pass total number of orders and total revenue into template
-        context = {
-            'orders': unshipped_orders,
-            'total_revenue': total_revenue,
-            'total_orders': len(orders)
-        }
-
-        return render(request, 'deliver/dashboard.html', context)
-
-    def test_func(self):
-        return self.request.user.groups.filter(name='staff').exists()
+    return render(request, 'deliver/delete_item.html', {'item': item})
 
 
-class OrderDetails(LoginRequiredMixin, UserPassesTestMixin, View):
-    def get(self, request, pk, *args, **kwargs):
-        order = OrderModel.objects.get(pk=pk)
-        context = {
-            'order': order
-        }
+def update_item(request, item_id):
+    item = get_object_or_404(MenuItem, pk=item_id)
+    if request.method == 'POST':
+        form = MenuItemForm(request.POST, request.FILES, instance=item)
+        if form.is_valid():
+            form.save()
+            return redirect('deliver:menu_dashboard')
+    else:
+        form = MenuItemForm(instance=item)
 
-        return render(request, 'deliver/order-details.html', context)
-
-    def post(self, request, pk, *args, **kwargs):
-        order = OrderModel.objects.get(pk=pk)
-        order.is_shipped = True
-        order.save()
-
-        context = {
-            'order': order
-        }
-
-        return render(request, 'deliver/order-details.html', context)
-
-    def test_func(self):
-        return self.request.user.groups.filter(name='staff').exists()
+    return render(request, 'deliver/update_item.html', {'form': form, 'item': item})

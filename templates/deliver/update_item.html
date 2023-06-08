@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <style>
+        body {
+            padding-top: 20px;
+            background-color: #f7f7f7;
+        }
+
+        .card {
+            margin: 20px auto;
+            max-width: 600px;
+            padding: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-group input[type="text"],
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+
+        .card-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .card-text {
+            margin-bottom: 10px;
+        }
+    </style>
+
+    <div class="card">
+        <h1 class="mb-4">Update Item</h1>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_name">Name</label>
+                {{ form.name }}
+            </div>
+            <div class="form-group">
+                <label for="id_description">Description</label>
+                {{ form.description }}
+            </div>
+            <div class="form-group">
+                <label for="id_price">Price</label>
+                {{ form.price }}
+            </div>
+            <div class="form-group">
+                <label for="id_category">Category</label>
+                {{ form.category }}
+            </div>
+            <div class="form-group">
+                <label for="id_image">Image</label>
+                {{ form.image }}
+            </div>
+            <div class="form-group">
+                <label for="id_DeliveredTime">Delivery Time</label>
+                {{ form.DeliveredTime }}
+            </div>
+            <div class="form-group">
+                <label for="id_availability">Availability</label>
+                {{ form.availability }}
+            </div>
+            <div class="form-group">
+                <label for="id_is_verified">Verified</label>
+                {{ form.is_verified }}
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+{% endblock %}

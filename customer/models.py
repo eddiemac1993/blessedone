@@ -87,8 +87,10 @@ class AdImage(models.Model):
     ad = models.ForeignKey(Ad, related_name='images', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='ads/')
 
+from datetime import timedelta
+
 def default_delivered_time():
-    return str(timedelta(minutes=40))
+    return str(timedelta(hours=2))
 
 class MenuItem(models.Model):
     name = models.CharField(max_length=100)
