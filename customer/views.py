@@ -133,7 +133,6 @@ class Order(View):
     def post(self, request, *args, **kwargs):
         name = request.POST.get('name')
         specifics = request.POST.get('specifics')
-        email = request.POST.get('email')
         street = request.POST.get('street')
         phone_number = request.POST.get('phone_number')
         location_id = request.POST.get('location')
@@ -159,7 +158,6 @@ class Order(View):
             price=price,
             name=name,
             specifics=specifics,
-            email=email,
             street=street,
             phone_number=phone_number,
             location=location,
@@ -197,7 +195,6 @@ def get_invoice(request, pk):
     # Get the customer details from the order object
     name = order.name
     specifics = order.specifics
-    email = order.email
     street = order.street
     city = order.city
 
@@ -205,7 +202,7 @@ def get_invoice(request, pk):
     # Render the HTML template to be converted to PDF
     html = render_to_string('customer/invoice.html', {'items': items, 'pk': pk, 'price': price,
                                                    'delivery_fee': delivery_fee, 'total_price': total,
-                                                   'name': name,'specifics': specifics, 'email': email, 'street': street,
+                                                   'name': name,'specifics': specifics, 'street': street,
                                                    'city': city, 'order': order})
 
     # Convert the HTML to PDF and return it as response

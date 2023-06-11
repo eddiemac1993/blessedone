@@ -5,7 +5,6 @@
 {% block content %}
 <br/>
 <br/>
-
 <div class="container">
     <div class="mb-2">
         <a href="{% url 'customer:index' %}" class="btn btn-outline-primary btn-sm rounded-pill">
@@ -35,8 +34,6 @@
                     <p class="card-text description">Description: {{ ad.description }}</p>
                     {% if ad.price %}
                       <p class="card-text"><strong>Price:</strong> K {{ ad.price }} <span class="badge bg-success">Best deal</span></p>
-
-
                     {% endif %}
                     {% if ad.category %}
                         <p class="card-text"><strong>Category:</strong> {{ ad.get_category_display }}</p>
@@ -51,30 +48,21 @@
                 </ul>
             </div>
             <!-- Share Buttons -->
-            
-<div class="row">
-    <div class="col-6 col-md-6">
-        <div class="share-buttons mt-4">
-            <a href="whatsapp://send?text={{ ad.title }} - {{ ad.description }} - {{ request.build_absolute_uri }}" class="btn btn-sm btn-success rounded me-1" style="text-decoration: none;">
-                <i class="fab fa-whatsapp"></i> Share on WhatsApp
-            </a>
+            <div class="row">
+                <div class="col-6 col-md-6">
+                    <div class="share-buttons mt-4">
+                        <a href="whatsapp://send?text={{ ad.title }} - {{ ad.description }} - {{ request.build_absolute_uri }}" class="btn btn-sm btn-success rounded me-1" style="text-decoration: none;">
+                            <i class="fab fa-whatsapp"></i> Share on WhatsApp
+                        </a>
+                    </div>
+                </div>
+                <div class="col-6 col-md-6 mt-4">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" class="btn btn-sm btn-primary rounded" style="text-decoration: none;">
+                        <i class="fab fa-facebook"></i> Share on Facebook
+                    </a>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="col-6 col-md-6 mt-4">
-        <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" class="btn btn-sm btn-primary rounded" style="text-decoration: none;">
-            <i class="fab fa-facebook"></i> Share on Facebook
-        </a>
-    </div>
-</div>
-
-
-        
-        
-        
-        
-        </div>
-        
-
         <!-- Comment Form -->
         <div class="col-lg-9 col-md-6">
             <form action="{% url 'customer:add-comment' ad.id %}" method="POST">
@@ -98,8 +86,25 @@
                 <p>No comments yet.</p>
             {% endfor %}
         </div>
-
-        
     </div>
 </div>
+
+{% block meta_tags %}
+    <!-- Meta tags for WhatsApp image sharing -->
+    <meta property="og:title" content="{{ ad.title }}">
+    <meta property="og:description" content="{{ ad.description }}">
+    <meta property="og:image" content="{{ ad.images.first.image.url }}" />
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+
+    <!-- Meta tags for Facebook image sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ ad.title }}">
+    <meta property="og:description" content="{{ ad.description }}">
+    <meta property="og:image:url" content="{{ ad.images.first.image.url }}" />
+    <meta property="og:image:alt" content="{{ ad.title }}" />
+    <meta property="og:image:width" content="600" />
+    <meta property="og:image:height" content="315" />
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+{% endblock %}
+
 {% endblock %}

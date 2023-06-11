@@ -11,63 +11,102 @@
   </div>
 </section>
 
-<a href="{% url 'pdf_manager:pdf_list' %}" style="color: black; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: transparent; border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 4px; transition: background-color 0.3s; display: inline-flex; align-items: center;">
-    <i class="fas fa-briefcase" style="margin-right: 5px;"></i> Education PDF <i class="fas fa-file-pdf">  </i>
+<a href="" style="color: black; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: transparent; border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 4px; transition: background-color 0.3s; display: inline-flex; align-items: center;">
+     Categories
 </a>
-
-
-<section class="featured-products">
-    <div class="container">
-        <h2 class="section-title">Advertise with Us</h2>
-        <div class="row">
-            <div class="col-lg-8 col-md-6">
-                <div class="ad-image-container">
-                    <img src="https://m.media-amazon.com/images/I/71qid7QFWJL._SX3000_.jpg" alt="Advertisement" class="product-image img-fluid">
-                    <a href="{% url 'customer:ad-list' %}" style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: #FF9900; border-radius: 4px; transition: background-color 0.3s;">Advertisements</a>
-                </div>
-                <div class="hero">
-                    <div class="container">
-                        <h4 style="color: #232f3e; font-size: 30px; font-weight: bold; text-transform: uppercase;">Promote Your Business</h4>
-                        <p style="color: white; font-size: 20px; margin-top: 20px;">Reach a wider audience.</p><br/>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6"><hr>
-                <div class="product-item">
-                    <img src="{% static 'logo.png' %}" alt="Advertisement" class="product-image img-fluid">
-                    <h3 class="product-title">Increase Your Visibility</h3>
-                    <p class="product-description">Get noticed by potential customers and expand your brand's reach.</p>
-                     <a href="{% url 'customer:create-ad' %}" style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: #FF9900; border-radius: 4px; transition: background-color 0.3s;">Post an Ad</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
 <style>
-.ad-image-container {
-    position: relative;
+.categories-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-.ad-link {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #ffffff;
-    padding: 10px 20px;
-    font-size: 16px;
-    color: orange;
-    text-decoration: none;
-    border: 1px solid orange;
-    border-radius: 4px;
-    z-index: 1;
+.category {
+  flex-basis: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-.ad-link-content {
-    margin: 0;
+.category i {
+  font-size: 36px;
+  margin-bottom: 10px;
+  color: black; /* Set default color to black */
+}
+
+.category-label {
+  font-size: 14px;
+  text-align: center;
+}
+
+.category a {
+  text-decoration: none;
+}
+
+.category.education i {
+  color: red; /* Set color to red for the education icon */
 }
 </style>
+
+<div class="categories-container">
+    <div class="category tourism">
+      <a href="/">
+        <i class="fas fa-plane"></i>
+        <p class="category-label">Tourism</p>
+      </a>
+    </div>
+  <div class="category education">
+    <a href="{% url 'pdf_manager:pdf_list' %}">
+      <i class="fas fa-graduation-cap"></i>
+      <p class="category-label">Education</p>
+    </a>
+  </div>
+  <div class="category">
+    <a href="#">
+      <i class="fas fa-heartbeat"></i>
+      <p class="category-label">Health</p>
+    </a>
+  </div>
+  <div class="category">
+    <a href="#">
+      <i class="fas fa-taxi"></i>
+      <p class="category-label">Taxi</p>
+    </a>
+  </div>
+  <div class="category">
+    <a href="#">
+      <i class="fas fa-credit-card"></i>
+      <p class="category-label">Payment</p>
+    </a>
+  </div>
+  <div class="category">
+    <a href="#">
+      <i class="fas fa-tractor"></i>
+      <p class="category-label">Agriculture</p>
+    </a>
+  </div>
+  <div class="category">
+    <a href="#">
+      <i class="fas fa-shopping-cart"></i>
+      <p class="category-label">Groceries</p>
+    </a>
+  </div>
+  <div class="category">
+    <a href="#">
+      <i class="fas fa-tools"></i>
+      <p class="category-label">Autospares</p>
+    </a>
+  </div>
+  <div class="category">
+    <a href="#">
+      <i class="fas fa-tv"></i>
+      <p class="category-label">Electronics</p>
+    </a>
+  </div>
+</div>
+
+
 
 
 
@@ -79,7 +118,7 @@
 
 
 
-    <div class="container py-5">
+    <div class="container py-3">
         <h1 class="text-center mb-4">Our Partners</h1>
 <div class="row justify-content-center">
   {% for post in posts %}

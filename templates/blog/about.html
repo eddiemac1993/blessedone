@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
     <div class="container">
@@ -15,6 +16,35 @@
                     </div>
                 </div>
             </div>
+
+
+            <section class="featured-products">
+    <div class="container">
+        <h2 class="section-title">Advertise with Us</h2>
+        <div class="row">
+            <div class="col-lg-8 col-md-6">
+                <div class="ad-image-container">
+                    <img src="https://m.media-amazon.com/images/I/71qid7QFWJL._SX3000_.jpg" alt="Advertisement" class="product-image img-fluid">
+                    <a href="{% url 'customer:ad-list' %}" style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: #FF9900; border-radius: 4px; transition: background-color 0.3s;">Advertisements</a>
+                </div>
+                <div class="hero">
+                    <div class="container">
+                        <h4 style="color: #232f3e; font-size: 30px; font-weight: bold; text-transform: uppercase;">Promote Your Business</h4>
+                        <p style="color: white; font-size: 20px; margin-top: 20px;">Reach a wider audience.</p><br/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6"><hr>
+                <div class="product-item">
+                    <img src="{% static 'logo.png' %}" alt="Advertisement" class="product-image img-fluid">
+                    <h3 class="product-title">Increase Your Visibility</h3>
+                    <p class="product-description">Get noticed by potential customers and expand your brand's reach.</p>
+                     <a href="{% url 'customer:create-ad' %}" style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: #FF9900; border-radius: 4px; transition: background-color 0.3s;">Post an Ad</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
             <div class="col-md-4">
                 <div class="card shadow">

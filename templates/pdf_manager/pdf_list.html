@@ -1,211 +1,194 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block content %}
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            margin: 0;
-            padding: 20px;
-        }
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF Education Resource Library</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        h1 {
-            color: #333;
-            text-align: center;
-            margin-bottom: 20px;
-        }
+    body {
+      font-family: Arial, sans-serif;
+    }
 
-        .search-form {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
 
-        .search-input {
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #FF9900;
-            border-radius: 4px;
-            margin-right: 10px;
-        }
+    .card {
+      background-color: #f5f5f5;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
 
-        .search-button {
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            font-size: 18px;
-            font-weight: bold;
-            text-decoration: none;
-            padding: 10px 20px;
-            background-color: #FF9900;
-            border: none;
-            border-radius: 4px;
-            transition: background-color 0.3s;
-        }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+    }
 
-        .search-button:hover {
-            background-color: #FF6600;
-        }
+    .navbar input[type="text"] {
+      padding: 5px 30px 5px 10px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      width: 200px;
+      background-image: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/svgs/solid/search.svg');
+      background-repeat: no-repeat;
+      background-position: 5px center;
+      font-size: 14px;
+    }
 
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
+    .navbar .home-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #333;
+      cursor: pointer;
+      border: 2px solid #333;
+      border-radius: 4px;
+      padding: 3px 8px;
+      text-decoration: none;
+    }
 
-        li {
-            margin-bottom: 10px;
-        }
+    .uploaded-files {
+      margin-top: 20px;
+    }
 
-        a {
-            color: #333;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
+    .uploaded-file {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
 
-        a:hover {
-            color: #FF9900;
-        }
+    .uploaded-file a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: #333;
+      font-size: 14px;
+    }
 
-        .no-files {
-            text-align: center;
-            color: #666;
-        }
+    .pdf-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 8px;
+      border: 2px solid #333;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #333;
+      font-size: 12px;
+      margin-right: 8px;
+    }
 
-        .back-btn {
-            color: black;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            font-size: 18px;
-            font-weight: bold;
-            text-decoration: none;
-            padding: 10px 20px;
-            background-color: transparent;
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            border-radius: 4px;
-            transition: background-color 0.3s;
-            display: inline-flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
+    .pdf-button .file-icon {
+      font-size: 14px;
+      margin-right: 5px;
+    }
 
-        .back-btn:hover {
-            background-color: #FF9900;
-        }
+    .file-title {
+      font-weight: bold;
+      flex-grow: 1;
+      font-size: 16px;
+      margin-left: 8px;
+    }
 
-        .upload-btn {
-            color: black;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            font-size: 18px;
-            font-weight: bold;
-            text-decoration: none;
-            padding: 10px 20px;
-            background-color: transparent;
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            border-radius: 4px;
-            transition: background-color 0.3s;
-            display: inline-flex;
-            align-items: center;
-        }
+    .file-date {
+      font-size: 12px;
+    }
 
-        .upload-btn:hover {
-            background-color: #FF9900;
-        }
+    .share-btn {
+      font-size: 14px;
+      color: #333;
+      cursor: pointer;
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+    }
 
-        .pdf-item {
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 10px;
-        }
+    .share-icon {
+      font-size: 14px;
+      margin-right: 5px;
+    }
 
-        .pdf-item a {
-            display: flex;
-            align-items: center;
-            color: #333;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
+    .share-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: green;
+      color: white;
+      font-size: 12px;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      margin-left: 5px;
+    }
 
-        .pdf-item a:hover {
-            color: #FF9900;
-        }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
 
-        .pdf-date {
-            color: #666;
-        }
+    .no-files {
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
 
-        .share-icon {
-            color: white;
-            text-decoration: none;
-            background-color: #FF9900;
-            border: none;
-            border-radius: 4px;
-            padding: 5px 10px;
-            margin-left: 10px;
-        }
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="navbar">
+        <a href="{% url 'customer:index' %}" class="home-btn">
+          <i class="fas fa-home"></i>
+        </a>
+        <form method="GET" action="{% url 'pdf_manager:pdf_list' %}" class="search-form">
+          <input type="text" name="q" placeholder="Search for PDF Books" class="search-input">
+        </form>
+        <a href="{% url 'pdf_manager:pdf_upload' %}" class="upload-btn">
+          <i class="fas fa-upload"></i>
+        </a>
+      </div>
 
-        .share-icon i {
-            margin-right: 5px;
-        }
+      <h1>The PDF Education Resource Library<br>for Startups</h1>
 
-        .share-icon:hover {
-            background-color: #FF6600;
-        }
-
-        .pdf-card-container {
-            margin-top: 20px;
-        }
-
-        hr {
-            margin-top: 20px;
-            border: none;
-            border-top: 1px solid #ccc;
-        }
-    </style>
-
-    <a href="{% url 'customer:index' %}" class="back-btn mb-1 py-3 mt-2 btn btn-outline-primary btn-sm rounded-pill">
-        <i class="fas fa-arrow-left"></i> Go Back <i class="fas fa-home"></i>
-    </a>
-
-    <h1>The PDF Education Resource Library<br>for Starting Up a Business</h1>
-
-    <form method="GET" action="{% url 'pdf_manager:pdf_list' %}" class="search-form">
-        <input type="text" name="q" placeholder="Search PDF Files" class="search-input" value="{{ query }}">
-        <button type="submit" class="search-button">Search</button>
-    </form>
-
-    <a href="{% url 'pdf_manager:pdf_upload' %}" class="upload-btn">
-        <i class="fas fa-upload"></i> Upload An Education PDF <i class="fas fa-file-pdf"></i>
-    </a>
-
-    {% if pdf_files %}
-        <div class="pdf-card-container">
-            <ul class="pdf-list">
-                {% for pdf_file in pdf_files %}
-                    <li>
-                        <div class="pdf-item">
-                            <a href="{{ pdf_file.pdf.url }}">
-                               <i class="fas fa-download"></i> | <i class="fas fa-file-pdf"></i> <strong> {{ pdf_file.title }}</strong> | {{ pdf_file.pdf.name }}
-                            </a>
-
-
-
-
-                            <div class="pdf-details">
-                                <span class="pdf-date">Posted On: {{ pdf_file.upload_date|date:'F d, Y' }} |
-    {% for pdf_file in pdf_files %}
-        {{ pdf_file.category.name }}
-    {% endfor %}</span>
-                                <a class="share-icon btn btn-warning" href="whatsapp://send?text={{ pdf_file.title|urlencode }} {{ pdf_file.pdf.url|urlencode }}">
-                                    <i class="fab fa-whatsapp"></i> Share On WhatsApp
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul>
+      <div class="uploaded-files">
+        {% if pdf_files %}
+        {% for pdf_file in pdf_files %}
+        <div class="uploaded-file">
+          <a href="{{ pdf_file.pdf.url }}">
+            <div class="pdf-button">
+              <i class="fas fa-download file-icon"></i>
+              <div class="file-title">{{ pdf_file.title }}</div>
+            </div>
+          </a>
+          <a class="share-btn" href="whatsapp://send?text={{ pdf_file.title|urlencode }} {{ pdf_file.pdf.url|urlencode }}">
+            <i class="fas fa-share share-icon"></i>
+            <div class="file-date">Share</div>
+            <span class="share-badge"></span>
+          </a>
         </div>
-    {% else %}
+        {% endfor %}
+        {% else %}
         <p class="no-files">No PDF files found.</p>
-    {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
 </body>
-{% endblock content %}
-<hr/>
+
+</html>
