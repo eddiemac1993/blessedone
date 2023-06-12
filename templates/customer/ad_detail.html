@@ -7,7 +7,7 @@
 <br/>
 <div class="container">
     <div class="mb-2">
-        <a href="{% url 'customer:index' %}" class="btn btn-outline-primary btn-sm rounded-pill">
+        <a href="{% url 'customer:ad-list' %}" class="btn btn-outline-primary btn-sm rounded-pill">
             <i class="fas fa-arrow-left"></i> Go Back
         </a>
         <a href="{% url 'customer:create-ad' %}" class="btn btn-primary btn-sm rounded-pill">
@@ -51,15 +51,17 @@
             <div class="row">
                 <div class="col-6 col-md-6">
                     <div class="share-buttons mt-4">
-                        <a href="whatsapp://send?text={{ ad.title }} - {{ ad.description }} - {{ request.build_absolute_uri }}" class="btn btn-sm btn-success rounded me-1" style="text-decoration: none;">
-                            <i class="fab fa-whatsapp"></i> Share on WhatsApp
-                        </a>
+                        <a href="whatsapp://send?text={{ ad.title }} - {{ ad.description }} - {{ request.build_absolute_uri|urlencode }}" class="btn btn-sm btn-success rounded me-1" style="text-decoration: none;">
+  <i class="fab fa-whatsapp"></i> Share WhatsApp
+</a>
+
                     </div>
                 </div>
                 <div class="col-6 col-md-6 mt-4">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" class="btn btn-sm btn-primary rounded" style="text-decoration: none;">
-                        <i class="fab fa-facebook"></i> Share on Facebook
-                    </a>
+                   <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri|urlencode }}" class="btn btn-sm btn-primary rounded" style="text-decoration: none;">
+  <i class="fab fa-facebook"></i> Share Facebook
+</a>
+
                 </div>
             </div>
         </div>

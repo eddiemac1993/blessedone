@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'customer',
     'deliver',
+    'town',
     'crispy_forms',
     'django_social_share',
     "taggit"

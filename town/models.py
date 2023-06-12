@@ -1,60 +1,56 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-class MenuItem(models.Model):
+class Place(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
-    image = models.ImageField(upload_to='menu_images/')
-    price = models.DecimalField(max_digits=5, decimal_places=2)
-    category = models.ManyToManyField('category', related_name='item')
-    availability = models.BooleanField(default=True)
+    # Other fields for Place model
 
     def __str__(self):
         return self.name
 
+class Hotel(models.Model):
+    place = models.OneToOneField(Place, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='hotel_images')
+    rating = models.DecimalField(max_digits=3, decimal_places=2)
+    address = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    # Other fields for Hotel model
 
-class Category(models.Model):
+    def __str__(self):
+        return self.place.name
+
+class TouristCompany(models.Model):
+    place = models.OneToOneField(Place, on_delete=models.CASCADE)
+    logo = models.ImageField(upload_to='company_logos')
+    website = models.URLField()
+    address = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    # Other fields for TouristCompany model
+
+    def __str__(self):
+        return self.place.name
+
+class Adventure(models.Model):
+    place = models.ForeignKey(Place, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
+    description = models.TextField()
+    price = models.DecimalField(max_digits=8, decimal_places=2)
+    duration = models.PositiveIntegerField()
+    location = models.CharField(max_length=100)
+    # Other fields for Adventure model
 
     def __str__(self):
         return self.name
 
-
-class Location(models.Model):
-    name = models.CharField(max_length=50)
-    delivery_fee = models.DecimalField(max_digits=5, decimal_places=2)
-
-    def __str__(self):
-        return self.name
-
-class OrderModel(models.Model):
-    created_on = models.DateTimeField(auto_now_add=True)
-    price = models.DecimalField(max_digits=7, decimal_places=2)
-    items = models.ManyToManyField(
-        'MenuItem', related_name='order', through='OrderItem', blank=True)
-    name = models.CharField(max_length=50, blank=True)
-    email = models.EmailField(default="example@email.com")
-    street = models.CharField(max_length=50, blank=True)
-    city = models.CharField(max_length=50, blank=True)
-    phone_number = models.CharField(max_length=15, null=True)
-    location = models.ForeignKey(Location, on_delete=models.SET_NULL, related_name='order', null=True, blank=True)
-    is_shipped = models.BooleanField(default=False)
-
-    def total_price(self):
-        total = self.price
-        for order_item in self.orderitem_set.all():
-            total += order_item.total_price()
-
-        if self.location:
-            total += self.location.delivery_fee
-        return total
+class Booking(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    adventure = models.ForeignKey(Adventure, on_delete=models.CASCADE)
+    date_booked = models.DateTimeField(auto_now_add=True)
+    num_people = models.PositiveIntegerField()
+    # Other fields for Booking model
 
     def __str__(self):
-        return f'Order: {self.created_on.strftime("%b %d %I: %M %p")}'
-
-class OrderItem(models.Model):
-    order = models.ForeignKey(OrderModel, on_delete=models.CASCADE)
-    item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField(default=1)
-
-    def total_price(self):
-        return self.quantity * self.item.price
+        return f"{self.user.username}'s Booking"

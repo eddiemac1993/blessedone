@@ -98,60 +98,65 @@
                     </div>
                 {% endfor %}
             {% endif %}
+<div class="container mt-2">
+  <div class="row">
 
-            <div class="col-lg-3 col-md-6 mb-4 pt-3">
-                <div class="card">
-                    <div id="carousel-{{ ad.id }}" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            {% for image in ad.images.all %}
-                                <div class="carousel-item{% if forloop.first %} active{% endif %}">
-                                    <img src="{{ image.image.url }}" alt="{{ ad.title }}" class="card-img-top" style="height: 370px;">
-                                    <div class="image-overlay" style="position: absolute; bottom: 0; right: 0; padding: 8px; color: white; font-size: 14px;">
-                                        <a href="{% url 'customer:ad-detail' ad.id %}" style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: #FF9900; border-radius: 4px; transition: background-color 0.3s;">{{ ad.title|upper }}</a>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div>
-                            {% if ad.price %}
-                                <p class="card-text"><strong>Price:</strong> <span style="color: red;">K {{ ad.price }} each</span></p>
-                            {% else %}
-                                <p class="card-text"><strong>Price:</strong> N/A</p>
-                            {% endif %}
-                            {% if ad.category %}
-                                <p class="card-text"><strong>Category:</strong> {{ ad.get_category_display }}</p>
-                            {% else %}
-                                <p class="card-text"><strong>Category:</strong> N/A</p>
-                            {% endif %}
-                        </div>
-                        <p class="card-text text-muted small" style="font-style: italic; margin-bottom: 5px;">
-                            Posted {{ ad.created_at|timesince }} ago
-                        </p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item" style="background-color: #f8f9fa;">
-                            <a href="tel:{{ ad.phone_number }}" class="card-link" style="text-decoration: none; color: #333;">
-                                <i class="fas fa-phone me-2" style="color: #888;"></i>{{ ad.phone_number }}
-                            </a>
-                        </li>
-                        <li class="list-group-item" style="background-color: #f8f9fa;">
-                            <i class="fas fa-map-marker-alt me-2" style="color: #888;"></i>
-                            <a href="https://www.google.com/maps/search/?api=1&query={{ ad.location }}" class="card-link" style="text-decoration: none; color: #333;">
-                                {{ ad.location }}
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="card-footer" style="background-color: #f8f9fa; padding: 10px;">
-                        <small class="text-muted">
-                            <a href="{% url 'customer:ad-detail' ad.id %}" style="text-decoration: none; color: #333;">
-                                {{ ad.comments.count }} comments
-                            </a>
-                        </small>
+      <div class="col-md-4 mt-2">
+        <div class="card">
+          {% for image in ad.images.all %}
+            <a href="{% url 'customer:ad-detail' ad.id %}">
+  <img src="{{ image.image.url }}" class="card-img-top" alt="Product Image">
+</a>
+          {% endfor %}
+          <div class="card-body">
+            <h5 class="card-title" ><a href="{% url 'customer:ad-detail' ad.id %}"style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 12px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: #FF9900; border-radius: 4px; transition: background-color 0.3s;" class="text-decoration-none text-light">{{ ad.title|upper }}</a></h5>
+            <p class="card-text">{{ ad.get_category_display }}</p>
+            <h6 class="card-price">K {{ ad.price }} each</h6>
+            <div class="rating">
+              <i class="fa fa-star star"></i>Posted {{ ad.created_at|timesince }} ago
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" style="background-color: #f8f9fa;">
+                <a href="tel:{{ ad.phone_number }}" class="card-link" style="text-decoration: none; color: #333;">
+                  <i class="fas fa-phone me-2" style="color: #888;"></i>{{ ad.phone_number }}
+                </a>
+              </li>
+              <li class="list-group-item" style="background-color: #f8f9fa;">
+                <i class="fas fa-map-marker-alt me-2" style="color: #888;"></i>
+                <a href="https://www.google.com/maps/search/?api=1&query={{ ad.location }}" class="card-link" style="text-decoration: none; color: #333;">
+                  {{ ad.location }}
+                </a>
+              </li>
+            </ul>
+            <div class="card-footer" style="background-color: #f8f9fa; padding: 10px;">
+              <small class="text-muted">
+                <a href="{% url 'customer:ad-detail' ad.id %}" style="text-decoration: none; color: #333;">
+                  {{ ad.comments.count }} comments
+                </a>
+              </small>
+                          <div class="row">
+                <div class="col-6 col-md-6">
+                    <div class="share-buttons mt-4">
+                        <a href="whatsapp://send?text={{ ad.title }} - {{ ad.description }} - {{ request.build_absolute_uri }}" class="btn btn-sm btn-success rounded me-1" style="text-decoration: none;">
+                            <i class="fab fa-whatsapp"></i> Share WhatsApp
+                        </a>
                     </div>
                 </div>
+                <div class="col-6 col-md-6 mt-4">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" class="btn btn-sm btn-primary rounded" style="text-decoration: none;">
+                        <i class="fab fa-facebook"></i> Share Facebook
+                    </a>
+                </div>
             </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  </div>
+</div>
+
+
         {% endif %}
     {% endfor %}
 

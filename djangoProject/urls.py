@@ -48,6 +48,7 @@ urlpatterns = [
          ),
          name='password_reset_complete'),
     path('blog/', include('blog.urls')),
+    path('town/', include('town.urls')),
     path('', include('customer.urls')),
     path('deliver/', include('deliver.urls')),
     path('pdf/', include('pdf_manager.urls', namespace='pdf_manager')),

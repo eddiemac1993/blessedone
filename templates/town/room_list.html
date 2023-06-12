@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <style>
+    .hero-section {
+            background-image: url("{% static 'rooms.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-section h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-family: "Arial", sans-serif;
+        }
+
+        .adventure-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .adventure-list li {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+
+        .adventure-list li h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .adventure-list li p {
+            margin-bottom: 5px;
+        }
+
+        .navigation-links {
+            margin-top: 30px;
+        }
+
+        .hero-links {
+            position: absolute;
+            bottom: 50px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-links a {
+            display: inline-block;
+            background-color: #ff9900;
+            color: #fff;
+            padding: 8px 15px; /* Updated padding */
+            margin-right: 10px;
+            border-radius: 20px; /* Updated border-radius */
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .hero-links a:hover {
+            background-color: #ff6600;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-section">
+        <h1>Find Your Perfect Room</h1>
+        <div class="hero-links">
+            <a href="{% url 'town:place_list' %}">Explore Places</a><br/>
+            <a href="{% url 'town:adventure_list' %}">Discover Adventures</a>
+        </div>
+    </div>
+
+    <h2>Available Hotels & Rooms</h2>
+    <ul class="room-list">
+    {% for hotel in hotels %}
+        <li>
+            <h2>{{ hotel.place.name }}</h2>
+            <img src="{{ hotel.image.url }}" alt="{{ hotel.place.name }}" width="300" height="200">
+            <p>Rating: {{ hotel.rating }}</p>
+            <p>Address: {{ hotel.address }}</p>
+            <p>Email: {{ hotel.email }}</p>
+            <p>Phone: {{ hotel.phone }}</p>
+        </li>
+    {% empty %}
+        <li>No hotels found.</li>
+    {% endfor %}
+    </ul>
+
+</body>
+{% endblock content %}

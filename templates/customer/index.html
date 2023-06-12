@@ -47,11 +47,15 @@
 .category.education i {
   color: red; /* Set color to red for the education icon */
 }
+
+.category.tourism i {
+  color: red; /* Set color to red for the tourism icon */
+}
 </style>
 
 <div class="categories-container">
     <div class="category tourism">
-      <a href="/">
+      <a href="{% url 'town:place_list' %}">
         <i class="fas fa-plane"></i>
         <p class="category-label">Tourism</p>
       </a>

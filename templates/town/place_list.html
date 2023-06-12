@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <style>
+    .hero-section {
+            background-image: url("{% static 'vic.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-section h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-family: "Arial", sans-serif;
+        }
+
+        .adventure-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .adventure-list li {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+
+        .adventure-list li h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .adventure-list li p {
+            margin-bottom: 5px;
+        }
+
+        .navigation-links {
+            margin-top: 30px;
+        }
+
+        .hero-links {
+            position: absolute;
+            bottom: 50px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-links a {
+            display: inline-block;
+            background-color: #ff9900;
+            color: #fff;
+            padding: 8px 15px; /* Updated padding */
+            margin-right: 10px;
+            border-radius: 20px; /* Updated border-radius */
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .hero-links a:hover {
+            background-color: #ff6600;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-section">
+        <h1>Welcome to Our Tourist Destinations!</h1>
+        <div class="hero-links">
+            <a href="{% url 'town:room_list' %}">Hotels & Rooms</a><br/>
+            <a href="{% url 'town:adventure_list' %}">Adventures</a>
+        </div>
+    </div>
+
+    <h2>Explore Amazing Places</h2>
+    <ul class="place-list">
+    {% for place in places %}
+        <li>
+            <h2>{{ place.name }}</h2>
+            <p>{{ place.description }}</p>
+        </li>
+    {% empty %}
+        <li>No places found.</li>
+    {% endfor %}
+    </ul>
+
+</body>
+{% endblock content %}
