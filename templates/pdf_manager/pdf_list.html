@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 
 <head>
@@ -6,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PDF Education Resource Library</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
   <style>
     * {
       box-sizing: border-box;
@@ -22,12 +24,27 @@
       margin: 0 auto;
       padding: 20px;
     }
-
+    
     .card {
-      background-color: #f5f5f5;
+      background-image: url('{% static 'education.jpg' %}');
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    
+    .card-content {
+      margin-bottom: 20px;
+    }
+    
+    h1 {
+      color: black;
+      text-shadow: 2px 2px white;
+      font-weight: bold;
     }
 
     .navbar {
@@ -42,7 +59,7 @@
       border-radius: 4px;
       border: 1px solid #ccc;
       width: 200px;
-      background-image: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/svgs/solid/search.svg');
+      
       background-repeat: no-repeat;
       background-position: 5px center;
       font-size: 14px;
@@ -119,76 +136,189 @@
     }
 
     .share-icon {
-      font-size: 14px;
-      margin-right: 5px;
+      font-size: 16px;
+      margin-right: 4px;
     }
 
     .share-badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background-color: green;
-      color: white;
-      font-size: 12px;
+      background-color: #febd69;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
-      width: 20px;
-      height: 20px;
-      margin-left: 5px;
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-      font-size: 24px;
+      display: inline-block;
+      margin-left: 4px;
     }
 
     .no-files {
       text-align: center;
+      font-size: 16px;
       margin-top: 20px;
+    }
+    
+    /* Custom styles for Amazon-like layout */
+    header {
+      background-color: #232f3e;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .home-btn,
+    .upload-btn {
+      font-size: 20px;
+      color: #fff;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+    }
+    
+    .amazon-logo {
+      font-size: 24px;
+      color: #fff;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    
+    .upload-btn {
+      display: flex;
+      align-items: center;
+    }
+    
+    .upload-btn i {
+      margin-right: 5px;
+    }
+
+    
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      .card {
+        padding: 10px;
+      }
+
+      .navbar input[type="text"] {
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      .navbar .home-btn {
+        font-size: 16px;
+        padding: 2px 6px;
+      }
+
+    .search-form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .search-container {
+      position: relative;
+    }
+    
+    .search-input {
+      padding: 10px 40px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 300px;
+      font-size: 14px;
+    }
+    
+    .search-button {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .search-button i {
+      font-size: 18px;
+      color: #333;
+    }
+    
+    /* Optional styles to enhance the appearance */
+    .search-input:focus {
+      outline: none;
+      border-color: #999;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+
+      .uploaded-file {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 0;
+      }
+
+      .pdf-button {
+        margin-top: 10px;
+      }
     }
   </style>
 </head>
 
 <body>
+<header>
+  <a href="{% url 'customer:index' %}" class="home-btn">
+    <i class="fas fa-home"></i>
+  </a>
+  <a href="{% url 'pdf_manager:pdf_list' %}" class="amazon-logo">Education</a>
+  <a href="{% url 'pdf_manager:pdf_upload' %}" class="upload-btn">
+    <i class="fas fa-upload"></i>
+  </a>
+</header>
+
   <div class="container">
     <div class="card">
       <div class="navbar">
-        <a href="{% url 'customer:index' %}" class="home-btn">
-          <i class="fas fa-home"></i>
-        </a>
-        <form method="GET" action="{% url 'pdf_manager:pdf_list' %}" class="search-form">
-          <input type="text" name="q" placeholder="Search for PDF Books" class="search-input">
-        </form>
-        <a href="{% url 'pdf_manager:pdf_upload' %}" class="upload-btn">
-          <i class="fas fa-upload"></i>
-        </a>
-      </div>
 
-      <h1>The PDF Education Resource Library<br>for Startups</h1>
-
-      <div class="uploaded-files">
-        {% if pdf_files %}
-        {% for pdf_file in pdf_files %}
-        <div class="uploaded-file">
-          <a href="{{ pdf_file.pdf.url }}">
-            <div class="pdf-button">
-              <i class="fas fa-download file-icon"></i>
-              <div class="file-title">{{ pdf_file.title }}</div>
-            </div>
-          </a>
-          <a class="share-btn" href="whatsapp://send?text={{ pdf_file.title|urlencode }} {{ pdf_file.pdf.url|urlencode }}">
-            <i class="fas fa-share share-icon"></i>
-            <div class="file-date">Share</div>
-            <span class="share-badge"></span>
-          </a>
-        </div>
-        {% endfor %}
-        {% else %}
-        <p class="no-files">No PDF files found.</p>
-        {% endif %}
-      </div>
-    </div>
+<form method="GET" action="{% url 'pdf_manager:pdf_list' %}" class="search-form">
+  <div class="search-container">
+    <input type="text" name="q" placeholder="Search for PDF Books" class="search-input" value="{{ query }}">
+    <button type="submit" class="search-button">
+      <i class="fas fa-search"></i>
+    </button>
   </div>
+</form>
+
+
+      </div>
+      <h1 style="color: black; text-shadow: 2px 2px white;">The PDF Education Resource Library<br>for Startups</h1>
+    </div>
+
+<div class="uploaded-files">
+  {% if pdf_files %}
+    {% for pdf_file in pdf_files %}
+      <div class="uploaded-file">
+        <a href="{{ pdf_file.pdf.url }}" class="file-link">
+          <div class="pdf-button">
+            <i class="fas fa-download file-icon"></i>
+            <div class="file-title">{{ pdf_file.title }}</div>
+          </div>
+          <p class="card-text">{{ pdf_file.category }}</p>
+        </a>
+        <p class="file-date">Uploaded on {{ pdf_file.upload_date }}</p>
+        <a class="share-btn" href="whatsapp://send?text={{ request.build_absolute_uri }} - {{ pdf_file.title|urlencode }} {{ pdf_file.pdf.url|urlencode }}">
+          <i class="fas fa-share share-icon"></i>
+          <div class="file-date">Share</div>
+          <span class="share-badge"></span>
+        </a>
+      </div>
+    {% endfor %}
+  {% else %}
+    <div class="no-files">No PDF files found.</div>
+  {% endif %}
+</div>
+
+    
+    
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 </body>
 
 </html>

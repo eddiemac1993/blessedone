@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.db import models
+from django.db.models import Q
 from .forms import PDFUploadForm
 from .models import PDFFile, Category
 
@@ -13,6 +13,8 @@ def pdf_upload(request):
         form = PDFUploadForm()
     return render(request, 'pdf_manager/upload_pdf.html', {'form': form})
 
+
+
 def pdf_list_view(request):
     query = request.GET.get('q')  # Get the search query from the URL parameters
 
@@ -21,7 +23,7 @@ def pdf_list_view(request):
 
     if query:
         pdf_files = PDFFile.objects.filter(
-            models.Q(title__icontains=query) | models.Q(pdf__icontains=query)
+            Q(title__icontains=query) | Q(pdf__icontains=query)
         )
     else:
         pdf_files = PDFFile.objects.all()

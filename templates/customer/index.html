@@ -51,6 +51,10 @@
 .category.tourism i {
   color: red; /* Set color to red for the tourism icon */
 }
+
+.category.shop i {
+  color: red; /* Set color to red for the shop icon */
+}
 </style>
 
 <div class="categories-container">
@@ -66,6 +70,12 @@
       <p class="category-label">Education</p>
     </a>
   </div>
+    <div class="category shop">
+    <a href="{% url 'customer:order' %}">
+      <i class="fas fa-shopping-cart"></i>
+      <p class="category-label">Shop</p>
+    </a>
+  </div>
   <div class="category">
     <a href="#">
       <i class="fas fa-heartbeat"></i>
@@ -78,24 +88,14 @@
       <p class="category-label">Taxi</p>
     </a>
   </div>
-  <div class="category">
-    <a href="#">
-      <i class="fas fa-credit-card"></i>
-      <p class="category-label">Payment</p>
-    </a>
-  </div>
+
   <div class="category">
     <a href="#">
       <i class="fas fa-tractor"></i>
       <p class="category-label">Agriculture</p>
     </a>
   </div>
-  <div class="category">
-    <a href="#">
-      <i class="fas fa-shopping-cart"></i>
-      <p class="category-label">Groceries</p>
-    </a>
-  </div>
+
   <div class="category">
     <a href="#">
       <i class="fas fa-tools"></i>
@@ -108,22 +108,27 @@
       <p class="category-label">Electronics</p>
     </a>
   </div>
+    <div class="category">
+    <a href="#">
+      <i class="fas fa-credit-card"></i>
+      <p class="category-label">Payment</p>
+    </a>
+  </div>
 </div>
 
 
 
-
+        <a class="text-center mb-4" href="" style="color: black; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: transparent; border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 4px; transition: background-color 0.3s; display: inline-flex; align-items: center;">
+     Our Partners
+</a>
 
 
 
 
 <main>
-    <hr>
 
+    <div class="container">
 
-
-    <div class="container py-3">
-        <h1 class="text-center mb-4">Our Partners</h1>
 <div class="row justify-content-center">
   {% for post in posts %}
     <div class="col-4 col-md-4 col-lg-2 text-center mb-4">
