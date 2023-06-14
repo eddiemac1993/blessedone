@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Electronics Page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+  <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+  <style>
+    .hero-section {
+      position: relative;
+      background-color: #f8f9fa;
+      height: 500px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #000;
+      text-align: center;
+    }
+
+    .hero-section h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .hero-section .icon {
+      font-size: 100px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      border: none;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+  </style>
+</head>
+<body>
+  <section class="hero-section">
+    <div class="container">
+      <h1>Welcome to Electronics</h1>
+      <i class="fas fa-tv icon"></i>
+    </div>
+  </section>
+
+  <div class="container mt-5">
+    <div class="row">
+      {% for post in posts %}
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <img src="{{ post.image.url }}" class="card-img-top" alt="Post Image">
+          <div class="card-body">
+            <h5 class="card-title">{{ post.item_description }}</h5>
+            <p class="card-text">Price: {{ post.item_price }}</p>
+            <!-- Add more details as needed -->
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col">
+        <p>No posts found in this category.</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

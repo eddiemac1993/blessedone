@@ -6,10 +6,26 @@
     </a>
     <nav class="nav-menu">
       <ul>
-        <li><a href="{% url 'customer:ad-list' %}" style="text-decoration: none;" class="btn btn-warning mb-2 btn-sm rounded-pill">Advertisements</a></li>
+        <li>
+          <a href="{% url 'customer:ad-list' %}" class="btn btn-warning mb-2 btn-sm rounded-pill position-relative" style="text-decoration: none;" onclick="hideAlert()">
+            Advertisement
+            <span id="alert" class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+              <span class="visually-hidden">New alerts</span>
+            </span>
+          </a>
+        </li>
       </ul>
     </nav>
   </div>
 </header>
 <br/>
 <br/>
+<script>
+  function hideAlert() {
+    var alertElement = document.getElementById("alert");
+    alertElement.style.display = "none";
+    setTimeout(function() {
+      alertElement.style.display = "block";
+    }, 300000); // 5 minutes (300,000 milliseconds)
+  }
+</script>

@@ -55,6 +55,19 @@
 .category.shop i {
   color: red; /* Set color to red for the shop icon */
 }
+
+.category.agriculture i {
+  color: orange; /* Set color to red for the agriculture icon */
+}
+
+.category.autospare i {
+  color: orange; /* Set color to red for the autospare icon */
+}
+
+.category.electronics i {
+  color: orange; /* Set color to red for the electronics icon */
+}
+
 </style>
 
 <div class="categories-container">
@@ -76,42 +89,43 @@
       <p class="category-label">Shop</p>
     </a>
   </div>
-  <div class="category">
-    <a href="#">
-      <i class="fas fa-heartbeat"></i>
-      <p class="category-label">Health</p>
-    </a>
-  </div>
-  <div class="category">
-    <a href="#">
-      <i class="fas fa-taxi"></i>
-      <p class="category-label">Taxi</p>
-    </a>
-  </div>
 
-  <div class="category">
-    <a href="#">
+
+  <div class="category agriculture">
+    <a href="{% url 'town:agriculture' %}">
       <i class="fas fa-tractor"></i>
       <p class="category-label">Agriculture</p>
     </a>
   </div>
 
-  <div class="category">
-    <a href="#">
+  <div class="category autospare">
+    <a href="{% url 'town:autospare' %}">
       <i class="fas fa-tools"></i>
       <p class="category-label">Autospares</p>
     </a>
   </div>
-  <div class="category">
-    <a href="#">
+  <div class="category electronics">
+    <a href="{% url 'town:electronics' %}">
       <i class="fas fa-tv"></i>
       <p class="category-label">Electronics</p>
     </a>
   </div>
-    <div class="category">
+    <div class="category payment">
     <a href="#">
       <i class="fas fa-credit-card"></i>
       <p class="category-label">Payment</p>
+    </a>
+  </div>
+    <div class="category health">
+    <a href="#">
+      <i class="fas fa-heartbeat"></i>
+      <p class="category-label">Health</p>
+    </a>
+  </div>
+  <div class="category taxi">
+    <a href="#">
+      <i class="fas fa-taxi"></i>
+      <p class="category-label">Taxi</p>
     </a>
   </div>
 </div>

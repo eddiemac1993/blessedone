@@ -2,7 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime, timedelta
 from django.utils import timezone
-
+from django.core.files.uploadedfile import SimpleUploadedFile
+from PIL import Image
+import io
 
 class Event(models.Model):
     title = models.CharField(max_length=255)
@@ -12,6 +14,17 @@ class Event(models.Model):
     sponsored = models.BooleanField(default=False)
     image = models.ImageField(upload_to='event_images/', null=True, blank=True)
     link = models.URLField(default='https://blessedtouchs.pythonanywhere.com/ad-list/')
+
+    def save(self, *args, **kwargs):
+        if self.image:
+            img = Image.open(self.image)
+            img = img.convert('RGB')
+            img.thumbnail((800, 800))  # Resize the image to a maximum width/height of 800 pixels
+            img_io = io.BytesIO()
+            img.save(img_io, format='JPEG', quality=70)  # Save the image as JPEG with 70% quality
+            self.image = SimpleUploadedFile(self.image.name, img_io.getvalue(), content_type='image/jpeg')
+
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title
@@ -75,6 +88,7 @@ class Ad(models.Model):
     def __str__(self):
         return self.title
 
+
 class Comment(models.Model):
     ad = models.ForeignKey(Ad, related_name='comments', on_delete=models.CASCADE)
     content = models.TextField()
@@ -83,14 +97,26 @@ class Comment(models.Model):
     def __str__(self):
         return f"Comment on Ad '{self.ad.title}'"
 
+
 class AdImage(models.Model):
     ad = models.ForeignKey(Ad, related_name='images', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='ads/')
 
-from datetime import timedelta
+    def save(self, *args, **kwargs):
+        if self.image:
+            img = Image.open(self.image)
+            img = img.convert('RGB')
+            img.thumbnail((800, 800))  # Resize the image to a maximum width/height of 800 pixels
+            img_io = io.BytesIO()
+            img.save(img_io, format='JPEG', quality=70)  # Save the image as JPEG with 70% quality
+            self.image = SimpleUploadedFile(self.image.name, img_io.getvalue(), content_type='image/jpeg')
+
+        super().save(*args, **kwargs)
+
 
 def default_delivered_time():
     return str(timedelta(hours=2))
+
 
 class MenuItem(models.Model):
     name = models.CharField(max_length=100)
@@ -101,6 +127,17 @@ class MenuItem(models.Model):
     category = models.ManyToManyField('Category', related_name='items')
     availability = models.BooleanField(default=True)
     is_verified = models.BooleanField(default=False)  # New field for verified items
+
+    def save(self, *args, **kwargs):
+        if self.image:
+            img = Image.open(self.image)
+            img = img.convert('RGB')
+            img.thumbnail((800, 800))  # Resize the image to a maximum width/height of 800 pixels
+            img_io = io.BytesIO()
+            img.save(img_io, format='JPEG', quality=70)  # Save the image as JPEG with 70% quality
+            self.image = SimpleUploadedFile(self.image.name, img_io.getvalue(), content_type='image/jpeg')
+
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
