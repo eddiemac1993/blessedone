@@ -107,9 +107,10 @@
             </p>
             <p class="restaurant-card-desc">{{ item.description }}</p>
           </div>
-          <a href="https://api.whatsapp.com/send?text={{ item.name }}%0APrice: ZMK {{ item.price }}%0A{{ item.description }}%0A{{ request.build_absolute_uri }}" class="whatsapp-share" target="_blank" rel="noopener noreferrer">
-            Share on WhatsApp
-          </a>
+<a href="https://api.whatsapp.com/send?text=%0AOrder: {{ item.name }}%0APrice: ZMK {{ item.price }}%0A{{ item.description }}%0A{{ request.build_absolute_uri }}&image={{ item.image_url }}" class="whatsapp-share" target="_blank" rel="noopener noreferrer">
+  Share on WhatsApp
+</a>
+
         </div>
       </div>
     </div>

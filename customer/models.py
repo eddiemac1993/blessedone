@@ -19,7 +19,7 @@ class Event(models.Model):
         if self.image:
             img = Image.open(self.image)
             img = img.convert('RGB')
-            img.thumbnail((800, 800))  # Resize the image to a maximum width/height of 800 pixels
+            img.thumbnail((400, 400))  # Resize the image to a maximum width/height of 800 pixels
             img_io = io.BytesIO()
             img.save(img_io, format='JPEG', quality=70)  # Save the image as JPEG with 70% quality
             self.image = SimpleUploadedFile(self.image.name, img_io.getvalue(), content_type='image/jpeg')
@@ -106,7 +106,7 @@ class AdImage(models.Model):
         if self.image:
             img = Image.open(self.image)
             img = img.convert('RGB')
-            img.thumbnail((800, 800))  # Resize the image to a maximum width/height of 800 pixels
+            img.thumbnail((400, 400))  # Resize the image to a maximum width/height of 800 pixels
             img_io = io.BytesIO()
             img.save(img_io, format='JPEG', quality=70)  # Save the image as JPEG with 70% quality
             self.image = SimpleUploadedFile(self.image.name, img_io.getvalue(), content_type='image/jpeg')
@@ -132,7 +132,7 @@ class MenuItem(models.Model):
         if self.image:
             img = Image.open(self.image)
             img = img.convert('RGB')
-            img.thumbnail((800, 800))  # Resize the image to a maximum width/height of 800 pixels
+            img.thumbnail((200, 200))  # Resize the image to a maximum width/height of 800 pixels
             img_io = io.BytesIO()
             img.save(img_io, format='JPEG', quality=70)  # Save the image as JPEG with 70% quality
             self.image = SimpleUploadedFile(self.image.name, img_io.getvalue(), content_type='image/jpeg')

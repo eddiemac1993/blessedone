@@ -22,11 +22,11 @@
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 20px;
+      padding: 12px;
     }
 
     .card {
-      background-image: url('{% static 'education.jpg' %}');
+      background-color: #f2f2f2;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       padding: 20px;
@@ -47,36 +47,45 @@
       font-weight: bold;
     }
 
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 0;
-    }
+  header {
+    background-color: #232f3e;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-    .navbar input[type="text"] {
-      padding: 5px 30px 5px 10px;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-      width: 200px;
+  .nav-container {
+    display: flex;
+    align-items: center;
+  }
 
-      background-repeat: no-repeat;
-      background-position: 5px center;
-      font-size: 14px;
-    }
+  .logo {
+    margin-right: auto;
+  }
 
-    .navbar .home-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      color: #333;
-      cursor: pointer;
-      border: 2px solid #333;
-      border-radius: 4px;
-      padding: 3px 8px;
-      text-decoration: none;
-    }
+  .nav-menu ul {
+    list-style: none;
+    display: flex;
+    margin-left: auto;
+  }
+
+  .nav-menu ul li {
+    margin-left: 20px;
+  }
+
+  .pdf-icon {
+    color: #ff0000;
+    font-size: 24px;
+  }
+
+  .logo-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+
+
 
     .uploaded-files {
       margin-top: 20px;
@@ -97,29 +106,40 @@
       font-size: 14px;
     }
 
-    .pdf-button {
-      display: inline-flex;
+    .file-card {
+      display: flex;
       align-items: center;
-      justify-content: center;
-      padding: 4px 8px;
-      border: 2px solid #333;
-      border-radius: 8px;
-      text-decoration: none;
-      color: #333;
-      font-size: 12px;
-      margin-right: 8px;
+      justify-content: space-between;
+      width: 100%;
     }
 
-    .pdf-button .file-icon {
-      font-size: 14px;
-      margin-right: 5px;
+    .file-image {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .file-details {
+      flex-grow: 1;
+      margin-left: 16px;
     }
 
     .file-title {
       font-weight: bold;
-      flex-grow: 1;
-      font-size: 16px;
-      margin-left: 8px;
+      font-size: 18px;
+    }
+
+    .file-category {
+      font-size: 14px;
+      color: #777;
+    }
+
+    .download-btn {
+      color: #333;
+      font-size: 24px;
+      margin-left: 16px;
+      text-decoration: none;
     }
 
     .file-date {
@@ -155,40 +175,6 @@
       margin-top: 20px;
     }
 
-    /* Custom styles for Amazon-like layout */
-    header {
-      background-color: #232f3e;
-      padding: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .home-btn,
-    .upload-btn {
-      font-size: 20px;
-      color: #fff;
-      cursor: pointer;
-      border: none;
-      background: transparent;
-    }
-
-    .amazon-logo {
-      font-size: 24px;
-      color: #fff;
-      font-weight: bold;
-      text-decoration: none;
-    }
-
-    .upload-btn {
-      display: flex;
-      align-items: center;
-    }
-
-    .upload-btn i {
-      margin-right: 5px;
-    }
-
 
     /* Responsive styles */
     @media (max-width: 768px) {
@@ -206,47 +192,46 @@
         padding: 2px 6px;
       }
 
-    .search-form {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 20px;
-    }
+      .search-form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+      }
 
-    .search-container {
-      position: relative;
-    }
+      .search-container {
+        position: relative;
+      }
 
-    .search-input {
-      padding: 10px 40px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      width: 300px;
-      font-size: 14px;
-    }
+      .search-input {
+        padding: 10px 40px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 300px;
+        font-size: 14px;
+      }
 
-    .search-button {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: transparent;
-      border: none;
-      cursor: pointer;
-    }
+      .search-button {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: transparent;
+        border: none;
+        cursor: pointer;
+      }
 
-    .search-button i {
-      font-size: 18px;
-      color: #333;
-    }
+      .search-button i {
+        font-size: 18px;
+        color: #333;
+      }
 
-    /* Optional styles to enhance the appearance */
-    .search-input:focus {
-      outline: none;
-      border-color: #999;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    }
-
+      /* Optional styles to enhance the appearance */
+      .search-input:focus {
+        outline: none;
+        border-color: #999;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      }
 
       .uploaded-file {
         flex-direction: column;
@@ -257,65 +242,116 @@
       .pdf-button {
         margin-top: 10px;
       }
+
+      .share-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+        background-color: #25D366;
+        color: #fff;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+      }
+
+      .share-btn:hover {
+        background-color: #128C7E;
+      }
+
+      .share-icon {
+        font-size: 16px;
+        margin-right: 4px;
+      }
+
+      .file-date {
+        font-size: 12px;
+        margin-left: 4px;
+      }
+
+      .share-badge {
+        background-color: #febd69;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-left: 4px;
+      }
+      
+    .pdf-icon {
+      color: #ff0000;
+      font-size: 24px;
+    }
+
     }
   </style>
 </head>
 
 <body>
-<header>
-  <a href="{% url 'customer:index' %}" class="home-btn">
-    <i class="fas fa-home"></i>
-  </a>
-  <a href="{% url 'pdf_manager:pdf_list' %}" class="amazon-logo">Education</a>
-  <a href="{% url 'pdf_manager:pdf_upload' %}" class="upload-btn">
-    <i class="fas fa-upload"></i>
-  </a>
+<header class="fixed-top">
+  <div class="nav-container">
+    <a href="{% url 'customer:index' %}" class="logo">
+      <img src="{% static 'logo.png' %}" alt="logo" class="logo-img rounded-circle">
+    </a>
+  </div>
+      <nav class="nav-menu">
+      <ul>
+        <li>
+          <a href="{% url 'pdf_manager:pdf_upload' %}" class="btn btn-warning mb-2 btn-sm rounded-pill position-relative" style="text-decoration: none; display: flex; align-items: center;">
+            <span>Upload</span>
+            <i class="fas fa-cloud-upload-alt" style="margin-left: 5px;"></i>
+            <i class="far fa-file-pdf pdf-icon" style="margin-left: 5px;"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
 </header>
+
+
+  <br/>
+  <br/>
+  <br/>
 
   <div class="container">
     <div class="card">
       <div class="navbar">
-
-<form method="GET" action="{% url 'pdf_manager:pdf_list' %}" class="search-form">
-  <div class="search-container">
-    <input type="text" name="q" placeholder="Search for PDF Books" class="search-input" value="{{ query }}">
-    <button type="submit" class="search-button">
-      <i class="fas fa-search"></i>
-    </button>
-  </div>
-</form>
-
-
-      </div style="">
+        <form method="GET" action="{% url 'pdf_manager:pdf_list' %}" class="search-form">
+          <div class="search-container">
+            <input type="text" name="q" placeholder="Search for PDF Books" class="search-input" value="{{ query }}">
+            <button type="submit" class="search-button">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </form>
+      </div>
       <h1 style="background-color: rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px); padding: 10px; border-radius: 10px; color: black; text-shadow: 2px 2px white;">The PDF Education Resource Library<br>for Startups</h1>
     </div>
 
-<div class="uploaded-files">
-  {% if pdf_files %}
-    {% for pdf_file in pdf_files %}
+    <div class="uploaded-files">
+      {% if pdf_files %}
+      {% for pdf_file in pdf_files %}
       <div class="uploaded-file">
         <a href="{{ pdf_file.pdf.url }}" class="file-link">
-          <div class="pdf-button">
-            <i class="fas fa-download file-icon"></i>
-            <div class="file-title">{{ pdf_file.title }}</div>
+          <div class="file-card">
+            <img src="{% static 'education.png' %}" alt="education" class="file-image">
+            <div class="file-details">
+              <div class="file-title">{{ pdf_file.title }} <i class="far fa-file-pdf pdf-icon"></i> </div>
+              <p class="file-category">{{ pdf_file.category }}</p>
+            </div>
+
           </div>
-          <p class="card-text">{{ pdf_file.category }}</p>
         </a>
-        <p class="file-date">Uploaded on {{ pdf_file.upload_date }}</p>
-        <a class="share-btn" href="whatsapp://send?text={{ request.build_absolute_uri }} - {{ pdf_file.title|urlencode }} {{ pdf_file.pdf.url|urlencode }}">
-          <i class="fas fa-share share-icon"></i>
+        <a class="share-btn" href="whatsapp://send?text={{ request.build_absolute_uri }} - {{ pdf_file.title|urlencode }} {{ pdf_file.pdf.url|urlencode }}&image={% static 'education.png' %}">
+          <i class="fab fa-whatsapp share-icon"></i>
           <div class="file-date">Share</div>
           <span class="share-badge"></span>
         </a>
       </div>
-    {% endfor %}
-  {% else %}
-    <div class="no-files">No PDF files found.</div>
-  {% endif %}
-</div>
-
-
-
+      {% endfor %}
+      {% else %}
+      <div class="no-files">No PDF files found.</div>
+      {% endif %}
+    </div>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>

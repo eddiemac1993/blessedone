@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -8,7 +8,7 @@
   <style>
     .hero-section {
       position: relative;
-      background-image: url('vic.jpg');
+      background-image: url("{% static 'adventure.jpg' %}");
       background-size: cover;
       background-position: center;
       height: 500px;

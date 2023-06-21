@@ -6,7 +6,7 @@
 <section class="hero" style="background-image: url('{% static 'White Yellow Minimalist Delivery Services Instagram Story (1).png' %}');">
   <div class="container">
     <h1 style="color: #232f3e; font-size: 30px; font-weight: bold; text-transform: uppercase;">Quick<span style="color: #FF9900;">Drop</span></h1>
-    <p style="color: white; font-size: 20px; margin-top: 20px;">Order. Deliver. Enjoy.</p><br/>
+    <p style="color: white; font-size: 20px; margin-top: 20px;">You Order. We Deliver. Enjoy.</p><br/>
     <a href="{% url 'customer:order' %}" style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: #FF9900; border-radius: 4px; transition: background-color 0.3s;">Place an Order</a>
   </div>
 </section>
@@ -100,7 +100,7 @@
 
   <div class="category autospare">
     <a href="{% url 'town:autospare' %}">
-      <i class="fas fa-tools"></i>
+      <i class="fas fa-store"></i>
       <p class="category-label">Autospares</p>
     </a>
   </div>
@@ -110,26 +110,26 @@
       <p class="category-label">Electronics</p>
     </a>
   </div>
-    <div class="category payment">
-    <a href="#">
-      <i class="fas fa-credit-card"></i>
-      <p class="category-label">Payment</p>
-    </a>
-  </div>
-    <div class="category health">
-    <a href="#">
-      <i class="fas fa-heartbeat"></i>
-      <p class="category-label">Health</p>
-    </a>
-  </div>
-  <div class="category taxi">
-    <a href="#">
-      <i class="fas fa-taxi"></i>
-      <p class="category-label">Taxi</p>
-    </a>
-  </div>
+<div class="category payment">
+  <a href="{% url 'customer:order-search' %}?q=mobile%20money">
+    <i class="fas fa-credit-card"></i>
+    <p class="category-label">Mobile Money</p>
+  </a>
+</div>
+<div class="category health">
+  <a href="{% url 'customer:order-search' %}?q=health">
+    <i class="fas fa-tools"></i>
+    <p class="category-label">Hardware</p>
+  </a>
+</div>
+<div class="category taxi">
+  <a href="{% url 'customer:order-search' %}?q=taxi">
+    <i class="fas fa-taxi"></i>
+    <p class="category-label">Taxi</p>
+  </a>
 </div>
 
+</div> <!-- Closing tag for categories-container -->
 
 
         <a class="text-center mb-4" href="" style="color: black; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: transparent; border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 4px; transition: background-color 0.3s; display: inline-flex; align-items: center;">

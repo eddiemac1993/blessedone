@@ -7,8 +7,6 @@
     <div class="row justify-content-center mt-1">
         <div class="col-md-12 col-sm-12 p-4">
 
-
-
                 <a href="{% url 'customer:index' %}" class="btn btn-outline-warning mb-2 btn-sm rounded-pill">
         <i class="fas fa-arrow-left"></i> Go Back
     </a>
@@ -89,7 +87,9 @@
                     <div class="menu-item">
                         <div class="row">
                             <div class="col-md-2 col-sm-12">
-                                <img class="menu-item-image rounded" src="{{ item.image.url }}">
+                                <a href="{{ item.image.url }}" target="_blank">
+                                  <img class="menu-item-image rounded" src="{{ item.image.url }}">
+                                </a>
                             </div>
                             <div class="col-md-8 col-sm-12">
                                 <div class="d-flex flex-row">

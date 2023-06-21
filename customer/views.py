@@ -11,6 +11,8 @@ from .forms import AdForm, AdImageFormSet, CommentForm
 from .models import Ad, AdImage, Comment, Event
 from django.db.models import Count
 from django.db.models.functions import Coalesce
+from decimal import Decimal
+
 
 
 def ad_list(request):
@@ -39,10 +41,16 @@ def ad_list(request):
 
     liked_ads = request.session.get('liked_ads', [])  # Get liked ads from session or initialize as empty list
 
+    for ad in ads:
+        if ad.price is not None:
+            ad.original_price = ad.price / Decimal('0.8')
+        else:
+            ad.original_price = None
+
+
     events = Event.objects.all()  # Fetch the events from the database
 
     return render(request, 'customer/ad_list.html', {'ads': ads, 'categories': categories, 'ad_comments': ad_comments, 'liked_ads': liked_ads, 'events': events})
-
 
 
 def create_ad(request):

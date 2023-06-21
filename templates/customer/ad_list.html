@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load custom_filters %}
+{% load custom_tags %}
 {% load static %}
 {% load humanize %}
 
@@ -82,12 +84,12 @@
                                         <div class="row">
                                             <div class="col">
                                                 <a href="whatsapp://send?text={{ event.title }} - {{ event.description }} - {{ request.build_absolute_uri }}" class="btn btn-sm btn-success rounded me-1" style="text-decoration: none;">
-                                                    <i class="fab fa-whatsapp"></i> Share on WhatsApp
+                                                    <i class="fab fa-whatsapp"></i> WhatsApp Share
                                                 </a>
                                             </div>
                                             <div class="col">
                                                 <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" class="btn btn-sm btn-primary rounded me-1" style="text-decoration: none;">
-                                                    <i class="fab fa-facebook"></i> Share on Facebook
+                                                    <i class="fab fa-facebook"></i> FaceBook Share
                                                 </a>
                                             </div>
                                         </div>
@@ -109,45 +111,145 @@
 </a>
           {% endfor %}
           <div class="card-body">
-            <h5 class="card-title" ><a href="{% url 'customer:ad-detail' ad.id %}"style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 12px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: #FF9900; border-radius: 4px; transition: background-color 0.3s;" class="text-decoration-none text-light">{{ ad.title|upper }}</a></h5>
-            <p class="card-text">{{ ad.get_category_display }}</p>
-            <h6 class="card-price">K {{ ad.price }} each</h6>
-            <div class="rating">
-              <i class="fa fa-star star"></i>Posted {{ ad.created_at|timesince }} ago
-            </div>
+            <h5 class="card-title py-1" ><a href="{% url 'customer:ad-detail' ad.id %}"style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 12px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: #FF9900; border-radius: 4px; transition: background-color 0.3s;" class="text-decoration-none text-light">{{ ad.title|upper }}</a></h5>
+<div class="price-tag">
+  <p class="before-price">Price Was: <span>K {{ ad.original_price }}</span></p>
+  <p class="now-price">Price: <span>K {{ ad.price }}</span></p>
+</div>
+
+
+
+            <style>
+.price-tag {
+  display: inline-block;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  padding: 10px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #333;
+}
+
+.before-price {
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #999;
+}
+
+.before-price span {
+  text-decoration: line-through;
+}
+
+.now-price {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.now-price span {
+  color: #ff6600;
+}
+
+
+.posted-info {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.clock-icon {
+  color: #888;
+  margin-right: 5px;
+}
+
+.posted-text {
+  color: #666;
+  font-size: 14px;
+}
+</style>
+
+<div class="posted-info">
+  <i class="fas fa-clock clock-icon"></i>
+  <span class="posted-text">Posted {{ ad.created_at|timesince }} ago</span>
+</div>
+
             <ul class="list-group list-group-flush">
-              <li class="list-group-item" style="background-color: #f8f9fa;">
+              <li class="list-group-item" style="">
                 <a href="tel:{{ ad.phone_number }}" class="card-link" style="text-decoration: none; color: #333;">
-                  <i class="fas fa-phone me-2" style="color: #888;"></i>{{ ad.phone_number }}
-                </a>
+  <span class="badge bg-success"><i class="fas fa-phone me-2" style="color: #fff;"></i>Call</span>
+</a>
+
+{% if ad.phone_number|striptags|join:''|starts_with_plus260 %}
+  <a href="https://wa.me/{{ ad.phone_number|slugify }}" class="card-link" style="text-decoration: none; color: #333;">
+    <span class="badge bg-primary"><i class="fas fa-comment me-2" style="color: #fff;"></i>Chat</span>
+  </a>
+{% else %}
+  <a href="https://wa.me/+260{{ ad.phone_number|slugify }}" class="card-link" style="text-decoration: none; color: #333;">
+    <span class="badge bg-primary"><i class="fas fa-comment me-2" style="color: #fff;"></i>Chat</span>
+  </a>
+{% endif %}
+
+
+
+
+
+
+  <a href="{% url 'customer:ad-detail' ad.id %}" style="text-decoration: none; color: #333;">
+    <span class="badge bg-info"><i class="fas fa-comment-alt me-2" style="color: #fff;"></i>{{ ad.comments.count }} comments</span>
+  </a>
+
+
               </li>
-              <li class="list-group-item" style="background-color: #f8f9fa;">
-                <i class="fas fa-map-marker-alt me-2" style="color: #888;"></i>
-                <a href="https://www.google.com/maps/search/?api=1&query={{ ad.location }}" class="card-link" style="text-decoration: none; color: #333;">
-                  {{ ad.location }}
-                </a>
-              </li>
+<style>
+  .discount-section {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+  }
+
+  .discount-amount {
+    font-weight: bold;
+    color: #666;
+  }
+
+  .original-price {
+    text-decoration: line-through;
+    color: #999;
+  }
+</style>
+
+<li class="list-group-item" style="display: flex; align-items: center; justify-content: center; border-color: #ccc;">
+  <a href="https://www.google.com/maps/search/?api=1&query={{ ad.location }}" class="card-link d-flex align-items-center justify-content-center" style="text-decoration: none; color: #333; padding: 4px 8px; border: 1px solid #ccc; border-radius: 4px; width: 100%;">
+    <i class="fas fa-map-marker-alt me-2" style="color: #888;"></i>
+    {{ ad.location }}
+  </a>
+</li>
+
+
+
+
+
+
             </ul>
-            <div class="card-footer" style="background-color: #f8f9fa; padding: 10px;">
-              <small class="text-muted">
-                <a href="{% url 'customer:ad-detail' ad.id %}" style="text-decoration: none; color: #333;">
-                  {{ ad.comments.count }} comments
-                </a>
-              </small>
-                          <div class="row">
-                <div class="col-6 col-md-6">
-                    <div class="share-buttons mt-4">
-                        <a href="whatsapp://send?text={{ ad.title }} - {{ ad.description }} - {{ request.build_absolute_uri }}" class="btn btn-sm btn-success rounded me-1" style="text-decoration: none;">
-                            <i class="fab fa-whatsapp"></i> Share WhatsApp
-                        </a>
-                    </div>
-                </div>
-                <div class="col-6 col-md-6 mt-4">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" class="btn btn-sm btn-primary rounded" style="text-decoration: none;">
-                        <i class="fab fa-facebook"></i> Share Facebook
-                    </a>
-                </div>
-            </div>
+            <div class="" style="padding: 10px;">
+
+<div class="row">
+  <div class="col-md-6 col-sm-6 mt-2">
+    <div class="d-grid">
+      <a href="whatsapp://send?text={{ ad.title }} - {{ ad.description }} - {{ request.build_absolute_uri }}" class="btn btn-sm btn-success rounded me-1 w-100" style="text-decoration: none;">
+        <i class="fab fa-whatsapp"></i> WhatsApp Share
+      </a>
+    </div>
+  </div>
+  <div class="col-md-6 col-sm-6 mt-2">
+    <div class="d-grid">
+      <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" class="btn btn-sm btn-primary rounded w-100" style="text-decoration: none;">
+        <i class="fab fa-facebook"></i> Facebook Share
+      </a>
+    </div>
+  </div>
+</div>
+
+
             </div>
           </div>
         </div>
@@ -180,4 +282,4 @@
 </div>
 </div>
 {% endblock %}
-</section>
+</section><br/>
