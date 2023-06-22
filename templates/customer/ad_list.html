@@ -104,7 +104,7 @@
   <div class="row">
 
       <div class="col-md-4 mt-2">
-        <div class="card">
+        <div id="ad{{ ad.id }}" class="card">
           {% for image in ad.images.all %}
             <a href="{% url 'customer:ad-detail' ad.id %}">
   <img src="{{ image.image.url }}" class="card-img-top" alt="Product Image">
@@ -235,19 +235,21 @@
 <div class="row">
   <div class="col-md-6 col-sm-6 mt-2">
     <div class="d-grid">
-      <a href="whatsapp://send?text={{ ad.title }} - {{ ad.description }} - {{ request.build_absolute_uri }}" class="btn btn-sm btn-success rounded me-1 w-100" style="text-decoration: none;">
-        <i class="fab fa-whatsapp"></i> WhatsApp Share
-      </a>
+<a href="whatsapp://send?text={{ ad.title }} - {{ ad.description }} - {{ request.build_absolute_uri }}#ad{{ ad.id }}" class="btn btn-sm btn-success rounded me-1 w-100" style="text-decoration: none;">
+    <i class="fab fa-whatsapp"></i> WhatsApp Share
+</a>
+
     </div>
   </div>
   <div class="col-md-6 col-sm-6 mt-2">
     <div class="d-grid">
-      <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" class="btn btn-sm btn-primary rounded w-100" style="text-decoration: none;">
-        <i class="fab fa-facebook"></i> Facebook Share
-      </a>
+<a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}#ad{{ ad.id }}" class="btn btn-sm btn-primary rounded w-100" style="text-decoration: none;">
+    <i class="fab fa-facebook"></i> Facebook Share
+</a>
     </div>
   </div>
 </div>
+
 
 
             </div>
@@ -280,6 +282,21 @@
         {% endfor %}
     {% endif %}
 </div>
-</div>
+</div><br/>
+<script>
+// JavaScript code to scroll to the ad when the page loads
+document.addEventListener("DOMContentLoaded", function() {
+  // Get the ad ID from the URL fragment
+  const adId = window.location.hash.substr(1);
+
+  // Scroll to the ad element if the ID exists
+  if (adId) {
+    const adElement = document.getElementById(adId);
+    if (adElement) {
+      adElement.scrollIntoView();
+    }
+  }
+});
+</script>
 {% endblock %}
-</section><br/>
+</section>

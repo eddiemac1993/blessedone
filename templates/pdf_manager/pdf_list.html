@@ -3,6 +3,30 @@
 <html lang="en">
 
 <head>
+
+    <head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- CSS -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'logo.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'logo.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'logo.png' %}">
+    <link rel="manifest" href="{% static 'site.webmanifest' %}">
+
+
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PDF Education Resource Library</title>
@@ -277,7 +301,7 @@
         display: inline-block;
         margin-left: 4px;
       }
-      
+
     .pdf-icon {
       color: #ff0000;
       font-size: 24px;
@@ -317,7 +341,7 @@
       <div class="navbar">
         <form method="GET" action="{% url 'pdf_manager:pdf_list' %}" class="search-form">
           <div class="search-container">
-            <input type="text" name="q" placeholder="Search for PDF Books" class="search-input" value="{{ query }}">
+            <input type="text" name="q" placeholder="Search for PDF Papers" class="search-input" value="">
             <button type="submit" class="search-button">
               <i class="fas fa-search"></i>
             </button>
@@ -327,31 +351,31 @@
       <h1 style="background-color: rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px); padding: 10px; border-radius: 10px; color: black; text-shadow: 2px 2px white;">The PDF Education Resource Library<br>for Startups</h1>
     </div>
 
-    <div class="uploaded-files">
-      {% if pdf_files %}
-      {% for pdf_file in pdf_files %}
-      <div class="uploaded-file">
-        <a href="{{ pdf_file.pdf.url }}" class="file-link">
-          <div class="file-card">
-            <img src="{% static 'education.png' %}" alt="education" class="file-image">
-            <div class="file-details">
-              <div class="file-title">{{ pdf_file.title }} <i class="far fa-file-pdf pdf-icon"></i> </div>
-              <p class="file-category">{{ pdf_file.category }}</p>
-            </div>
-
-          </div>
-        </a>
-        <a class="share-btn" href="whatsapp://send?text={{ request.build_absolute_uri }} - {{ pdf_file.title|urlencode }} {{ pdf_file.pdf.url|urlencode }}&image={% static 'education.png' %}">
-          <i class="fab fa-whatsapp share-icon"></i>
-          <div class="file-date">Share</div>
-          <span class="share-badge"></span>
-        </a>
+<div class="uploaded-files">
+  {% if pdf_files %}
+  {% for pdf_file in pdf_files %}
+  <div class="uploaded-file">
+    <a href="{{ pdf_file.pdf.url }}" class="file-link">
+      <div class="file-card">
+        <img src="{% static 'education.png' %}" alt="education" class="file-image">
+        <div class="file-details">
+          <div class="file-title">{{ pdf_file.title }} <i class="far fa-file-pdf pdf-icon"></i> </div>
+          <p class="file-category">{{ pdf_file.category.name }}</p>
+        </div>
       </div>
-      {% endfor %}
-      {% else %}
-      <div class="no-files">No PDF files found.</div>
-      {% endif %}
-    </div>
+    </a>
+    <a class="share-btn" href="whatsapp://send?text={{ request.build_absolute_uri }} - {{ pdf_file.title|urlencode }} {{ pdf_file.pdf.url|urlencode }}&image={% static 'education.png' %}">
+      <i class="fab fa-whatsapp share-icon"></i>
+      <div class="file-date">Share</div>
+      <span class="share-badge"></span>
+    </a>
+  </div>
+  {% endfor %}
+  {% else %}
+  <div class="no-files">No PDF files found.</div>
+  {% endif %}
+</div>
+
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>

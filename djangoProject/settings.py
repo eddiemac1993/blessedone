@@ -51,6 +51,7 @@ INSTALLED_APPS = [
 
     'allauth',
     'allauth.account',
+    'django_group_by',
     'allauth.socialaccount',
 
     'blog.apps.BlogConfig',
