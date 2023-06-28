@@ -128,17 +128,6 @@ class MenuItem(models.Model):
     availability = models.BooleanField(default=True)
     is_verified = models.BooleanField(default=False)  # New field for verified items
 
-    def save(self, *args, **kwargs):
-        if self.image:
-            img = Image.open(self.image)
-            img = img.convert('RGB')
-            img.thumbnail((200, 200))  # Resize the image to a maximum width/height of 800 pixels
-            img_io = io.BytesIO()
-            img.save(img_io, format='JPEG', quality=70)  # Save the image as JPEG with 70% quality
-            self.image = SimpleUploadedFile(self.image.name, img_io.getvalue(), content_type='image/jpeg')
-
-        super().save(*args, **kwargs)
-
     def __str__(self):
         return self.name
 

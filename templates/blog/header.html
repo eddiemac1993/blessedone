@@ -7,17 +7,21 @@
     <nav class="nav-menu">
       <ul>
         <li>
-          <a href="{% url 'customer:ad-list' %}" class="btn btn-warning mb-2 btn-sm rounded-pill position-relative" style="text-decoration: none;" onclick="hideAlert()">
+          <a href="{% url 'customer:ad-list' %}" class="btn btn-warning mb-2 btn-sm rounded-pill position-relative" style="text-decoration: none; background-color: #FFA500; border-color: #FFA500;" onclick="hideAlert()">
             Advertisement
             <span id="alert" class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
               <span class="visually-hidden">New alerts</span>
             </span>
           </a>
         </li>
+        <li>
+          <a href="{% url 'blog-about' %}" class="btn btn-primary mb-2 btn-sm rounded-pill" style="text-decoration: none; background-color: navy; border-color: navy; color: #fff;">About</a>
+        </li>
       </ul>
     </nav>
   </div>
 </header>
+
 <br/>
 <br/>
 <script>

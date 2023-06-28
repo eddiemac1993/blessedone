@@ -14,7 +14,6 @@ def pdf_upload(request):
     return render(request, 'pdf_manager/upload_pdf.html', {'form': form})
 
 
-
 def pdf_list_view(request):
     query = request.GET.get('q')  # Get the search query from the URL parameters
 
@@ -23,7 +22,7 @@ def pdf_list_view(request):
 
     if query:
         pdf_files = PDFFile.objects.filter(
-            Q(title__icontains=query) | Q(pdf__icontains=query)
+            Q(title__icontains=query) | Q(pdf__icontains=query) | Q(category__name=query)
         )
     else:
         pdf_files = PDFFile.objects.all()

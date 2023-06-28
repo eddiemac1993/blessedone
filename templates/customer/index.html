@@ -122,10 +122,10 @@
     <p class="category-label">Hardware</p>
   </a>
 </div>
-<div class="category taxi">
-  <a href="{% url 'customer:order-search' %}?q=taxi">
-    <i class="fas fa-taxi"></i>
-    <p class="category-label">Taxi</p>
+<div class="category baby">
+  <a href="{% url 'customer:order-search' %}?q=baby">
+    <i class="fas fa-baby"></i>
+    <p class="category-label">Baby</p>
   </a>
 </div>
 
@@ -176,6 +176,39 @@
 .logo-wrapper .text-dark {
   margin-top: 5px;
 }
+.sticky-whatsapp-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  background-color: #25D366;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.whatsapp-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.whatsapp-text {
+  font-weight: bold;
+}
+
+/* Adjust the button position for smaller screens */
+@media (max-width: 768px) {
+  .sticky-whatsapp-button {
+    bottom: 80px; /* Adjust the distance from the bottom as needed */
+  }
+}
+
+
+
 </style>
 
 
@@ -189,5 +222,12 @@
         </div>
 
 </main>
+<a href="https://wa.me/260970349470?text=Hello%2C%20I%20have%20a%20question." target="_blank" class="sticky-whatsapp-button">
+  <i class="fab fa-whatsapp whatsapp-icon"></i>
+  <span class="whatsapp-text">Chat on WhatsApp</span>
+</a>
+
+
+
 
 {% endblock %}
