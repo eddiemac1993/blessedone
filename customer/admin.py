@@ -13,8 +13,18 @@ class AdImageAdmin(admin.ModelAdmin):
     list_display = ('ad', 'image')
     list_filter = ('ad',)
 
+@admin.register(OrderModel)
+class OrderModelAdmin(admin.ModelAdmin):
+    list_display = ('created_on', 'name', 'email', 'is_shipped', 'total_price')
+    list_filter = ('is_shipped',)
+    search_fields = ('name', 'email')
+    readonly_fields = ('total_price',)
+
+    def total_price(self, obj):
+        return obj.total_price()
+    total_price.short_description = 'Total Price'
+
 admin.site.register(MenuItem)
 admin.site.register(Category)
-admin.site.register(OrderModel)
 admin.site.register(Location)
 admin.site.register(Event)

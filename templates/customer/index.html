@@ -77,12 +77,13 @@
         <p class="category-label">Tourism</p>
       </a>
     </div>
-  <div class="category education">
-    <a href="{% url 'pdf_manager:pdf_list' %}">
-      <i class="fas fa-graduation-cap"></i>
-      <p class="category-label">Education</p>
-    </a>
-  </div>
+<div class="category education">
+  <a href="{% url 'pdf_manager:pdf_list' %}">
+    <i class="fas fa-graduation-cap"></i>
+    <p class="category-label">Education<br>ABEKA</p>
+  </a>
+</div>
+
     <div class="category shop">
     <a href="{% url 'customer:order' %}">
       <i class="fas fa-shopping-cart"></i>
@@ -101,7 +102,7 @@
   <div class="category autospare">
     <a href="{% url 'town:autospare' %}">
       <i class="fas fa-store"></i>
-      <p class="category-label">Autospares</p>
+      <p class="category-label">Hardware</p>
     </a>
   </div>
   <div class="category electronics">
@@ -110,24 +111,7 @@
       <p class="category-label">Electronics</p>
     </a>
   </div>
-<div class="category payment">
-  <a href="{% url 'customer:order-search' %}?q=mobile%20money">
-    <i class="fas fa-credit-card"></i>
-    <p class="category-label">Mobile Money</p>
-  </a>
-</div>
-<div class="category health">
-  <a href="{% url 'customer:order-search' %}?q=health">
-    <i class="fas fa-tools"></i>
-    <p class="category-label">Hardware</p>
-  </a>
-</div>
-<div class="category baby">
-  <a href="{% url 'customer:order-search' %}?q=baby">
-    <i class="fas fa-baby"></i>
-    <p class="category-label">Baby</p>
-  </a>
-</div>
+
 
 </div> <!-- Closing tag for categories-container -->
 <hr>
