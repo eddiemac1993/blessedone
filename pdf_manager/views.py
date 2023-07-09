@@ -27,6 +27,9 @@ def pdf_list_view(request):
     else:
         pdf_files = PDFFile.objects.all()
 
+    # Change the order of the PDF files
+    pdf_files = pdf_files.order_by('-id')  # Order by ID in descending order
+
     context = {
         'pdf_files': pdf_files,
         'query': query,
@@ -34,3 +37,4 @@ def pdf_list_view(request):
     }
 
     return render(request, 'pdf_manager/pdf_list.html', context)
+

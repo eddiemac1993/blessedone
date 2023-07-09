@@ -23,11 +23,58 @@
                     </div>
                 </form>
             </div>
+            <div class="badge-container">
+              <a href="{% url 'customer:order-search' %}?q=mobile%20money" class="badge">Mobile money</a>
+              <a href="{% url 'customer:order-search' %}?q=health" class="badge">Health</a>
+              <a href="{% url 'customer:order-search' %}?q=baby" class="badge">Baby</a>
+              <a href="{% url 'customer:order-search' %}?q=agriculture" class="badge">Agriculture</a>
+              <a href="{% url 'customer:order-search' %}?q=electronic" class="badge">Electronics</a>
+              <a href="{% url 'customer:order-search' %}?q=food" class="badge">Food</a>
+                <button id="refresh-button-small" class="refresh-button-small" onclick="window.location.href = '{% url 'customer:order' %}'">
+                  <i class="fas fa-sync"></i>
+                </button>
+
+            </div>
+
 
             <form id="order-form" method="POST">
                 {% csrf_token %}
                 <div class="pt-5">
                     <style>
+                    .refresh-button-small {
+                      background-color: #fff;
+                      border: none;
+                      padding: 5px;
+                      border-radius: 50%;
+                      cursor: pointer;
+                      font-size: 16px;
+                      color: #333;
+                      margin-left: 5px;
+                      transition: background-color 0.3s;
+                    }
+
+                    .refresh-button-small:hover {
+                      background-color: #f5f5f5;
+                    }
+
+                        .badge {
+                          display: inline-block;
+                          padding: 6px 10px;
+                          background-color: #f1f1f1;
+                          border-radius: 10px;
+                          font-size: 12px;
+                          color: #333;
+                          text-decoration: none; /* Add this line to remove underline */
+                        }
+
+                        /* Media query for responsiveness */
+                        @media (max-width: 480px) {
+                          .badge {
+                            font-size: 10px;
+                            padding: 4px 8px;
+                          }
+                        }
+
                         .menu-item-image {
                             width: 200px;
                             height: 150px;
@@ -142,9 +189,11 @@
 </div>
 
 <div class="form-group pt-3">
-    <label for="specifics">Specifics</label>
-    <input class="form-control" type="text" placeholder="Specifics (optional)" name="specifics" id="specifics">
+  <label for="specifics">Specifics</label>
+  <input class="form-control" type="text" placeholder="Specifics (optional)" name="specifics" id="specifics">
+  <small class="form-text text-muted">Please specify the desired quantities.</small>
 </div>
+
 
 <div class="form-group pt-3">
     <label for="phone">Phone:</label>
