@@ -13,76 +13,95 @@
 
 <a href="" style="color: black; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: transparent; border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 4px; transition: background-color 0.3s; display: inline-flex; align-items: center;">
      Categories
-</a>
-<style>
-.categories-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
+</a><style>
+  .categories-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
 
-.category {
-  flex-basis: 30%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 20px;
-}
+  .category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    flex-basis: calc(33.33% - 20px);
+    max-width: calc(33.33% - 20px);
+  }
 
-.category i {
-  font-size: 36px;
-  margin-bottom: 10px;
-  color: black; /* Set default color to black */
-}
+  .category a {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
 
-.category-label {
-  font-size: 14px;
-  text-align: center;
-}
+  .category i {
+    margin-bottom: 10px;
+  }
 
-.category a {
-  text-decoration: none;
-}
+  .category-label {
+    font-weight: bold;
+    border: 2px solid #000;
+    padding: 10px;
+    border-radius: 5px;
+    width: 150px;
+    text-align: center;
+    position: relative;
+  }
 
-.category.education i {
-  color: red; /* Set color to red for the education icon */
-}
+  .category-label i {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 50%;
+    border: 2px solid #000;
+  }
 
-.category.tourism i {
-  color: red; /* Set color to red for the tourism icon */
-}
-
-.category.shop i {
-  color: red; /* Set color to red for the shop icon */
-}
-
-
+  @media (max-width: 600px) {
+    .category {
+      flex-basis: calc(100% - 20px);
+      max-width: calc(100% - 20px);
+    }
+  }
 </style>
 
-<div class="categories-container">
+<div class="container">
+  <div class="categories-container">
     <div class="category tourism">
-      <a href="{% url 'town:place_list' %}">
-        <i class="fas fa-plane"></i>
-        <p class="category-label">Tourism</p>
+      <a href="{% url 'customer:ad-list' %}">
+        <span class="category-label">
+          <i class="fas fa-ad"></i>
+          View Ads
+        </span>
       </a>
     </div>
-<div class="category education">
-  <a href="{% url 'pdf_manager:pdf_list' %}">
-    <i class="fas fa-graduation-cap"></i>
-    <p class="category-label">Education<br>ABEKA</p>
-  </a>
-</div>
+
+    <div class="category education">
+      <a href="{% url 'pdf_manager:pdf_list' %}">
+        <span class="category-label">
+          <i class="fas fa-graduation-cap"></i>
+          Education - ABEKA
+        </span>
+      </a>
+    </div>
 
     <div class="category shop">
-    <a href="{% url 'customer:order' %}">
-      <i class="fas fa-shopping-cart"></i>
-      <p class="category-label">Shop</p>
-    </a>
-  </div>
+      <a href="{% url 'customer:order' %}">
+        <span class="category-label">
+          <i class="fas fa-shopping-cart"></i>
+          Shop
+        </span>
+      </a>
+    </div>
+  </div> <!-- Closing tag for categories-container -->
+</div> <!-- Closing tag for container -->
 
-
-
-</div> <!-- Closing tag for categories-container -->
 <hr>
 
         <a class="text-center mb-4" href="" style="color: black; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: transparent; border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 4px; transition: background-color 0.3s; display: inline-flex; align-items: center;">
@@ -175,10 +194,35 @@
         </div>
 
 </main>
+<style>
+  .sticky-whatsapp-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    background-color: #25D366;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .whatsapp-icon {
+    margin-right: 5px;
+  }
+
+  .whatsapp-text {
+    font-weight: bold;
+  }
+</style>
+
 <a href="https://wa.me/260970349470?text=Hello%2C%20I%20have%20a%20question." target="_blank" class="sticky-whatsapp-button">
   <i class="fab fa-whatsapp whatsapp-icon"></i>
   <span class="whatsapp-text">Chat on WhatsApp</span>
 </a>
+
 
 
 
