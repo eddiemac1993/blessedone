@@ -9,11 +9,17 @@
     <p style="color: white; font-size: 20px; margin-top: 20px;">You Order. We Deliver. Enjoy.</p><br/>
     <a href="{% url 'customer:order' %}" style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: #FF9900; border-radius: 4px; transition: background-color 0.3s;">Place an Order</a>
   </div>
+
 </section>
+<div class="service-availability">
+        <p>Service available in Livingstone, Zambia only.</p>
+    </div>
 
 <a href="" style="color: black; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: transparent; border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 4px; transition: background-color 0.3s; display: inline-flex; align-items: center;">
      Categories
-</a><style>
+</a>
+
+<style>
   .categories-container {
     display: flex;
     justify-content: center;
@@ -62,6 +68,14 @@
     border-radius: 50%;
     border: 2px solid #000;
   }
+  .service-availability {
+    background-color: #FF9900;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+}
 
   @media (max-width: 600px) {
     .category {
