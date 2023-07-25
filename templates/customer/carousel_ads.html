@@ -1,0 +1,33 @@
+<!-- carousel_ads.html -->
+<div id="adCarousel" class="carousel slide" data-bs-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    {% for ad in ads %}
+      <li data-bs-target="#adCarousel" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %}></li>
+    {% endfor %}
+  </ol>
+
+  <!-- Slides -->
+  <div class="carousel-inner">
+    {% for ad in ads %}
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <!-- Add your ad content here, for example: -->
+        <div class="carousel-content">
+          <h3>{{ ad.title }}</h3>
+          <p>{{ ad.description }}</p>
+          <!-- Add other ad details as needed -->
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- Controls -->
+  <a class="carousel-control-prev" href="#adCarousel" role="button" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#adCarousel" role="button" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </a>
+</div>
