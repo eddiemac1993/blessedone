@@ -12,6 +12,7 @@ from .models import Ad, AdImage, Comment, Event
 from django.db.models import Count
 from django.db.models.functions import Coalesce
 from decimal import Decimal
+import random
 
 
 
@@ -109,10 +110,16 @@ def add_comment(request, ad_id):
     return render(request, 'customer/add_comment.html', {'form': form})
 
 
-class Index(PostListView):
-    template_name = 'customer/index.html'
-    context_object_name = 'posts'
-    ordering = ['-date_posted']
+class Index(View):
+    def get(self, request, *args, **kwargs):
+        menu_items = list(MenuItem.objects.all())
+        random.shuffle(menu_items)
+
+        context = {
+            'menu_items': menu_items
+        }
+
+        return render(request, 'customer/index.html', context)
 
 
 class About(View):
@@ -232,6 +239,16 @@ class Menu(View):
 
         return render(request, 'customer/menu.html', context)
 
+
+class Menu(View):
+    def get(self, request, *args, **kwargs):
+        menu_items = MenuItem.objects.all().order_by('-id')
+
+        context = {
+            'menu_items': menu_items
+        }
+
+        return render(request, 'customer/menu.html', context)
 
 class MenuSearch(View):
     def get(self, request, *args, **kwargs):

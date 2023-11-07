@@ -52,29 +52,6 @@
   text-decoration: none;
 }
 
-.category.education i {
-  color: red; /* Set color to red for the education icon */
-}
-
-.category.tourism i {
-  color: red; /* Set color to red for the tourism icon */
-}
-
-.category.shop i {
-  color: red; /* Set color to red for the shop icon */
-}
-
-.category.agriculture i {
-  color: orange; /* Set color to red for the agriculture icon */
-}
-
-.category.autospare i {
-  color: orange; /* Set color to red for the autospare icon */
-}
-
-.category.electronics i {
-  color: orange; /* Set color to red for the electronics icon */
-}
 .logo-wrapper {
   display: flex;
   flex-direction: column;
@@ -117,6 +94,30 @@
 .whatsapp-text {
   font-weight: bold;
 }
+.image-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.image-item {
+  flex-basis: 250px;
+  text-align: center;
+}
+
+.gallery-image {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.image-item h3 {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
 
 /* Adjust the button position for smaller screens */
   @media (max-width: 768px) {
@@ -129,84 +130,113 @@
   <p>This website is currently under testing. Please bear with us as we work on improving your experience.</p>
 </div>
 
-<section class="hero" style="background-image: url('{% static 'White Yellow Minimalist Delivery Services Instagram Story (1).png' %}');">
-  <div class="container">
+<section class="hero" style="background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px); padding: 40px 0; border-radius: 10px; box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);">
+  <div class="container" style="text-align: center;">
     <h1 style="color: #232f3e; font-size: 30px; font-weight: bold; text-transform: uppercase;">
-      Quick<span style="color: #FF9900;">Drop</span>
+      CEA<span style="color: #FF9900;">JAM</span>
     </h1>
-    <p style="color: white; font-size: 20px; margin-top: 20px;">You Order. We Deliver. Enjoy.</p><br/>
-    <a href="{% url 'customer:order' %}" style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: #FF9900; border-radius: 4px; transition: background-color 0.3s;">Place an Order</a>
+    <p style="color: white; font-size: 20px; margin-top: 20px;">reliable. convenient. efficient.</p><br/>
+    <a href="{% url 'customer:order' %}" style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: #FF9900; border-radius: 4px; transition: background-color 0.3s;">Get A Quotation</a>
   </div>
 </section>
+
 
 <div class="service-availability">
   <p>Service available in Livingstone, Zambia only.</p>
 </div>
 
-<a href="" style="color: black; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: transparent; border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 4px; transition: background-color 0.3s; display: inline-flex; align-items: center;">
-  Categories
+<a href="{% url 'customer:menu' %}" style="color: black; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: transparent; border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 4px; transition: background-color 0.3s; display: inline-flex; align-items: center;">
+  HARDWARE STORE MARKET
 </a>
 
-<div class="categories-container">
-  <div class="category tourism">
-    <a href="{% url 'town:place_list' %}">
-      <i class="fas fa-plane"></i>
-      <p class="category-label">Tourism</p>
-    </a>
-  </div>
-  <div class="category education">
-    <a href="{% url 'pdf_manager:pdf_list' %}">
-      <i class="fas fa-graduation-cap"></i>
-      <p class="category-label">Education</p>
-    </a>
-  </div>
-  <div class="category shop">
-    <a href="{% url 'customer:order' %}">
-      <i class="fas fa-shopping-cart"></i>
-      <p class="category-label">Shop</p>
-    </a>
-  </div>
-  <div class="category agriculture">
-    <a href="{% url 'town:agriculture' %}">
-      <i class="fas fa-tractor"></i>
-      <p class="category-label">Agriculture</p>
-    </a>
-  </div>
-  <div class="category autospare">
-    <a href="{% url 'town:autospare' %}">
-      <i class="fas fa-store"></i>
-      <p class="category-label">Hardware</p>
-    </a>
-  </div>
-  <div class="category electronics">
-    <a href="{% url 'town:electronics' %}">
-      <i class="fas fa-tv"></i>
-      <p class="category-label">Electronics</p>
-    </a>
-  </div>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+
+<!-- Place your existing styles here -->
+
+<!-- Your existing HTML content -->
+
+<!-- Add the Slick JavaScript file -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<style>
+  /* Adjust the container's background and padding */
+  .image-gallery {
+    background-color: #f8f8f8; /* Set the desired background color */
+    padding: 20px; /* Adjust the padding as needed */
+  }
+
+  /* Adjust the styling for the images */
+  .gallery-image {
+    width: 100%;
+    height: 200px; /* Adjust the height as needed */
+    object-fit: cover;
+    border-radius: 10px; /* Apply rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow effect */
+    margin-bottom: 10px; /* Add space between images */
+  }
+
+  /* Customize the carousel navigation and pagination */
+  .slick-prev,
+  .slick-next {
+    color: #fff; /* Set the desired color for the navigation arrows */
+    background-color: #FF9900; /* Set the background color for the arrows */
+  }
+
+  .slick-dots li button:before {
+    color: #FF9900; /* Set the color for the pagination dots */
+  }
+  .whatsapp-share {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #25D366;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+  }
+  .whatsapp-share:hover {
+    background-color: #128C7E;
+  }
+</style>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.image-gallery').slick({
+      dots: true,
+      infinite: true,
+      speed: 300,
+      slidesToShow: 1,
+      adaptiveHeight: true,
+      // Add any other options as needed
+    });
+  });
+</script>
+
+<div class="image-gallery" style="display: flex;">
+  {% for item in menu_items %}
+    <div class="image-item" style="flex: 1;">
+      <img src="{{ item.image.url }}" alt="{{ item.name }}" class="gallery-image" style="width: 300px; height: 200px; object-fit: cover;">
+      <h3>{{ item.name }}</h3>
+      <p>{{ item.description }}</p>
+
+<a href="https://api.whatsapp.com/send?text=%0AItem: {{ item.name }}%0APrice: ZMK {{ item.price }}%0A{{ item.description }}%0A{{ request.build_absolute_uri }}&image={{ item.image.url }}" class="whatsapp-share" target="_blank" rel="noopener noreferrer">
+  Share on WhatsApp
+</a>
+
+    </div>
+  {% endfor %}
 </div>
+
 
 <hr>
 
 <a class="text-center mb-4" href="" style="color: black; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: transparent; border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 4px; transition: background-color 0.3s; display: inline-flex; align-items: center;">
-  Our Partners
+  OUR PARTNERS
 </a>
 
 <main>
   <div class="container">
-    <div class="row justify-content-center">
-      {% for post in posts %}
-        <div class="col-4 col-md-4 col-lg-2 text-center mb-4">
-          <a href="{% url 'post-detail' post.id %}" class="text-decoration-none">
-            <div class="logo-wrapper">
-              <img src="{{ post.image.url }}" alt="Partner Logo" class="partner-logo rounded-circle">
-              <span class="text-dark font-weight-bold small"><strong>{{ post.title }}</strong></span>
-            </div>
-          </a>
-        </div>
-      {% endfor %}
-    </div>
-
     <div class="partner-section text-center">
       <h3>Become Our Partner</h3>
       <p>Join our network and reach more customers with QuickDrop.</p>
