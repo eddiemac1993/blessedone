@@ -131,7 +131,7 @@ class About(View):
 class Order(View):
     def get(self, request, *args, **kwargs):
         # Get items that are available and verified
-        items = MenuItem.objects.filter(Q(availability=True) | Q(is_verified=True)).order_by('-id')
+        items = MenuItem.objects.filter(Q(availability=True) | Q(is_verified=True)).order_by('?')
 
         # Get all locations and users
         locations = Location.objects.all()
@@ -240,15 +240,6 @@ class Menu(View):
         return render(request, 'customer/menu.html', context)
 
 
-class Menu(View):
-    def get(self, request, *args, **kwargs):
-        menu_items = MenuItem.objects.all().order_by('-id')
-
-        context = {
-            'menu_items': menu_items
-        }
-
-        return render(request, 'customer/menu.html', context)
 
 class MenuSearch(View):
     def get(self, request, *args, **kwargs):

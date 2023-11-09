@@ -125,9 +125,106 @@
       bottom: 80px; /* Adjust the distance from the bottom as needed */
     }
   }
+  .image-gallery {
+    display: flex;
+    justify-content: center; /* Center the images horizontally */
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 20px 0;
+
+.gallery-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 8px;
+  margin-right: 20px;
+}
+
+ /* Adjust the container's background and padding */
+  .image-gallery {
+    background-color: #f8f8f8; /* Set the desired background color */
+    padding: 20px; /* Adjust the padding as needed */
+    position: relative;
+  }
+
+  /* Adjust the styling for the images */
+  .gallery-image {
+    width: 100%;
+    height: 200px; /* Adjust the height as needed */
+    object-fit: cover;
+    border-radius: 10px; /* Apply rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow effect */
+    margin-bottom: 10px; /* Add space between images */
+    position: relative;
+  }
+
+  /* Customize the text overlay */
+  .image-item {
+    position: relative;
+  }
+
+  .image-item .image-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+  }
+
+  /* Customize the carousel navigation and pagination */
+  .slick-prev,
+  .slick-next {
+    color: #fff; /* Set the desired color for the navigation arrows */
+    background-color: #FF9900; /* Set the background color for the arrows */
+  }
+
+  .slick-dots li button:before {
+    color: #FF9900; /* Set the color for the pagination dots */
+  }
+
+  .whatsapp-share {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #25D366;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+  }
+
+  .whatsapp-share:hover {
+    background-color: #128C7E;
+  }
 </style>
+
+
+<!-- Carousel structure -->
+<div class="image-gallery">
+  <div class="image-item">
+    <img src="{% static 'tv unit design1.jpg' %}" alt="Description of the image" class="gallery-image">
+    <div class="image-text">tv unit design</div>
+  </div>
+  <div class="image-item">
+    <img src="{% static 'tv unit design.jpg' %}" alt="Description of the image" class="gallery-image">
+    <div class="image-text">tv unit design</div>
+  </div>
+  <div class="image-item">
+    <img src="{% static 'wardrobe-design-for-kitchen.jpg' %}" alt="Description of the image" class="gallery-image">
+    <div class="image-text">design for kitchen</div>
+  </div>
+  <div class="image-item">
+    <img src="{% static 'new.jpg' %}" alt="Description of the image" class="gallery-image">
+    <div class="image-text">Bedroom Design</div>
+  </div>
+</div>
+
+
+
 <div class="testing-message">
-  <p>This website is currently under testing. Please bear with us as we work on improving your experience.</p>
+  <p>Build your Dream Home.</p>
 </div>
 
 <section class="hero" style="background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px); padding: 40px 0; border-radius: 10px; box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);">
@@ -145,25 +242,15 @@
   <p>Service available in Livingstone, Zambia only.</p>
 </div>
 
-<a href="{% url 'customer:menu' %}" style="color: black; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: transparent; border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 4px; transition: background-color 0.3s; display: inline-flex; align-items: center;">
+<a href="{% url 'customer:menu' %}" style="color: black; text-shadow: 2px 2px 4px rgba(0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: transparent; border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 4px; transition: background-color 0.3s; display: inline-flex; align-items: center;">
   HARDWARE STORE MARKET
 </a>
-
-
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-
-<!-- Place your existing styles here -->
-
-<!-- Your existing HTML content -->
-
-<!-- Add the Slick JavaScript file -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <style>
   /* Adjust the container's background and padding */
   .image-gallery {
     background-color: #f8f8f8; /* Set the desired background color */
     padding: 20px; /* Adjust the padding as needed */
+    position: relative;
   }
 
   /* Adjust the styling for the images */
@@ -174,6 +261,20 @@
     border-radius: 10px; /* Apply rounded corners */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow effect */
     margin-bottom: 10px; /* Add space between images */
+    position: relative;
+  }
+
+  /* Customize the price tag */
+  .price-tag {
+    position: absolute;
+    top: 10px; /* Adjust the distance from the top */
+    right: 10px; /* Adjust the distance from the right */
+    background-color: #FF9900; /* Set the background color */
+    color: #fff; /* Set the text color */
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold; /* Make the text bold */
+    z-index: 1;
   }
 
   /* Customize the carousel navigation and pagination */
@@ -186,6 +287,7 @@
   .slick-dots li button:before {
     color: #FF9900; /* Set the color for the pagination dots */
   }
+
   .whatsapp-share {
     display: inline-block;
     padding: 10px 20px;
@@ -195,41 +297,45 @@
     border-radius: 20px;
     transition: background-color 0.3s;
   }
+
   .whatsapp-share:hover {
     background-color: #128C7E;
   }
 </style>
 
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('.image-gallery').slick({
-      dots: true,
-      infinite: true,
-      speed: 300,
-      slidesToShow: 1,
-      adaptiveHeight: true,
-      // Add any other options as needed
-    });
-  });
-</script>
-
 <div class="image-gallery" style="display: flex;">
   {% for item in menu_items %}
-    <div class="image-item" style="flex: 1;">
+    <div class="image-item" style="flex: 1; position: relative;">
       <img src="{{ item.image.url }}" alt="{{ item.name }}" class="gallery-image" style="width: 300px; height: 200px; object-fit: cover;">
+      <div class="price-tag">
+        ZMK {{ item.price }}
+      </div>
       <h3>{{ item.name }}</h3>
       <p>{{ item.description }}</p>
 
-<a href="https://api.whatsapp.com/send?text=%0AItem: {{ item.name }}%0APrice: ZMK {{ item.price }}%0A{{ item.description }}%0A{{ request.build_absolute_uri }}&image={{ item.image.url }}" class="whatsapp-share" target="_blank" rel="noopener noreferrer">
-  Share on WhatsApp
-</a>
-
+      <meta property="og:image" content="{{ item.image.url }}">
+      <a href="https://api.whatsapp.com/send?text=%0AItem: {{ item.name|urlencode }}%0APrice: ZMK {{ item.price }}%0A{{ item.description|urlencode|safe }}%0A{{ request.build_absolute_uri }}?q={{ item.name|urlencode }}" class="whatsapp-share" target="_blank" rel="noopener noreferrer">
+        Share on WhatsApp
+      </a>
     </div>
   {% endfor %}
 </div>
 
 
-<hr>
+<!-- Add the carousel structure -->
+<div class="carousel">
+  {% for item in carousel_items %}
+    <div>
+      <img src="{{ item.image.url }}" alt="{{ item.name }}">
+      <div>
+        <h3>{{ item.name }}</h3>
+        <p>{{ item.description }}</p>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+<!-- Your existing JavaScript and other HTML content -->
 
 <a class="text-center mb-4" href="" style="color: black; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: transparent; border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 4px; transition: background-color 0.3s; display: inline-flex; align-items: center;">
   OUR PARTNERS
@@ -240,14 +346,15 @@
     <div class="partner-section text-center">
       <h3>Become Our Partner</h3>
       <p>Join our network and reach more customers with QuickDrop.</p>
-      <a href="{% url 'blog-home' %}" style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: #FF9900; border-radius: 4px; transition: background-color 0.3s;">Our Partners List</a>
+      <a href="{% url 'blog-home' %}" style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: #FF9900; border-radius: 4px; transition: background-color 0.3s;">Our Partners List</a>
     </div>
   </div>
 </main>
 
 <a href="https://wa.me/260970349470?text=Hello." class="sticky-whatsapp-button" target="_blank">
   <i class="fab fa-whatsapp whatsapp-icon"></i>
-  <span class="whatsapp-text">Contact Us</span>
+  <span class="whatsapp-text">Contact</span>
 </a>
+
 
 {% endblock %}

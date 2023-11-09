@@ -138,6 +138,39 @@
                             right: 20px;
                             z-index: 1000;
                         }
+
+                        .form-section {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.form-label {
+    font-weight: bold;
+    color: #333;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.select-field {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.form-hr {
+    border-top: 1px solid #ddd;
+    margin-top: 20px;
+}
+
                     </style>
                     {% for item in items %}
                     <div class="menu-item">
@@ -189,52 +222,54 @@
                     {% endfor %}
 
                     <hr />
-
-<div class="form-group pt-3">
-    <label for="full-name">Full Name</label>
-    <input required class="form-control" type="text" placeholder="Your Name" name="name" id="full-name">
-</div>
-
-<div class="form-group pt-3">
-  <label for="specifics">Specifics</label>
-  <input class="form-control" type="text" placeholder="Specifics (optional)" name="specifics" id="specifics">
-  <small class="form-text text-muted">Please specify the desired quantities.</small>
-</div>
-
-
-<div class="form-group pt-3">
-    <label for="phone">Phone:</label>
-    <input class="form-control" type="text" placeholder="Phone number" name="phone" id="phone">
-</div>
-<div class="form-group pt-3">
-<label for="agent">Referral Agent:</label>
-<select name="agent" class="form-control">
-    {% for user in users %}
-    <option value="{{ user.id }}">{{ user.username }}</option>
-    {% endfor %}
-</select>
-</div>
-
-<div class="row">
-    <div class="col-md-4 col-sm-12">
-        <div class="form-group pt-3">
-            <label for="street">Street Address</label>
-            <input required class="form-control" type="text" placeholder="1234 Main St" name="street" id="street">
-        </div>
+<div class="form-section">
+    <div class="form-group pt-3">
+        <label for="full-name" class="form-label">Full Name</label>
+        <input required class="form-control input-field" type="text" placeholder="Your Name" name="name" id="full-name">
     </div>
-</div>
 
-<div class="row">
-    <div class="col-md-4 col-sm-12 pt-3">
-        <label for="location">Location: </label>
-        <select id="location" name="location" class="form-control">
-            {% for location in locations %}
-            <option value="{{ location.pk }}"> {{ location.name }} (ZMK {{ location.delivery_fee }})</option>
+    <div class="form-group pt-3">
+        <label for="specifics" class="form-label">Specifics</label>
+        <input class="form-control input-field" type="text" placeholder="Specifics (optional)" name="specifics" id="specifics">
+        <small class="form-text text-muted">Please specify the desired quantities.</small>
+    </div>
+
+    <div class="form-group pt-3">
+        <label for="phone" class="form-label">Phone:</label>
+        <input class="form-control input-field" type="text" placeholder="Phone number" name="phone" id="phone">
+    </div>
+
+    <div class="form-group pt-3">
+        <label for="agent" class="form-label">Referral Agent:</label>
+        <select name="agent" class="form-control select-field">
+            {% for user in users %}
+            <option value="{{ user.id }}">{{ user.username }}</option>
             {% endfor %}
         </select>
     </div>
+
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
+            <div class="form-group pt-3">
+                <label for="street" class="form-label">Street Address</label>
+                <input required class="form-control input-field" type="text" placeholder="1234 Main St" name="street" id="street">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 col-sm-12 pt-3">
+            <label for="location" class="form-label">Location: </label>
+            <select id="location" name="location" class="form-control select-field">
+                {% for location in locations %}
+                <option value="{{ location.pk }}"> {{ location.name }} (ZMK {{ location.delivery_fee }})</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <hr class="form-hr" />
 </div>
-<hr />
+
 
 
                 <!-- Button trigger modal -->
