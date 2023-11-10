@@ -220,8 +220,9 @@
                         </div>
                     </div>
                     {% endfor %}
+<label for="full-name" class="form-label">FILL THE FORM TO MAKE THE ORDER</label>
+<hr />
 
-                    <hr />
 <div class="form-section">
     <div class="form-group pt-3">
         <label for="full-name" class="form-label">Full Name</label>
@@ -240,13 +241,13 @@
     </div>
 
     <div class="form-group pt-3">
-        <label for="agent" class="form-label">Referral Agent:</label>
-        <select name="agent" class="form-control select-field">
-            {% for user in users %}
-            <option value="{{ user.id }}">{{ user.username }}</option>
-            {% endfor %}
-        </select>
-    </div>
+<label for="agent">Referral Agent:</label>
+<select name="agent" class="form-control">
+    {% for user in users %}
+    <option value="{{ user.id }}">{{ user.username }}</option>
+    {% endfor %}
+</select>
+</div>
 
     <div class="row">
         <div class="col-md-4 col-sm-12">

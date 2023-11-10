@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.views import View
+from django.views.generic import ListView
 from django.db.models import Q
 from .models import MenuItem, OrderModel, Location, OrderItem
 import pdfkit
@@ -110,23 +111,27 @@ def add_comment(request, ad_id):
     return render(request, 'customer/add_comment.html', {'form': form})
 
 
-class Index(View):
+class Index(ListView):
+    model = MenuItem
+    template_name = 'customer/index.html'
+    context_object_name = 'menu_items'
+    paginate_by = 20
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        # Shuffle the queryset randomly
+        queryset = list(queryset)
+        random.shuffle(queryset)
+        return queryset
+
+
+class Ai(View):
     def get(self, request, *args, **kwargs):
-        menu_items = list(MenuItem.objects.all())
-        random.shuffle(menu_items)
-
-        context = {
-            'menu_items': menu_items
-        }
-
-        return render(request, 'customer/index.html', context)
-
+        return render(request, 'customer/ai.html')
 
 class About(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'customer/about.html')
-
-
 
 class Order(View):
     def get(self, request, *args, **kwargs):
@@ -231,7 +236,7 @@ def get_invoice(request, pk):
 
 class Menu(View):
     def get(self, request, *args, **kwargs):
-        menu_items = MenuItem.objects.all().order_by('-id')
+        menu_items = MenuItem.objects.all().order_by('?')
 
         context = {
             'menu_items': menu_items
@@ -266,11 +271,52 @@ class OrderSearch(MenuSearch):
             Q(price__icontains=query) |
             Q(category__name__icontains=query) # use name__icontains on the related Category model
         )
+
+        # Get all locations and users
         locations = Location.objects.all()
+        users = User.objects.all()
 
         context = {
             'items': items,
             'locations': locations,
+            'users': users,
         }
 
         return render(request, 'customer/order.html', context)
+
+    def post(self, request, *args, **kwargs):
+        name = request.POST.get('name')
+        specifics = request.POST.get('specifics')
+        street = request.POST.get('street')
+        phone_number = request.POST.get('phone_number')
+        location_id = request.POST.get('location')
+        agent_id = request.POST.get('agent')
+        agent = User.objects.get(pk=agent_id)
+        location = Location.objects.get(pk=location_id)
+        order_items = []
+
+        items = request.POST.getlist('items[]')
+        quantities = request.POST.getlist('quantities[]')
+
+        for item, quantity in zip(items, quantities):
+            menu_item = MenuItem.objects.get(pk=int(item))
+            order_item = OrderItem.objects.create(
+                item=menu_item,
+                quantity=int(quantity)
+            )
+            order_items.append(order_item)
+
+        price = sum([item.item.price * item.quantity for item in order_items])
+
+        order = OrderModel.objects.create(
+            price=price,
+            name=name,
+            specifics=specifics,
+            street=street,
+            phone_number=phone_number,
+            location=location,
+            agent=agent
+        )
+        order.order_items.add(*order_items)
+
+        return redirect('customer:order-confirmation', pk=order.pk)
