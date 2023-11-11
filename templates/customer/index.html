@@ -230,7 +230,7 @@
 <section class="hero" style="background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px); padding: 40px 0; border-radius: 10px; box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);">
   <div class="container" style="text-align: center;">
     <h1 style="color: #232f3e; font-size: 30px; font-weight: bold; text-transform: uppercase;">
-      CEA<span style="color: #FF9900;">JAM</span>
+      STAY<span style="color: #FF9900;">CONNECTED</span>
     </h1>
     <p style="color: white; font-size: 20px; margin-top: 20px;">reliable. convenient. efficient.</p><br/>
     <a href="{% url 'customer:order' %}" style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: #FF9900; border-radius: 4px; transition: background-color 0.3s;">Get A Quotation</a>
@@ -288,34 +288,41 @@
     color: #FF9900; /* Set the color for the pagination dots */
   }
 
-  .whatsapp-share {
+
+
+   /* Customize the link */
+  .badge {
     display: inline-block;
-    padding: 10px 20px;
-    background-color: #25D366;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 20px;
+    padding: 10px;
+    background-color: #007BFF; /* Set the background color for the link */
+    color: #fff; /* Set the text color */
+    text-decoration: none; /* Remove the default underline on the link */
+    border-radius: 5px;
     transition: background-color 0.3s;
   }
 
-  .whatsapp-share:hover {
-    background-color: #128C7E;
+  .badge:hover {
+    background-color: #0056b3; /* Change the background color on hover */
   }
 </style>
 
 <div class="image-gallery" style="display: flex;">
   {% for item in menu_items %}
     <div class="image-item" style="flex: 1; position: relative;">
-      <img src="{{ item.image.url }}" alt="{{ item.name }}" class="gallery-image" style="width: 300px; height: 200px; object-fit: cover;">
+      <a href="{% url 'customer:order-search' %}?q={{ item.name }}">
+    <img src="{{ item.image.url }}" alt="{{ item.name }}" class="gallery-image" style="width: 300px; height: 200px; object-fit: cover;">
+</a>
       <div class="price-tag">
         ZMK {{ item.price }}
       </div>
-      <h3>{{ item.name }}</h3>
+      <a href="{% url 'customer:order-search' %}?q={{ item.name }}" class="badge">
+        {{ item.name }}
+      </a>
       <p>{{ item.description }}</p>
 
       <meta property="og:image" content="{{ item.image.url }}">
       <a href="https://api.whatsapp.com/send?text=%0AItem: {{ item.name|urlencode }}%0APrice: ZMK {{ item.price }}%0A{{ item.description|urlencode|safe }}%0A{{ request.build_absolute_uri }}?q={{ item.name|urlencode }}" class="whatsapp-share" target="_blank" rel="noopener noreferrer">
-        Share on WhatsApp
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
       </a>
     </div>
   {% endfor %}
@@ -340,8 +347,85 @@
 <a class="text-center mb-4" href="" style="color: black; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: transparent; border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 4px; transition: background-color 0.3s; display: inline-flex; align-items: center;">
   OUR PARTNERS
 </a>
+<style>
+  /* Existing styles ... */
+
+  .partners-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 20px; /* Adjust the margin as needed */
+  }
+
+  .partner-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 250px; /* Set the width of each partner card */
+    margin-bottom: 20px; /* Adjust the margin between partner cards */
+    transition: transform 0.3s; /* Add a smooth transition effect on hover */
+  }
+
+  .partner-card:hover {
+    transform: scale(1.05); /* Scale up the card on hover */
+  }
+
+  .partner-image {
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    object-fit: cover;
+    height: 150px; /* Set the height of the partner image */
+  }
+
+  .partner-content {
+    padding: 15px;
+  }
+
+  .partner-name {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+  }
+
+  .partner-description {
+    color: #666;
+  }
+</style>
 
 <main>
+    <div class="partners-container">
+  <!-- Partner 1 -->
+  <div class="partner-card">
+    <img src="{% static 'new.jpg' %}" alt="Partner 1" class="partner-image">
+    <div class="partner-content">
+      <div class="partner-name">CEAJAM</div>
+      <div class="partner-description">HARDWARE STORE</div>
+    </div>
+  </div>
+  <!--<div class="partner-card">
+    <img src="partner1.jpg" alt="Partner 1" class="partner-image">
+    <div class="partner-content">
+      <div class="partner-name">Partner 1</div>
+      <div class="partner-description">Description for Partner 1.</div>
+    </div>
+  </div>
+    <div class="partner-card">
+    <img src="partner1.jpg" alt="Partner 1" class="partner-image">
+    <div class="partner-content">
+      <div class="partner-name">Partner 1</div>
+      <div class="partner-description">Description for Partner 1.</div>
+    </div>
+  </div>
+  <!-- Partner 2
+  <div class="partner-card">
+    <img src="partner2.jpg" alt="Partner 2" class="partner-image">
+    <div class="partner-content">
+      <div class="partner-name">Partner 2</div>
+      <div class="partner-description">Description for Partner 2.</div>
+    </div>
+  </div>-->
+
   <div class="container">
     <div class="partner-section text-center">
       <h3>Become Our Partner</h3>

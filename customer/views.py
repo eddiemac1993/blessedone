@@ -8,7 +8,6 @@ from .models import MenuItem, OrderModel, Location, OrderItem
 import pdfkit
 from django.http import HttpResponse
 from django.template.loader import render_to_string
-from blog.views import PostListView
 from .forms import AdForm, AdImageFormSet, CommentForm
 from .models import Ad, AdImage, Comment, Event
 from django.db.models import Count
@@ -116,7 +115,7 @@ class Index(ListView):
     model = MenuItem
     template_name = 'customer/index.html'
     context_object_name = 'menu_items'
-    paginate_by = 20
+    paginate_by = 10
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -124,6 +123,7 @@ class Index(ListView):
         queryset = list(queryset)
         random.shuffle(queryset)
         return queryset
+
 
 class Ai(View):
     template_name = 'customer/ai.html'

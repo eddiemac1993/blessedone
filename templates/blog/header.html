@@ -1,9 +1,37 @@
 {% load static %}
+  <style>
+    .logo {
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+    }
 
+    .logo img {
+      border-radius: 50%;
+      margin-right: 8px; /* Adjust the margin as needed */
+      width: 50px; /* Adjust the width of the image */
+      height: 50px; /* Adjust the height of the image */
+    }
+
+    .logo-text {
+      color: #FF5733; /* Color for the first part of the text */
+    }
+
+    .logo-text2 {
+      color: #5DADE2; /* Color for the second part of the text */
+    }
+
+    .logo-text3 {
+      color: #58D68D; /* Color for the third part of the text */
+    }
+  </style>
 <header class="fixed-top">
   <div class="nav-container">
-<a href="{% url 'customer:index' %}" class="logo" style="text-decoration: none; font-weight: bold;">
-  <span style="color: #FF5733;">CEA</span><span style="color: #5DADE2;">JAM</span> <span style="color: #58D68D;">HARDWARE</span>
+<a href="{% url 'customer:index' %}" class="logo">
+  <img src="{% static 'solidconnection.jpg' %}" alt="Logo">
+  <span class="logo-text">SOLID</span>
+  <span class="logo-text3">CONNECTIONS</span>
 </a>
 
 
