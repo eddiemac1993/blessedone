@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.views import View
 from django.views.generic import ListView
@@ -124,26 +125,42 @@ class Index(ListView):
         random.shuffle(queryset)
         return queryset
 
-
 class Ai(View):
+    template_name = 'customer/ai.html'
+
     def get(self, request, *args, **kwargs):
-        return render(request, 'customer/ai.html')
+        return render(request, self.template_name)
+
+    def post(self, request, *args, **kwargs):
+        if request.method == 'POST':
+            message = request.POST.get('message')
+            response = 'Hi, this is my response'
+            return JsonResponse({'message': message, 'response': response})
+        return JsonResponse({'error': 'Invalid request method'})
 
 class About(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'customer/about.html')
 
+
 class Order(View):
     def get(self, request, *args, **kwargs):
         # Get items that are available and verified
-        items = MenuItem.objects.filter(Q(availability=True) | Q(is_verified=True)).order_by('?')
+        items_by_category = {}
+
+        # Group items by category
+        for item in MenuItem.objects.filter(Q(availability=True) | Q(is_verified=True)).order_by('?'):
+            for category in item.category.all():
+                if category not in items_by_category:
+                    items_by_category[category] = []
+                items_by_category[category].append(item)
 
         # Get all locations and users
         locations = Location.objects.all()
         users = User.objects.all()
 
         context = {
-            'items': items,
+            'items_by_category': items_by_category,
             'locations': locations,
             'users': users,
         }

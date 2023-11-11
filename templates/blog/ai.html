@@ -164,8 +164,9 @@
     </nav>
 
     <!-- Main Content Section -->
+
     <div class="container">
-        <div class="row">
+        <div class="row mb-3">
             <div class="col-md-4">
                 <h1>Your Digital Assistant</h1>
                 <p>"For All Things Dining and Lodging..."</p>
@@ -191,19 +192,49 @@
                 </ul>
             </div>
         </div>
+        <hr/>
 
-        <!-- Search Bar -->
-        <div class="input-group mt-4">
-            <input type="text" class="form-control" placeholder="How many we assist you our customer?...">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                        <path d="M10.85 9.15a5 5 0 1 0-1.7 1.7l3.54 3.54a1 1 0 0 0 1.41-1.41l-3.54-3.54zM11 5a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"/>
-                    </svg>
-                </button>
+<div class="chat-container">
+  <div class="card flex-grow-1">
+    <div class="card-header bg-primary text-white">AI Chat</div>
+    <div class="card-body messages-box">
+
+      <ul class="list-unstyled messages-list">
+
+        <li class="message received">
+          <div class="message-text">
+            <div class="message-sender">
+              <b>Digital Assitant</b>
             </div>
+            <div class="message-content">
+              Hi, I am your Digital Assitant, you can ask me anything.
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <br><br>
+    <br><br>
+    <br><br>
+  </div>
+            <!-- Search Bar -->
+            <form class="message-form">
+                {% csrf_token %}
+                <div class="input-group">
+                    <input type="text" class="form-control message-input" placeholder="Type your message..." required>
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary btn-send">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-search" viewBox="0 0 16 16">
+                                <path
+                                    d="M10.85 9.15a5 5 0 1 0-1.7 1.7l3.54 3.54a1 1 0 0 0 1.41-1.41l-3.54-3.54zM11 5a4 4 0 1 1-8 0 4 4 0 0 1 8 0z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <hr />
         </div>
-        <hr />
     </div>
 
     <!-- Bootstrap JS and dependencies -->
@@ -211,6 +242,52 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+    <script>
+        const messagesList = document.querySelector('.messages-list');
+        const messageForm = document.querySelector('.message-form');
+        const messageInput = document.querySelector('.message-input');
+
+        messageForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const message = messageInput.value.trim();
+            if (message.length === 0) {
+                return;
+            }
+
+            appendMessage('sent', 'You', message);
+
+            fetch('', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({
+                    'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                    'message': message
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const response = data.response;
+                    appendMessage('received', 'AI Chatbot', response);
+                });
+        });
+
+        function appendMessage(type, sender, content) {
+            const messageItem = document.createElement('li');
+            messageItem.classList.add('message', type);
+            messageItem.innerHTML = `
+                <div class="message-text">
+                    <div class="message-content">
+                        ${content}
+                    </div>
+                    <div class="message-sender">
+                        <b>${sender}</b>
+                    </div>
+                </div>`;
+            messagesList.appendChild(messageItem);
+            messageInput.value = '';
+        }
+    </script>
 </body>
 
 </html>
