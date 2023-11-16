@@ -1,79 +1,97 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <style>
-        body {
-            padding-top: 20px;
-            background-color: #f7f7f7;
-        }
+<style>
+    /* styles.css */
 
-        .card {
-            margin: 20px auto;
-            max-width: 600px;
-            padding: 20px;
-        }
+body {
+    padding-top: 20px;
+    background-color: #f7f7f7;
+}
 
-        .form-group label {
-            font-weight: bold;
-        }
+.card {
+    margin: 20px auto;
+    max-width: 600px;
+    padding: 20px;
+}
 
-        .form-group input[type="text"],
-        .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
+.form-group label {
+    font-weight: bold;
+}
 
-        .form-group select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
+.form-group input[type="text"],
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
 
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-        }
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
 
-        .btn-primary:hover {
-            background-color: #0069d9;
-            border-color: #0062cc;
-        }
+.btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
 
-        .btn-danger {
-            background-color: #dc3545;
-            border-color: #dc3545;
-        }
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
 
-        .btn-danger:hover {
-            background-color: #c82333;
-            border-color: #bd2130;
-        }
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
 
-        .card-title {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
+.card-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
 
-        .card-text {
-            margin-bottom: 10px;
-        }
+.card-text {
+    margin-bottom: 10px;
+}
 
-        .img-fluid {
-            max-width: 100%;
-            height: auto;
-        }
-        .category-form {
-            margin-top: 20px;
-            border-top: 1px solid #ccc;
-            padding-top: 20px;
-        }
-    </style>
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+.category-form {
+    margin-top: 20px;
+    border-top: 1px solid #ccc;
+    padding-top: 20px;
+}
+
+</style>
 
     <div class="card">
         <h1 class="mb-4">Menu Dashboard</h1>
+<style>
+  /* Style for the button */
+  .button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    background-color: #007BFF; /* Choose your preferred background color */
+    color: #fff; /* Choose your preferred text color */
+    border-radius: 5px;
+    border: 1px solid #007BFF; /* Choose a border color matching the background */
+    cursor: pointer;
+    margin-right: 10px; /* Add some space between buttons */
+  }
+</style>
+
+<a href="{% url 'deliver:menu_dashboardx' %}">Dashboard X</a>
+
+
 
         <!-- Display form for adding items -->
         <form method="POST" enctype="multipart/form-data">
@@ -122,27 +140,5 @@
                 <button type="submit" class="btn btn-primary">Add Category</button>
             </form>
         </div>
-
-        <hr>
-
-        {% for menu_item in menu_items %}
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h2 class="card-title">{{ menu_item.name }}</h2>
-                    <p class="card-text">{{ menu_item.description }}</p>
-                    <p class="card-text"><strong>Price:</strong> ${{ menu_item.price }}</p>
-                    <p class="card-text"><strong>Category:</strong> {{ menu_item.category }}</p>
-                    <p class="card-text"><strong>Delivered Time:</strong> {{ menu_item.DeliveredTime }}</p>
-                    <p class="card-text"><strong>Availability:</strong> {{ menu_item.availability }}</p>
-                    <p class="card-text"><strong>Verified:</strong> {{ menu_item.is_verified }}</p>
-                    <!-- Add other fields as needed -->
-                    <a href="{% url 'deliver:update_item' menu_item.id %}" class="btn btn-primary">Edit</a>
-                    <form method="POST" action="{% url 'deliver:delete_item' menu_item.id %}" class="d-inline">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-danger">Delete Item</button>
-                    </form>
-                </div>
-            </div>
-        {% endfor %}
     </div>
 {% endblock %}

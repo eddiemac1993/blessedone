@@ -1,0 +1,355 @@
+/* CSS for the header */
+.fixed-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #232f3e;
+  color: #fff;
+  padding: 10px;
+  z-index: 9999;
+  transition: background-color 0.3s, height 0.3s;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo-img {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s;
+}
+
+.logo-img:hover {
+  transform: scale(1.1);
+}
+
+.nav-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.nav-menu ul li {
+  margin-right: 10px;
+}
+
+.nav-menu ul li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 5px 10px;
+}
+
+.nav-menu ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Add borders to specific links */
+.nav-menu ul li:nth-child(1) a,
+.nav-menu ul li:nth-child(2) a {
+  border: 1px solid #fff;
+  transition: border-color 0.3s;
+}
+
+.nav-menu ul li:nth-child(1) a:hover,
+.nav-menu ul li:nth-child(2) a:hover {
+  border-color: #ffcc00;
+}
+
+
+
+/* Main */
+main {
+  padding: 40px;
+}
+
+
+/* Hero */
+.hero {
+  position: relative;
+  padding: 40px;
+  text-align: center;
+  background-image: url('{% static 'image1.jpg' %}');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero .container {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.hero h2,
+.hero p {
+  color: white;
+  font-size: 24px;
+  margin: 0;
+}
+
+.hero .btn {
+  background-color: #FF9900;
+  color: #FFFFFF;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.hero .btn:hover {
+  background-color: #FF8C00;
+}
+
+
+
+
+
+
+
+
+
+/* Featured Products */
+.featured-products {
+  padding: 40px 0;
+  text-align: center;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.product-item {
+  background-color: #f8f8f8;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.product-item img {
+  max-width: 100%;
+  height: 200px;
+  object-fit: contain;
+  margin-bottom: 20px;
+}
+
+.product-item h3 {
+  color: #232f3e;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.product-item p {
+  color: #666666;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.product-item .btn {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  color: #ffffff;
+  background-color: #ff9900;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.product-item .btn:hover {
+  background-color: #e68a00;
+}
+
+/* Become Our Partner Section */
+.partner-section {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.partner-section h3 {
+  color: #000000;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.partner-section p {
+  color: #666666;
+  margin-bottom: 20px;
+}
+
+.partner-section .btn {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  color: #ffffff;
+  background-color: #ff9900;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.partner-section .btn:hover {
+  background-color: #e68a00;
+}
+
+
+
+
+/* Popular Categories */
+.popular-categories {
+  background-color: #f8f8f8;
+  padding: 40px;
+  text-align: center;
+}
+
+.popular-categories h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.category-item {
+  /* Add styling for the individual category items */
+}
+
+.category-item img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.category-item h3 {
+  font-size: 18px;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+
+/* Footer */
+/* Footer container */
+.navFooterVerticalColumn {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+/* Footer column */
+.navFooterVerticalColumn .navFooterLinkCol {
+  flex: 1;
+  padding-right: 20px;
+}
+
+/* Footer column header */
+.navFooterVerticalColumn .navFooterColHead {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Footer links */
+.navFooterVerticalColumn .navFooterLinkCol ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navFooterVerticalColumn .navFooterLinkCol ul li {
+  margin-bottom: 5px;
+}
+
+.navFooterVerticalColumn .navFooterLinkCol ul li.nav_first {
+  margin-top: 5px;
+}
+
+.navFooterVerticalColumn .navFooterLinkCol ul li.nav_last {
+  margin-bottom: 0;
+}
+
+/* Footer link styling */
+.navFooterVerticalColumn .navFooterLinkCol a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.navFooterVerticalColumn .navFooterLinkCol a:hover {
+  text-decoration: underline;
+}
+
+/* Footer line */
+.nav-footer-line {
+  height: 1px;
+  background-color: #ddd;
+  margin: 10px 0;
+}
+
+/* Footer logo */
+.navFooterLogoLine {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.navFooterLogoLine a {
+  display: inline-block;
+}
+
+/* Language, currency, country */
+.icp-container-desktop {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.icp-button {
+  display: flex;
+  align-items: center;
+  color: #555;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.icp-button-globe-2 {
+  width: 20px;
+  height: 20px;
+  background-image: url(https://images-na.ssl-images-amazon.com/images/G/01/AUIClients/InternationalCustomerPreferencesNavAssets-icp_sprite-2x-6176a2a68b4c61e7063a7544a9b11a4f44f01a96._V2_.png);
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  margin-right: 5px;
+}
+
+.icp-nav-globe-img-2 {
+  width: 20px;
+  height: 20px;
+  background-image: url(https://images-na.ssl-images-amazon.com/images/G/01/AUIClients/InternationalCustomerPreferencesNavAssets-icp_sprite-2x-6176a2a68b4c61e7063a7544a9b11a4f44f01a96._V2_.png);
+  background-repeat: no-repeat;
+  background-position: -32px 0;
+  margin-right: 5px;
+}
+
+.icp-flag-3 {
+  width: 25px;
+  height: 16px;
+  background-image: url(https://images-na.ssl-images-amazon.com/images/G/01/AUIClients/InternationalCustomerPreferencesNavAssets-icp_sprite-2x-6176a2a68b4c61e7063a7544a9b11a4f44f01a96.V2.png);
+  background-repeat: no-repeat;
+  background-position: -55px 0;
+  margin-right: 5px;
+}

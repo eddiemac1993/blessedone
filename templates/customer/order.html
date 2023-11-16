@@ -53,13 +53,21 @@
 </style>
 <hr/>
 <div class="badge-container">
-    <a href="{% url 'customer:order-search' %}?q=Food" class="badge">
+    <!--<a href="{% url 'customer:order-search' %}?q=Food" class="badge">
         <img src="{% static 'foodicon.jpg' %}" alt="Electrical Image" class="profile-pic">
         Food
     </a>
     <a href="{% url 'customer:order-search' %}?q=Medicine" class="badge">
         <img src="{% static 'medicineicon.jpg' %}" alt="Plumbing Image" class="profile-pic">
         Medicine
+    </a>-->
+        <a href="{% url 'customer:order-search' %}?q=All" class="badge">
+        <img src="{% static 'allicon.jpg' %}" alt="Plumbing Image" class="profile-pic">
+        All
+    </a>
+            <a href="{% url 'customer:order-search' %}?q=Hardware" class="badge">
+        <img src="{% static 'hardware.jpg' %}" alt="Plumbing Image" class="profile-pic">
+        Hardware
     </a>
     <a href="{% url 'customer:order-search' %}?q=building materials" class="badge">
         <img src="{% static 'buildingmaterialsicon.jpg' %}" alt="Building Materials Image" class="profile-pic">
@@ -69,7 +77,15 @@
         <img src="{% static 'plumbingicon.jpg' %}" alt="Plumbing Image" class="profile-pic">
         Plumbing
     </a>
-    <a href="{% url 'customer:order-search' %}?q=Accomodation" class="badge">
+    <a href="{% url 'customer:order-search' %}?q=Electricals" class="badge">
+        <img src="{% static 'electricityicon.jpg' %}" alt="Plumbing Image" class="profile-pic">
+        Electricity
+    </a>
+    <a href="{% url 'customer:order-search' %}?q=Services" class="badge">
+        <img src="{% static 'servicesicon.jpg' %}" alt="Plumbing Image" class="profile-pic">
+        Services
+    </a>
+   <!-- <a href="{% url 'customer:order-search' %}?q=Accomodation" class="badge">
         <img src="{% static 'busesicon.jpg' %}" alt="Building Materials Image" class="profile-pic">
         Transportation
     </a>
@@ -84,7 +100,7 @@
     <a href="{% url 'customer:order-search' %}?q=Accomodation" class="badge">
         <img src="{% static 'electronics.jpg' %}" alt="Building Materials Image" class="profile-pic">
         Electronics
-    </a>
+    </a>-->
 </div>
 <hr/>
 
@@ -230,7 +246,7 @@
                                 <p class="menu-item-description">{{ item.description }}</p>
                                 <p>Delivery Time: {{ item.DeliveredTime }}</p>
                                 <p class="menu-item-category">
-                                    <i class="fas fa-tag"></i>
+                                    Verified <i class="fas fa-check-circle" style="color: green;"></i>
                                     {% for category, items in items_by_category.items %}
     <h2>{{ category.name }}</h2>
     {% for item in items %}
@@ -340,6 +356,7 @@
     </div>
 </div>
 </div>
+<a href="{% url 'deliver:menu_dashboardx' %}">Dashboard X</a>
 <script>
     function scrollToOrderForm() {
         const fullNameInput = document.getElementById('full-name');

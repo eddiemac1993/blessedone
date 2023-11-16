@@ -123,7 +123,7 @@ class MenuItem(models.Model):
     description = models.TextField()
     DeliveredTime = models.TextField(default=default_delivered_time)
     image = models.ImageField(upload_to='menu_images/')
-    price = models.DecimalField(max_digits=5, decimal_places=2)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
     category = models.ManyToManyField('Category', related_name='items')
     availability = models.BooleanField(default=True)
     is_verified = models.BooleanField(default=False)  # New field for verified items
@@ -160,7 +160,7 @@ class OrderModel(models.Model):
     price = models.DecimalField(max_digits=7, decimal_places=2, default=0.0, null=True)
     order_items = models.ManyToManyField(OrderItem, related_name='order', blank=True)
     name = models.CharField(max_length=50, blank=True)
-    specifics = models.EmailField(default="example@example.com")
+    specifics = models.TextField(default="type")
     email = models.EmailField(default="example@example.com")
     street = models.CharField(max_length=50, blank=True)
     city = models.CharField(max_length=50, blank=True)

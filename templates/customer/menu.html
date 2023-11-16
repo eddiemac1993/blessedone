@@ -93,7 +93,7 @@
     {% for item in menu_items %}
     <div key="{{ item.id }}" class="col-md-4 col-sm-6 col-12 text-center mb-5 mt-5">
       <div class="restaurant-card">
-        <a href="{{ item.image.url }}" target="_blank" rel="noopener noreferrer" class="card-link">
+        <a href="{% url 'customer:order-search' %}?q={{ item.name }}">
           <img src="{{ item.image.url }}" alt="{{ item.name }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">
         </a>
         <div class="restaurant-card-content">

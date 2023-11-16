@@ -26,6 +26,28 @@ def menu_dashboard(request):
     return render(request, 'deliver/menu_dashboard.html', context)
 
 
+def menu_dashboardx(request):
+    form = MenuItemForm(request.POST or None, request.FILES or None)
+    category_form = CategoryForm(request.POST or None)
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('deliver:menu_dashboard')
+
+        if category_form.is_valid():
+            category_form.save()
+            return redirect('deliver:menu_dashboard')
+
+    menu_items = MenuItem.objects.all()
+    categories = Category.objects.all()
+    context = {
+        'form': form,
+        'menu_items': menu_items,
+        'category_form': category_form,
+        'categories': categories
+    }
+    return render(request, 'deliver/dashboardx.html', context)
 
 def delete_item(request, item_id):
     item = get_object_or_404(MenuItem, pk=item_id)

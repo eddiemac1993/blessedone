@@ -208,10 +208,6 @@
     <div class="image-text">tv unit design</div>
   </div>
   <div class="image-item">
-    <img src="{% static 'tv unit design.jpg' %}" alt="Description of the image" class="gallery-image">
-    <div class="image-text">tv unit design</div>
-  </div>
-  <div class="image-item">
     <img src="{% static 'wardrobe-design-for-kitchen.jpg' %}" alt="Description of the image" class="gallery-image">
     <div class="image-text">design for kitchen</div>
   </div>
@@ -243,7 +239,7 @@
 </div>
 
 <a href="{% url 'customer:menu' %}" style="color: black; text-shadow: 2px 2px 4px rgba(0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: transparent; border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 4px; transition: background-color 0.3s; display: inline-flex; align-items: center;">
-  HARDWARE STORE MARKET
+  ONLINE STORE
 </a>
 <style>
   /* Adjust the container's background and padding */
@@ -321,7 +317,7 @@
       <p>{{ item.description }}</p>
 
       <meta property="og:image" content="{{ item.image.url }}">
-      <a href="https://api.whatsapp.com/send?text=%0AItem: {{ item.name|urlencode }}%0APrice: ZMK {{ item.price }}%0A{{ item.description|urlencode|safe }}%0A{{ request.build_absolute_uri }}?q={{ item.name|urlencode }}" class="whatsapp-share" target="_blank" rel="noopener noreferrer">
+      <a href="https://api.whatsapp.com/send?text=%0AItem: {{ item.name|urlencode }}%0APrice: ZMK {{ item.price }}%0A{{ item.description|urlencode|safe }}%0A{{ request.build_absolute_uri }}menu/search/?q={{ item.name|urlencode }}" class="whatsapp-share" target="_blank" rel="noopener noreferrer">
         <i class="fa fa-share-alt" aria-hidden="true"></i>
       </a>
     </div>

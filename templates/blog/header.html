@@ -14,22 +14,18 @@
       height: 50px; /* Adjust the height of the image */
     }
 
-    .logo-text {
-      color: #FF5733; /* Color for the first part of the text */
-    }
+  .logo-text {
+    color: #B8860B; /* Darker gold color */
+  }
 
-    .logo-text2 {
-      color: #5DADE2; /* Color for the second part of the text */
-    }
-
-    .logo-text3 {
-      color: #58D68D; /* Color for the third part of the text */
-    }
+  .logo-text3 {
+    color: #B8860B; /* Darker gold color */
+  }
   </style>
-<header class="fixed-top">
+<header class="fixed-top" style="text-decoration: none; background-color: black">
   <div class="nav-container">
 <a href="{% url 'customer:index' %}" class="logo">
-  <img src="{% static 'solidconnection.jpg' %}" alt="Logo">
+  <img src="{% static 'sc.jpeg' %}" alt="Logo">
   <span class="logo-text">SOLID</span>
   <span class="logo-text3">CONNECTIONS</span>
 </a>
