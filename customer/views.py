@@ -72,7 +72,6 @@ class Order(View):
 
     def post(self, request, *args, **kwargs):
         name = request.POST.get('name')
-        specifics = request.POST.get('specifics')
         street = request.POST.get('street')
         phone_number = request.POST.get('phone_number')
         location_id = request.POST.get('location')
@@ -97,7 +96,6 @@ class Order(View):
         order = OrderModel.objects.create(
             price=price,
             name=name,
-            specifics=specifics,
             street=street,
             phone_number=phone_number,
             location=location,
@@ -112,7 +110,13 @@ class OrderConfirmation(View):
     def get(self, request, pk, *args, **kwargs):
         order = OrderModel.objects.get(pk=pk)
 
+        # Calculate the discount amount (5% of the total price)
+        discount_percentage = Decimal('0.05')  # Use Decimal for precise arithmetic
+        discount_amount = discount_percentage * order.price
+
+        #total_price = order.price + order.location.delivery_fee + discount_amount
         total_price = order.price + order.location.delivery_fee
+
         context = {
             'pk': order.pk,
             'order_items': order.order_items.all(),
@@ -120,30 +124,37 @@ class OrderConfirmation(View):
             'location': order.location,
             'delivery_fee': order.location.delivery_fee,
             'total_price': total_price,
+            'discount_amount': discount_amount,
         }
 
         return render(request, 'customer/order_confirmation.html', context)
 
 
+from decimal import Decimal
+
 def get_invoice(request, pk):
     order = OrderModel.objects.get(pk=pk)
     items = order.order_items.all()
-    price = sum(item.item.price * item.quantity for item in items)
-    delivery_fee = order.total_price() - order.price
-    total = price + delivery_fee
+
+    # Calculate the total price with discount
+    discount_percentage = Decimal('0.05')  # 5% discount
+    discount_amount = discount_percentage * order.price
+    price = sum((item.item.price * item.quantity for item in items))
+    total_price = price + order.location.delivery_fee
+    #total_price = price + order.location.delivery_fee + discount_amount
 
     # Get the customer details from the order object
     name = order.name
-    specifics = order.specifics
     street = order.street
     city = order.city
 
-
     # Render the HTML template to be converted to PDF
     html = render_to_string('customer/invoice.html', {'items': items, 'pk': pk, 'price': price,
-                                                   'delivery_fee': delivery_fee, 'total_price': total,
-                                                   'name': name,'specifics': specifics, 'street': street,
-                                                   'city': city, 'order': order})
+                                                      'delivery_fee': order.location.delivery_fee,
+                                                      'total_price': total_price,
+                                                      'discount_amount': discount_amount,
+                                                      'name': name,
+                                                      'street': street, 'city': city, 'order': order})
 
     # Convert the HTML to PDF and return it as response
     pdf = pdfkit.from_string(html, False)
@@ -151,6 +162,7 @@ def get_invoice(request, pk):
     response['Content-Disposition'] = 'attachment; filename="invoice.pdf"'
 
     return response
+
 
 
 
@@ -206,7 +218,6 @@ class OrderSearch(MenuSearch):
 
     def post(self, request, *args, **kwargs):
         name = request.POST.get('name')
-        specifics = request.POST.get('specifics')
         street = request.POST.get('street')
         phone_number = request.POST.get('phone_number')
         location_id = request.POST.get('location')
@@ -231,7 +242,6 @@ class OrderSearch(MenuSearch):
         order = OrderModel.objects.create(
             price=price,
             name=name,
-            specifics=specifics,
             street=street,
             phone_number=phone_number,
             location=location,

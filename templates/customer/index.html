@@ -79,7 +79,7 @@
   background-color: #25D366;
   color: #fff;
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: 8px;
   padding: 10px 20px;
   display: flex;
   align-items: center;
@@ -174,17 +174,6 @@
     z-index: 1;
   }
 
-  /* Customize the carousel navigation and pagination */
-  .slick-prev,
-  .slick-next {
-    color: #fff; /* Set the desired color for the navigation arrows */
-    background-color: #FF9900; /* Set the background color for the arrows */
-  }
-
-  .slick-dots li button:before {
-    color: #FF9900; /* Set the color for the pagination dots */
-  }
-
   .whatsapp-share {
     display: inline-block;
     padding: 10px 20px;
@@ -201,7 +190,7 @@
 </style>
 
 
-<!-- Carousel structure -->
+<!-- Carousel structure
 <div class="image-gallery">
   <div class="image-item">
     <img src="{% static 'tv unit design1.jpg' %}" alt="Description of the image" class="gallery-image">
@@ -216,7 +205,7 @@
     <div class="image-text">Bedroom Design</div>
   </div>
 </div>
-
+-->
 
 
 <div class="testing-message">
@@ -229,7 +218,7 @@
       STAY<span style="color: #FF9900;">CONNECTED</span>
     </h1>
     <p style="color: white; font-size: 20px; margin-top: 20px;">reliable. convenient. efficient.</p><br/>
-    <a href="{% url 'customer:order' %}" style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: #FF9900; border-radius: 4px; transition: background-color 0.3s;">Get A Quotation</a>
+    <a href="{% url 'customer:order' %}" style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: #FF9900; border-radius: 4px; transition: background-color 0.3s;">Place An Order</a>
   </div>
 </section>
 

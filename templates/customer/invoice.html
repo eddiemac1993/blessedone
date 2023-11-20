@@ -61,12 +61,12 @@
             <h2>Order Details</h2>
             <table>
                 <tr>
-                    <th>No.</th>
+                    <th>Page No.</th>
                     <td>100{{ pk }}</td>
                 </tr>
-                <tr></tr>
-                    <td>
-                        <ul>
+
+
+
 <style>
     table {
         width: 100%;
@@ -81,32 +81,29 @@
     }
 </style>
 
-<div class="order-details">
-    <h2>Order Details</h2>
-    <table>
-        <tr>
-            <td> No.</td>
-            <th>Description</th>
-            <th>Unit Price</th>
-            <th>Quantity</th>
-            <th>Amount</th>
-        </tr>
-        {% for order_item in items %}
-            <tr>
-                <td> </td>
-                <td>{{ order_item.item.name }} ({{ order_item.item.description }})</td>
-                <td>{{ order_item.item.price }}</td>
-                <td>{{ order_item.quantity }}</td>
-                <td> </td>
-            </tr>
-        {% endfor %}
-    </table>
-</div>
-
-
-                        </ul>
-                    </td>
+        <div class="order-details">
+            <table>
+                <tr>
+                    <th>No.</th>
+                    <th>Description</th>
+                    <th>Unit Price</th>
+                    <th>Quantity</th>
+                    <th>Amount</th>
                 </tr>
+                {% for order_item in items %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ order_item.item.name }} ({{ order_item.item.description }})</td>
+                        <td>{{ order_item.item.price }}</td>
+                        <td>{{ order_item.quantity }}</td>
+                        <td> <!-- Calculate and display amount here if needed --> </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            </div>
+
+
+            <table>
                 <tr>
                     <th>Total Price</th>
                     <td class="total">{{ price }}</td>
@@ -115,17 +112,21 @@
                     <th>Delivery Fee</th>
                     <td class="delivery-fee">{{ delivery_fee }}</td>
                 </tr>
+
                 <tr>
                     <th>Total (Including Delivery Fee)</th>
-                    <td class="total-with-delivery">{{ total_price }}</td>
+                    <td class="total-with-delivery">{{ total_price|floatformat:2 }}</td>
                 </tr>
+            </table>
+        </div>
+
             </table>
         </div>
     </div>
         <hr/>
         <div class="footer">
             <p class="text-center footer">
-                &copy; {{ current_year }} SolidConnections<span style="color: red;"></span>
+                &copy; {{ current_year }} SolidConnections<span style="color: red;"> | [{{ discount_amount|floatformat:2 }}]</span>
             </p>
         </div>
         <div class="stamp">

@@ -160,7 +160,7 @@ class OrderModel(models.Model):
     price = models.DecimalField(max_digits=7, decimal_places=2, default=0.0, null=True)
     order_items = models.ManyToManyField(OrderItem, related_name='order', blank=True)
     name = models.CharField(max_length=50, blank=True)
-    specifics = models.TextField(default="type")
+    specifics = models.TextField(default="example@example.com")
     email = models.EmailField(default="example@example.com")
     street = models.CharField(max_length=50, blank=True)
     city = models.CharField(max_length=50, blank=True)

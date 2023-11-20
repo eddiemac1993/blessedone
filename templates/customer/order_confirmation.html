@@ -24,8 +24,10 @@
             </div>
             {% endfor %}
             <hr />
+            <!-- Add this section to display the discount information
+<p>Added Cost: K{{ discount_amount|floatformat:2 }}</p>-->
             <p class="font-weight-bold pt-4">Delivery Fee: {{ location }} : K {{ delivery_fee }}</p>
-            <p class="font-weight-bold pt-4">Order Total: K {{ total_price }}</p>
+            <p class="font-weight-bold pt-4">Order Total: K {{ total_price|floatformat:2 }}</p>
         </div>
     </div>
     <hr />

@@ -23,7 +23,7 @@
                 <a href="{% url 'customer:index' %}" class="btn btn-outline-warning mb-2 btn-sm rounded-pill">
         <i class="fas fa-arrow-left"></i> Go Back
     </a>
-    <a href="{% url 'customer:menu' %}" class="btn btn-warning mb-2 btn-sm rounded-pill">Marketplace</a>
+    <a href="{% url 'customer:menu' %}" class="btn btn-warning mb-2 btn-sm rounded-pill"><i class="fas fa-shopping-cart"></i> Marketplace</a>
 
 
             <div class="pt-3">
@@ -49,59 +49,74 @@
         text-align: center; /* Centers the text below the image */
         text-decoration: none; /* Removes the default underline on the link */
         display: block; /* Ensures the link is displayed as a block element */
+        font-size: 14px; /* Set a specific font size for uniformity */
     }
 </style>
+
 <hr/>
 <div class="badge-container">
-    <!--<a href="{% url 'customer:order-search' %}?q=Food" class="badge">
+    <a href="{% url 'customer:order-search' %}?q=All" class="badge">
+        <img src="{% static 'allicon.jpg' %}" alt="Plumbing Image" class="profile-pic">
+        All Option
+    </a>
+    <a href="{% url 'customer:order-search' %}?q=Food" class="badge">
         <img src="{% static 'foodicon.jpg' %}" alt="Electrical Image" class="profile-pic">
-        Food
+        Tasty Eats
     </a>
     <a href="{% url 'customer:order-search' %}?q=Medicine" class="badge">
         <img src="{% static 'medicineicon.jpg' %}" alt="Plumbing Image" class="profile-pic">
-        Medicine
-    </a>-->
-        <a href="{% url 'customer:order-search' %}?q=All" class="badge">
-        <img src="{% static 'allicon.jpg' %}" alt="Plumbing Image" class="profile-pic">
-        All
+        medicine
     </a>
-            <a href="{% url 'customer:order-search' %}?q=Hardware" class="badge">
+    <a href="{% url 'customer:order-search' %}?q=Hardware" class="badge">
         <img src="{% static 'hardware.jpg' %}" alt="Plumbing Image" class="profile-pic">
-        Hardware
+        Tools Here
     </a>
     <a href="{% url 'customer:order-search' %}?q=building materials" class="badge">
         <img src="{% static 'buildingmaterialsicon.jpg' %}" alt="Building Materials Image" class="profile-pic">
-        Building Materials
+        Materials
     </a>
     <a href="{% url 'customer:order-search' %}?q=Plumbing" class="badge">
         <img src="{% static 'plumbingicon.jpg' %}" alt="Plumbing Image" class="profile-pic">
-        Plumbing
+        Pipe Work
     </a>
     <a href="{% url 'customer:order-search' %}?q=Electricals" class="badge">
         <img src="{% static 'electricityicon.jpg' %}" alt="Plumbing Image" class="profile-pic">
-        Electricity
+        Power Up
     </a>
     <a href="{% url 'customer:order-search' %}?q=Services" class="badge">
         <img src="{% static 'servicesicon.jpg' %}" alt="Plumbing Image" class="profile-pic">
-        Services
+        Serve All
     </a>
-   <!-- <a href="{% url 'customer:order-search' %}?q=Accomodation" class="badge">
+    <a href="{% url 'customer:order-search' %}?q=Accomodation" class="badge">
         <img src="{% static 'busesicon.jpg' %}" alt="Building Materials Image" class="profile-pic">
-        Transportation
+        Transport
     </a>
     <a href="{% url 'customer:order-search' %}?q=Accomodation" class="badge">
         <img src="{% static 'accomodationicon.jpg' %}" alt="Building Materials Image" class="profile-pic">
-        Accomodation
+        Stay Here
     </a>
     <a href="{% url 'customer:order-search' %}?q=Accomodation" class="badge">
         <img src="{% static 'taxiicon.jpg' %}" alt="Building Materials Image" class="profile-pic">
-        Taxi
+        Taxi Ride
     </a>
     <a href="{% url 'customer:order-search' %}?q=Accomodation" class="badge">
         <img src="{% static 'electronics.jpg' %}" alt="Building Materials Image" class="profile-pic">
-        Electronics
-    </a>-->
+        Tech Gear
+    </a>
+    <a href="{% url 'customer:order-search' %}?q=Gloceries" class="badge">
+        <img src="{% static 'gloceryicon.jpg' %}" alt="Building Materials Image" class="profile-pic">
+        Groceries
+    </a>
+    <a href="{% url 'customer:order-search' %}?q=Stationary" class="badge">
+        <img src="{% static 'stationary.jpg' %}" alt="Building Materials Image" class="profile-pic">
+        Supplies
+    </a>
+    <a href="{% url 'customer:order-search' %}?q=Autospare" class="badge">
+        <img src="{% static 'autospare.jpg' %}" alt="Building Materials Image" class="profile-pic">
+        Auto Parts
+    </a>
 </div>
+
 <hr/>
 
             <form id="order-form" method="POST">
@@ -110,7 +125,7 @@
                     <style>
                         .badge {
                           display: inline-block;
-                          padding: 6px 10px;
+                          padding: 3px 10px;
                           background-color: #f1f1f1;
                           border-radius: 10px;
                           font-size: 12px;
@@ -244,7 +259,7 @@
                                 </div>
 
                                 <p class="menu-item-description">{{ item.description }}</p>
-                                <p>Delivery Time: {{ item.DeliveredTime }}</p>
+                                <p>Delivery Within: {{ item.DeliveredTime }}</p>
                                 <p class="menu-item-category">
                                     Verified <i class="fas fa-check-circle" style="color: green;"></i>
                                     {% for category, items in items_by_category.items %}
@@ -280,13 +295,6 @@
         <label for="full-name" class="form-label">Full Name</label>
         <input required class="form-control input-field" type="text" placeholder="Your Name" name="name" id="full-name">
     </div>
-
-    <div class="form-group pt-3">
-        <label for="specifics" class="form-label">Specifics</label>
-        <input class="form-control input-field" type="text" placeholder="Specifics (optional)" name="specifics" id="specifics">
-        <small class="form-text text-muted">Please specify the desired quantities.</small>
-    </div>
-
     <div class="form-group pt-3">
         <label for="phone" class="form-label">Phone:</label>
         <input class="form-control input-field" type="text" placeholder="Phone number" name="phone" id="phone">
@@ -305,7 +313,7 @@
         <div class="col-md-4 col-sm-12">
             <div class="form-group pt-3">
                 <label for="street" class="form-label">Street Address</label>
-                <input required class="form-control input-field" type="text" placeholder="1234 Main St" name="street" id="street">
+                <input required class="form-control input-field" type="text" placeholder="" name="street" id="street">
             </div>
         </div>
     </div>
@@ -315,16 +323,13 @@
             <label for="location" class="form-label">Location: </label>
             <select id="location" name="location" class="form-control select-field">
                 {% for location in locations %}
-                <option value="{{ location.pk }}"> {{ location.name }} (ZMK {{ location.delivery_fee }})</option>
+                <option value="{{ location.pk }}"> {{ location.name }} (ZMW {{ location.delivery_fee }})</option>
                 {% endfor %}
             </select>
         </div>
     </div>
     <hr class="form-hr" />
 </div>
-
-
-
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#submitModal">
                     Submit Order!
@@ -356,7 +361,7 @@
     </div>
 </div>
 </div>
-<a href="{% url 'deliver:menu_dashboardx' %}">Dashboard X</a>
+<!--<a href="{% url 'deliver:menu_dashboardx' %}">Dashboard X</a>-->
 <script>
     function scrollToOrderForm() {
         const fullNameInput = document.getElementById('full-name');
