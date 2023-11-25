@@ -24,7 +24,19 @@ class OrderModelAdmin(admin.ModelAdmin):
         return obj.total_price()
     total_price.short_description = 'Total Price'
 
-admin.site.register(MenuItem)
+class MenuItemAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description', 'price_display', 'DeliveredTime', 'availability', 'is_verified')
+    search_fields = ('name', 'description')
+    list_filter = ('category', 'availability', 'is_verified')
+    list_per_page = 20
+    ordering = ('name',)  # Add this line to order items alphabetically by name
+
+    def price_display(self, obj):
+        return f"K{obj.price:.2f}"
+
+    price_display.short_description = 'Price'
+
+admin.site.register(MenuItem, MenuItemAdmin)
 admin.site.register(Category)
 admin.site.register(Location)
 admin.site.register(Event)

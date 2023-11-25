@@ -88,7 +88,7 @@
                     <th>Description</th>
                     <th>Unit Price</th>
                     <th>Quantity</th>
-                    <th>Amount</th>
+                    <th>Received Item</th>
                 </tr>
                 {% for order_item in items %}
                     <tr>
@@ -109,8 +109,8 @@
                     <td class="total">{{ price }}</td>
                 </tr>
                 <tr>
-                    <th>Delivery Fee</th>
-                    <td class="delivery-fee">{{ delivery_fee }}</td>
+                    <th>Delivery Fee Cost</th>
+                    <td class="delivery-fee">{{ delivery_fee }} + [{{ discount_amount|floatformat:2 }}]</td>
                 </tr>
 
                 <tr>
@@ -126,7 +126,7 @@
         <hr/>
         <div class="footer">
             <p class="text-center footer">
-                &copy; {{ current_year }} SolidConnections<span style="color: red;"> | [{{ discount_amount|floatformat:2 }}]</span>
+                &copy; {{ current_year }} SolidConnections<span style="color: red;"> </span>
             </p>
         </div>
         <div class="stamp">

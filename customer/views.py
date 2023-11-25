@@ -110,12 +110,11 @@ class OrderConfirmation(View):
     def get(self, request, pk, *args, **kwargs):
         order = OrderModel.objects.get(pk=pk)
 
-        # Calculate the discount amount (5% of the total price)
-        discount_percentage = Decimal('0.05')  # Use Decimal for precise arithmetic
+        # Calculate the discount amount (8% of the total price)
+        discount_percentage = Decimal('0.08')  # Use Decimal for precise arithmetic
         discount_amount = discount_percentage * order.price
 
-        #total_price = order.price + order.location.delivery_fee + discount_amount
-        total_price = order.price + order.location.delivery_fee
+        total_price = order.price + order.location.delivery_fee + discount_amount
 
         context = {
             'pk': order.pk,
@@ -137,11 +136,10 @@ def get_invoice(request, pk):
     items = order.order_items.all()
 
     # Calculate the total price with discount
-    discount_percentage = Decimal('0.05')  # 5% discount
+    discount_percentage = Decimal('0.08')  # 5% discount
     discount_amount = discount_percentage * order.price
     price = sum((item.item.price * item.quantity for item in items))
-    total_price = price + order.location.delivery_fee
-    #total_price = price + order.location.delivery_fee + discount_amount
+    total_price = price + order.location.delivery_fee + discount_amount
 
     # Get the customer details from the order object
     name = order.name
