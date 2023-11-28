@@ -4,9 +4,14 @@
 <head>
 
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta property="og:image" content="{{ item.image.url }}">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:title" content="{{ item.name }}">
+  <meta property="og:description" content="{{ item.description }}">
+  <meta property="og:image" content="{{ item.image.url }}">
+  <meta property="og:url" content="{{ request.build_absolute_uri }}">
+  <meta property="og:price:amount" content="{{ item.price }}">
+  <meta property="og:price:currency" content="ZMK">
 
 
     <!-- CSS -->

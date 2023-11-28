@@ -209,7 +209,7 @@
 
 
 <div class="testing-message">
-  <p>Build your Dream Home.</p>
+  <p>"Explore, Order, Enjoy – Everything You Need, Delivered to Your Doorstep!".</p>
 </div>
 
 <section class="hero" style="background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px); padding: 40px 0; border-radius: 10px; box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);">
@@ -306,9 +306,36 @@
       <p>{{ item.description }}</p>
 
       <meta property="og:image" content="{{ item.image.url }}">
-      <a href="https://wa.me/260970349470?text=%0AItem: {{ item.name|urlencode }}%0APrice: ZMK {{ item.price }}%0A{{ item.description|urlencode|safe }}%0A{{ request.build_absolute_uri }}menu/search/?q={{ item.name|urlencode }}" class="whatsapp-share" target="_blank" rel="noopener noreferrer">
-  <i class="fa fa-share-alt" aria-hidden="true"></i>
+      <a href="https://wa.me/?text=%0AItem: {{ item.name|urlencode }}%0APrice: ZMK {{ item.price }}%0A{{ item.description|urlencode|safe }}%0A{{ request.build_absolute_uri }}menu/search/?q={{ item.name|urlencode }}" class="whatsapp-share" target="_blank" rel="noopener noreferrer">
+  <i class="fa fa-share-alt" aria-hidden="true"></i> Whatsapp
 </a>
+
+<style>
+  /* Your existing styles ... */
+
+  .facebook-share {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #1877f2; /* Facebook blue color */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+  }
+
+  .facebook-share:hover {
+    background-color: #0e5a99; /* Darker blue on hover */
+  }
+
+  .facebook-share i {
+    margin-right: 5px; /* Add space between the icon and text */
+  }
+</style>
+
+<a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" class="facebook-share" target="_blank" rel="noopener noreferrer">
+  <i class="fa fa-share-alt" aria-hidden="true"></i> Facebook
+</a>
+
 
     </div>
   {% endfor %}
