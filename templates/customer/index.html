@@ -304,8 +304,6 @@
       <a href="{% url 'customer:order-search' %}?q={{ item.name }}" class="badge">
         {{ item.name }}
       </a>
-      <p>{{ item.description }}</p>
-
       <meta property="og:image" content="{{ item.image.url }}">
       <a href="https://wa.me/?text=%0AItem: {{ item.name|urlencode }}%0APrice: ZMK {{ item.price }}%0A{{ item.description|urlencode|safe }}%0A{{ request.build_absolute_uri }}menu/search/?q={{ item.name|urlencode }}" class="whatsapp-share" target="_blank" rel="noopener noreferrer">
   <i class="fa fa-share-alt" aria-hidden="true"></i> Whatsapp
