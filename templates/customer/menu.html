@@ -3,6 +3,8 @@
 {% block content %}
 
 <style>
+/* Your existing styles here */
+
 .menu-item-card {
   border: 1px solid #ddd;
   border-radius: 10px;
@@ -46,24 +48,25 @@
       <p class="lead">Find your best products from our selection of quality products</p>
     </div>
   </div>
-{% for item in menu_items %}
-  <div class="menu-item-card">
-    <a href="{% url 'customer:order-search' %}?q={{ item.name }}">
-      <img src="{{ item.image.url }}" alt="{{ item.name }}" class="menu-item-image">
-    </a>
-    <div class="menu-item-details">
-      <h3>{{ item.name }}</h3>
-      <p>{{ item.description }}</p>
-      <p>Price: ZMK {{ item.price }}</p>
-      <a href="https://wa.me/260970349470?text=%0AItem: {{ item.name|urlencode }}%0APrice: ZMK {{ item.price }}%0A{{ item.description|urlencode|safe }}%0A{{ request.build_absolute_uri }}menu/search/?q={{ item.name|urlencode }}" class="whatsapp-share" target="_blank" rel="noopener noreferrer">
-        <i class="fa fa-share-alt" aria-hidden="true"></i> Share on WhatsApp
-      </a>
-    </div>
+  <div class="row">
+    {% for item in menu_items %}
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="menu-item-card">
+          <a href="{% url 'customer:order-search' %}?q={{ item.name }}">
+            <img src="{{ item.image.url }}" alt="{{ item.name }}" class="menu-item-image">
+          </a>
+          <div class="menu-item-details">
+            <h3>{{ item.name }}</h3>
+            <p>{{ item.description }}</p>
+            <p>Price: ZMK {{ item.price }}</p>
+            <a href="https://wa.me/260970349470?text=%0AItem: {{ item.name|urlencode }}%0APrice: ZMK {{ item.price }}%0A{{ item.description|urlencode|safe }}%0A{{ request.build_absolute_uri }}menu/search/?q={{ item.name|urlencode }}" class="whatsapp-share" target="_blank" rel="noopener noreferrer">
+              <i class="fa fa-share-alt" aria-hidden="true"></i> Share on WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
   </div>
-{% endfor %}
-
-  </div>
-
 </div>
 
 {% endblock content %}
