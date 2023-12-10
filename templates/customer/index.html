@@ -232,70 +232,87 @@
  <a href="{% url 'customer:menu' %}" style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: #FF9900; border-radius: 4px; transition: background-color 0.3s;"><i class="fas fa-shopping-cart"></i> <!-- Replace 'fa-shopping-cart' with the desired Font Awesome icon -->
   Market Place</a>
 <style>
-
-
-
-
-
-  /* Adjust the container's background and padding */
   .image-gallery {
-    background-color: #f8f8f8; /* Set the desired background color */
-    padding: 20px; /* Adjust the padding as needed */
-    position: relative;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
   }
 
-  /* Adjust the styling for the images */
+  .image-item {
+    flex: 1;
+    position: relative;
+    padding: 20px;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+
+  .image-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+
   .gallery-image {
     width: 100%;
-    height: 200px; /* Adjust the height as needed */
+    height: 100%;
     object-fit: cover;
-    border-radius: 10px; /* Apply rounded corners */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow effect */
-    margin-bottom: 10px; /* Add space between images */
-    position: relative;
+    border-radius: 10px;
   }
 
-  /* Customize the price tag */
   .price-tag {
     position: absolute;
-    top: 10px; /* Adjust the distance from the top */
-    right: 10px; /* Adjust the distance from the right */
-    background-color: #FF9900; /* Set the background color */
-    color: #fff; /* Set the text color */
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-weight: bold; /* Make the text bold */
-    z-index: 1;
+    top: 10px;
+    right: 10px;
+    background-color: #ffcc00;
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    font-size: 1.2em;
   }
 
-  /* Customize the carousel navigation and pagination */
-  .slick-prev,
-  .slick-next {
-    color: #fff; /* Set the desired color for the navigation arrows */
-    background-color: #FF9900; /* Set the background color for the arrows */
-  }
-
-  .slick-dots li button:before {
-    color: #FF9900; /* Set the color for the pagination dots */
-  }
-
-
-
-   /* Customize the link */
   .badge {
     display: inline-block;
-    padding: 10px;
-    background-color: #007BFF; /* Set the background color for the link */
-    color: #fff; /* Set the text color */
-    text-decoration: none; /* Remove the default underline on the link */
+    color: black;
+    padding: 5px 10px;
     border-radius: 5px;
+    text-decoration: none;
+    margin-top: 10px;
+    font-size: 1.1em;
+    font-weight: bold;
+  }
+
+  .whatsapp-share,
+  .facebook-share {
+    display: inline-block;
+    background-color: #1877f2; /* Set Facebook blue color */
+    color: #fff;
+    padding: 10px 15px; /* Adjusted size for better visibility */
+    border-radius: 8px;
+    text-decoration: none;
+    margin-top: 10px;
     transition: background-color 0.3s;
   }
 
-  .badge:hover {
-    background-color: #0056b3; /* Change the background color on hover */
+  .whatsapp-share:hover,
+  .facebook-share:hover {
+    background-color: #0e5a9b; /* Darker shade on hover */
+  }
+
+  .whatsapp-share i,
+  .facebook-share i {
+    margin-right: 8px; /* Slightly reduce margin */
+  }
+
+  .whatsapp-share {
+    margin-right: 10px;
   }
 </style>
+
+
+
 
 <div class="image-gallery" style="display: flex;">
   {% for item in menu_items %}
@@ -313,58 +330,19 @@
       <a href="https://wa.me/?text=%0AItem: {{ item.name|urlencode }}%0APrice: ZMK {{ item.price }}%0A{{ item.description|urlencode|safe }}%0A{{ request.build_absolute_uri }}menu/search/?q={{ item.name|urlencode }}" class="whatsapp-share" target="_blank" rel="noopener noreferrer">
   <i class="fa fa-share-alt" aria-hidden="true"></i> Whatsapp
 </a>
-
-<style>
-  /* Your existing styles ... */
-
-  .facebook-share {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #1877f2; /* Facebook blue color */
-    color: #fff;
-    text-decoration: none;
-    border-radius: 20px;
-    transition: background-color 0.3s;
-  }
-
-  .facebook-share:hover {
-    background-color: #0e5a99; /* Darker blue on hover */
-  }
-
-  .facebook-share i {
-    margin-right: 5px; /* Add space between the icon and text */
-  }
-</style>
- {% with encoded_item_name=item.name|urlencode %}
-    {% with encoded_item_description=item.description|urlencode|safe %}
-      {% with facebook_share_url=request.build_absolute_uri|add:"menu/search/?q="|add:encoded_item_name %}
-        {% post_to_facebook facebook_share_url "Facebook" "facebook-link" %}
-      {% endwith %}
+{% with encoded_item_name=item.name|urlencode %}
+  {% with encoded_item_description=item.description|urlencode|safe %}
+    {% with facebook_share_url=request.build_absolute_uri|add:"menu/search/?q="|add:encoded_item_name %}
+      <a href="https://web.facebook.com/sharer/sharer.php?u={{ facebook_share_url }}" class="facebook-share" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-facebook-f"></i> Share on Facebook
+      </a>
     {% endwith %}
   {% endwith %}
-
-<hr/>
-
-
-
-
+{% endwith %}
 
     </div>
-  {% endfor %}
-</div>
 
-
-<!-- Add the carousel structure -->
-<div class="carousel">
-  {% for item in carousel_items %}
-    <div>
-      <img src="{{ item.image.url }}" alt="{{ item.name }}">
-      <div>
-        <h3>{{ item.name }}</h3>
-        <p>{{ item.description }}</p>
-      </div>
-    </div>
-  {% endfor %}
+  {% endfor %}    <hr/>
 </div>
 
 <!-- Your existing JavaScript and other HTML content -->
@@ -372,93 +350,8 @@
 <a class="text-center mb-4" href="" style="color: black; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: transparent; border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 4px; transition: background-color 0.3s; display: inline-flex; align-items: center;">
   OUR PARTNERS
 </a>
-<style>
-  /* Existing styles ... */
 
-  .partners-container {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    margin-top: 20px; /* Adjust the margin as needed */
-  }
 
-  .partner-card {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    width: 250px; /* Set the width of each partner card */
-    margin-bottom: 20px; /* Adjust the margin between partner cards */
-    transition: transform 0.3s; /* Add a smooth transition effect on hover */
-  }
-
-  .partner-card:hover {
-    transform: scale(1.05); /* Scale up the card on hover */
-  }
-
-  .partner-image {
-    width: 100%;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    object-fit: cover;
-    height: 150px; /* Set the height of the partner image */
-  }
-
-  .partner-content {
-    padding: 15px;
-  }
-
-  .partner-name {
-    font-size: 1.2em;
-    margin-bottom: 5px;
-  }
-
-  .partner-description {
-    color: #666;
-  }
-</style>
-
-<main>
-    <div class="partners-container">
-  <!-- Partner 1 -->
-  <div class="partner-card">
-    <img src="{% static 'new.jpg' %}" alt="Partner 1" class="partner-image">
-    <div class="partner-content">
-      <div class="partner-name">CEAJAM</div>
-      <div class="partner-description">HARDWARE STORE</div>
-    </div>
-  </div>
-  <!--<div class="partner-card">
-    <img src="partner1.jpg" alt="Partner 1" class="partner-image">
-    <div class="partner-content">
-      <div class="partner-name">Partner 1</div>
-      <div class="partner-description">Description for Partner 1.</div>
-    </div>
-  </div>
-    <div class="partner-card">
-    <img src="partner1.jpg" alt="Partner 1" class="partner-image">
-    <div class="partner-content">
-      <div class="partner-name">Partner 1</div>
-      <div class="partner-description">Description for Partner 1.</div>
-    </div>
-  </div>
-  <!-- Partner 2
-  <div class="partner-card">
-    <img src="partner2.jpg" alt="Partner 2" class="partner-image">
-    <div class="partner-content">
-      <div class="partner-name">Partner 2</div>
-      <div class="partner-description">Description for Partner 2.</div>
-    </div>
-  </div>-->
-
-  <div class="container">
-    <div class="partner-section text-center">
-      <h3>Become Our Partner</h3>
-      <p>Join our network and reach more customers with QuickDrop.</p>
-      <a href="{% url 'blog-home' %}" style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0.5); font-size: 18px; font-weight: bold; text-decoration: none; padding: 10px 20px; background-color: #FF9900; border-radius: 4px; transition: background-color 0.3s;">Our Partners List</a>
-    </div>
-  </div>
-</main>
 
 <a href="https://wa.me/260970349470?text=Hello." class="sticky-whatsapp-button" target="_blank">
   <i class="fab fa-whatsapp whatsapp-icon"></i>
