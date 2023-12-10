@@ -129,8 +129,6 @@ class OrderConfirmation(View):
         return render(request, 'customer/order_confirmation.html', context)
 
 
-from decimal import Decimal
-
 def get_invoice(request, pk):
     order = OrderModel.objects.get(pk=pk)
     items = order.order_items.all()
@@ -162,18 +160,17 @@ def get_invoice(request, pk):
     return response
 
 
-
-
 class Menu(View):
     def get(self, request, *args, **kwargs):
-        menu_items = MenuItem.objects.all().order_by('?')
+        menu_items = MenuItem.objects.all()
+        menu_items = list(menu_items)
+        random.shuffle(menu_items)
 
         context = {
             'menu_items': menu_items
         }
 
         return render(request, 'customer/menu.html', context)
-
 
 
 class MenuSearch(View):
@@ -185,6 +182,10 @@ class MenuSearch(View):
             Q(price__icontains=query) |
             Q(description__icontains=query)
         )
+
+        # Shuffle the menu items randomly
+        menu_items = list(menu_items)
+        random.shuffle(menu_items)
 
         context = {
             'menu_items': menu_items
@@ -210,6 +211,7 @@ class OrderSearch(MenuSearch):
             'items': items,
             'locations': locations,
             'users': users,
+            'searched_item': query,
         }
 
         return render(request, 'customer/order.html', context)

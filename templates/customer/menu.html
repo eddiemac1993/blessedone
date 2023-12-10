@@ -59,8 +59,8 @@
             <h3>{{ item.name }}</h3>
             <p>{{ item.description }}</p>
             <p>Price: ZMK {{ item.price }}</p>
-            <a href="https://wa.me/260970349470?text=%0AItem: {{ item.name|urlencode }}%0APrice: ZMK {{ item.price }}%0A{{ item.description|urlencode|safe }}%0A{{ request.build_absolute_uri }}menu/search/?q={{ item.name|urlencode }}" class="whatsapp-share" target="_blank" rel="noopener noreferrer">
-              <i class="fa fa-share-alt" aria-hidden="true"></i> Share on WhatsApp
+            <a href="https://wa.me/?text=%0AItem: {{ item.name|urlencode }}%0APrice: ZMK {{ item.price }}%0A{{ item.description|urlencode|safe }}%0A{{ request.build_absolute_uri }}search/?q={{ item.name|slice:'0:' }}" class="whatsapp-share" target="_blank" rel="noopener noreferrer">
+<i class="fa fa-share-alt" aria-hidden="true"></i> Share on WhatsApp
             </a>
           </div>
         </div>

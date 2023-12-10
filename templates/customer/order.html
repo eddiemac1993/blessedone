@@ -78,7 +78,7 @@
         <img src="{% static 'servicesicon.jpg' %}" alt="Plumbing Image" class="profile-pic">
         Serv. Hub
     </a>
-    <a href="{% url 'customer:order-search' %}?q=Accomodation" class="badge">
+    <a href="{% url 'customer:order-search' %}?q=Transportation" class="badge">
         <img src="{% static 'busesicon.jpg' %}" alt="Building Materials Image" class="profile-pic">
         Trans. Zone
     </a>
@@ -90,11 +90,11 @@
         <img src="{% static 'accomodationicon.jpg' %}" alt="Building Materials Image" class="profile-pic">
         Stay Opt.
     </a>
-    <a href="{% url 'customer:order-search' %}?q=Accomodation" class="badge">
+    <a href="{% url 'customer:order-search' %}?q=Taxi Service" class="badge">
         <img src="{% static 'taxiicon.jpg' %}" alt="Building Materials Image" class="profile-pic">
         Taxi Serv.
     </a>
-    <a href="{% url 'customer:order-search' %}?q=Accomodation" class="badge">
+    <a href="{% url 'customer:order-search' %}?q=Tech Gadgets" class="badge">
         <img src="{% static 'electronics.jpg' %}" alt="Building Materials Image" class="profile-pic">
         Tech Gad.
     </a>
@@ -115,7 +115,12 @@
 
 
 <hr/>
-
+{% if searched_item %}
+    <div class="alert alert-info">
+        <i class="fas fa-search"></i>
+<strong>{{ searched_item }}</strong>
+    </div>
+{% endif %}
             <form id="order-form" method="POST">
                 {% csrf_token %}
                 <div class="pt-5">
@@ -228,6 +233,7 @@
                         }
 
                     </style>
+
                     {% for item in items %}
                     <div class="menu-item">
 
