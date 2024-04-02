@@ -37,7 +37,7 @@
             <hr />
             <!-- Add this section to display the discount information -->
             <p>Added Cost: </p>
-            <p class="font-weight-bold pt-4">Delivery Fee: {{ location }} : K {{ delivery_fee }} + K{{ discount_amount|floatformat:2 }}</p>
+            <p class="font-weight-bold pt-4">Delivery Fee: {{ location }} : {{ delivery_fee }}% off on Deliveries + K{{ discount_amount|floatformat:2 }}</p>
             <p class="font-weight-bold pt-4">Order Total: K{{ total_price|floatformat:2 }}</p>
 
         </div>

@@ -88,7 +88,7 @@
     <nav class="nav-menu">
       <ul>
         <li>
-          <a href="{% url 'blog-about' %}" class="btn btn-primary mb-2 btn-sm rounded-pill" style="text-decoration: none; background-color: navy; border-color: white; color: #fff;">
+          <a href="{% url 'blog-about' %}" class="btn btn-primary mb-2 btn-sm rounded-pill" style="text-decoration: none; background-color: navy;">
             <i class="fas fa-info-circle about-icon"></i>
           </a>
         </li>
@@ -98,12 +98,4 @@
 </header>
 <br/>
 <br/>
-<script>
-  function hideAlert() {
-    var alertElement = document.getElementById("alert");
-    alertElement.style.display = "none";
-    setTimeout(function() {
-      alertElement.style.display = "block";
-    }, 300000); // 5 minutes (300,000 milliseconds)
-  }
-</script>
+<hr/>
