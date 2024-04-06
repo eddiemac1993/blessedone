@@ -37,13 +37,33 @@
         margin-right: 10px; /* Add some margin to the right of the search icon */
     }
 </style>
+<style>
+    .custom-alert {
+        background-color: #d1ecf1; /* Set the background color */
+        border: 1px solid #bee5eb; /* Set the border */
+        color: #0c5460; /* Set the text color */
+        padding: 10px; /* Add some padding */
+        border-radius: 5px; /* Add border-radius for rounded corners */
+        margin-top: 10px; /* Add margin to separate it from other elements */
+        display: flex; /* Make it a flex container */
+        align-items: center; /* Align items vertically in the center */
+    }
+
+    .custom-alert-icon {
+        margin-right: 10px; /* Add some margin to the right of the icon */
+    }
+</style>
 
 {% if searched_item %}
-    <div class="alert alert-info">
-        <i class="fas fa-search"></i>
-<strong>{{ searched_item }}</strong>
+    <div class="custom-alert">
+        <div class="custom-alert-icon">
+        </div>
+        <div class="custom-alert-content">
+            <strong>{{ searched_item }} | Section </strong>
+        </div>
     </div>
 {% endif %}
+
 <hr/>
             <form id="order-form" method="POST">
                 {% csrf_token %}
@@ -158,37 +178,61 @@
 
                     </style>
 
-                    {% for item in items %}
-                    <div class="menu-item">
+<style>
+    .menu-item-image img {
+        border: 2px solid black; /* Add border to the images */
+        border-radius: 10px; /* Add rounded corners */
+    }
 
-                        <div class="row">
-                            <div class="col-md-2 col-sm-12">
-                                <a href="{{ item.image.url }}" target="_blank">
-                                  <img class="menu-item-image rounded" src="{{ item.image.url }}">
-                                </a>
-                            </div>
-                            <div class="col-md-8 col-sm-12">
-                                <div class="d-flex flex-row">
-                                    <div class="form-group form-check">
-                                        <input type="checkbox" name="items[]" class="form-check-input"
-                                            value="{{ item.pk }}" id="item_{{ item.pk }}">
-                                        <label class="form-check-label" for="item_{{ item.pk }}">{{ item.name }}</label>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="input-group">
-                                                <label class="input-group-text font-weight-bold mr-3"
-                                                    for="quantity_{{ item.pk }}">Quantity:</label>
-                                                <input type="number" name="quantities[]" id="quantity_{{ item.pk }}"
-                                                    class="form-control" value="1" inputmode="numeric" step="1">
-                                                <label class="input-group-text font-weight-bold ml-3">K {{ item.price }} each</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-<p class="menu-item-description">{{ item.description }}</p>
-<p>Delivery Within: {{ item.DeliveredTime }}</p>
-<p class="menu-item-category">
-    Verified <i class="fas fa-check-circle" style="color: green;"></i>
-</p>
+    .transparent-button {
+        background: transparent;
+        border: 2px solid transparent;
+        color: #333; /* Text color */
+        padding: 8px 16px; /* Adjust padding as needed */
+        border-radius: 5px; /* Add border-radius for rounded corners */
+        cursor: pointer;
+        transition: background-color 0.3s, border-color 0.3s, color 0.3s; /* Add transition effect */
+    }
+
+    .transparent-button:hover {
+        background-color: #f1f1f1; /* Background color on hover */
+        border-color: #000; /* Border color on hover */
+    }
+</style>
+
+
+
+{% for item in items %}
+<div class="menu-item">
+
+    <div class="row">
+        <div class="col-md-2 col-sm-12">
+            <a href="{{ item.image.url }}" target="_blank">
+                <img class="menu-item-image rounded" src="{{ item.image.url }}">
+            </a>
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <div class="d-flex flex-row">
+                <div class="form-group form-check">
+                    <label class="transparent-button" for="item_{{ item.pk }}">
+                        <!-- Use label to style checkbox as a button -->
+                        <input type="checkbox" name="items[]" class="form-check-input" value="{{ item.pk }}" id="item_{{ item.pk }}">
+                        {{ item.name }}
+                    </label>
+                    <div class="d-flex justify-content-between">
+                        <div class="input-group">
+                            <label class="input-group-text font-weight-bold mr-3" for="quantity_{{ item.pk }}">Quantity:</label>
+                            <input type="number" name="quantities[]" id="quantity_{{ item.pk }}" class="form-control" value="1" inputmode="numeric" step="1">
+                            <label class="input-group-text font-weight-bold ml-3">K {{ item.price }} each</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="menu-item-description">{{ item.description }}</p>
+            <p>Delivery Within: {{ item.DeliveredTime }}</p>
+            <p class="menu-item-category">
+                Verified <i class="fas fa-check-circle" style="color: green;"></i>
+            </p>
             <p class="menu-item-availability">
                 {% if item.availability %}
                 <span class="dot available"></span> Available
@@ -215,27 +259,11 @@
 
 
 
-
-
-
 <div class="form-section">
     <div class="form-group pt-3">
         <label for="full-name" class="form-label">Full Name</label>
         <input required class="form-control input-field" type="text" placeholder="Your Name" name="name" id="full-name">
     </div>
-    <div class="form-group pt-3">
-        <label for="phone" class="form-label">Phone:</label>
-        <input class="form-control input-field" type="text" placeholder="Phone number" name="phone" id="phone">
-    </div>
-
-    <div class="form-group pt-3">
-<label for="agent">Referral Agent:</label>
-<select name="agent" class="form-control">
-    {% for user in users %}
-    <option value="{{ user.id }}">{{ user.username }}</option>
-    {% endfor %}
-</select>
-</div>
 
     <div class="row">
         <div class="col-md-4 col-sm-12">
@@ -263,6 +291,16 @@
                     Submit Order!
                 </button>
 
+<hr />
+
+    <div class="form-group pt-3">
+<label for="agent">Referral Agent:</label>
+<select name="agent" class="form-control">
+    {% for user in users %}
+    <option value="{{ user.id }}">{{ user.username }}</option>
+    {% endfor %}
+</select>
+</div>
                 <!-- Modal -->
                 <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="submitModalLabel"
                     aria-hidden="true">
