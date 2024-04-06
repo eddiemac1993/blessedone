@@ -168,12 +168,15 @@
     color: white;
   }
 
+
+</style>
+<style>
   /* WhatsApp Button Styles */
   .whatsapp-button {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: #25D366;
+    background-color: #25D366; /* WhatsApp green color */
     color: white;
     text-decoration: none;
     border-radius: 10px;
@@ -185,7 +188,7 @@
   }
 
   .whatsapp-button:hover {
-    background-color: #128C7E;
+    background-color: #128C7E; /* Darker shade of green on hover */
   }
 
   .whatsapp-icon {
@@ -298,32 +301,70 @@
   }
 </style>
 
+<style>
+  /* Card Styles */
+  .card {
+    border: 1px solid #ccc; /* Add a border */
+    border-radius: 10px; /* Add border-radius for rounded corners */
+    padding: 10px; /* Add padding */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+    transition: transform 0.3s ease; /* Add transition effect */
+    background-color: #fff; /* Set background color */
+  }
+
+  .card:hover {
+    transform: translateY(-5px); /* Add hover effect */
+  }
+
+  /* Image Styles */
+  .card img {
+    width: 100%; /* Make the image responsive */
+    height: auto; /* Maintain aspect ratio */
+    border-top-left-radius: 10px; /* Add rounded corners only to the top-left and top-right */
+    border-top-right-radius: 10px;
+  }
+
+  /* Details Styles */
+  .card-details {
+    padding: 10px; /* Add padding */
+    text-align: center; /* Center align text */
+  }
+
+  .item-name {
+    font-size: 1.1em; /* Set font size */
+    font-weight: bold; /* Set font weight */
+    margin-bottom: 5px; /* Add margin bottom */
+  }
+
+  .item-price {
+    font-size: 0.9em; /* Set font size */
+    color: #888; /* Set text color */
+  }
+</style>
 
 
 <div class="image-gallery">
   {% for item in menu_items %}
-    <div class="image-item">
+    <div class="card">
       <a href="{% url 'customer:order-search' %}?q={{ item.name }}">
-        <img src="{{ item.image.url }}" alt="{{ item.name }}" class="gallery-image">
+        <img src="{{ item.image.url }}" alt="{{ item.name }}">
       </a>
-      <div class="price-tag">
-        ZMK {{ item.price }}
+      <div class="card-details">
+        <div class="item-name">{{ item.name }}</div>
+        <div class="item-price">ZMK {{ item.price }}</div>
       </div>
-      <hr/>
-      <a href="{% url 'customer:order-search' %}?q={{ item.name }}" class="badge">
-        {{ item.name }}
-      </a>
-      <hr/>
     </div>
   {% endfor %}
-  <hr/>
 </div>
+
+
 
 <a class="text-center mb-4" href="" style="color: black;">OUR PARTNERS</a>
 
-<a href="https://wa.me/260970349470?text=Hello." class="sticky-whatsapp-button" target="_blank">
+<a href="https://wa.me/260970349470?text=Hello." class="whatsapp-button" target="_blank">
   <i class="fab fa-whatsapp whatsapp-icon"></i>
   <span class="whatsapp-text">Chat</span>
 </a>
+
 
 {% endblock %}
