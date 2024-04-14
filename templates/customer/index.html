@@ -209,16 +209,20 @@
 <div class="badge-container">
 
     <a href="{% url 'customer:order-search' %}?q=Food" class="badge">
-        <img src="{% static 'OIG.9nDejLsqZn5UuhMSEU.jpeg' %}" alt="Electrical Image" class="profile-pic">
+        <img src="{% static 'bravo.jpg' %}" alt="Electrical Image" class="profile-pic">
         <span class="badge-text">Bravo</span>
     </a>
+        <a href="{% url 'customer:order-search' %}?q=Groceries" class="badge">
+    <img src="{% static 'gloceryicon.jpg' %}" alt="Groceries Image" class="profile-pic">
+    <span class="badge-text">Groceries</span>
+</a>
     <a href="{% url 'customer:order-search' %}?q=Medicine" class="badge">
         <img src="{% static 'medicineicon.jpg' %}" alt="Plumbing Image" class="profile-pic">
         <span class="badge-text">Medicine</span>
     </a>
     <a href="{% url 'customer:order-search' %}?q=Hardware" class="badge">
         <img src="{% static 'hardware.jpg' %}" alt="Plumbing Image" class="profile-pic">
-        <span class="badge-text">Hardware</span>
+        <span class="badge-text">Ceajam</span>
     </a>
     <a href="{% url 'customer:order-search' %}?q=building materials" class="badge">
         <img src="{% static 'buildingmaterialsicon.jpg' %}" alt="Building Materials Image" class="profile-pic">
@@ -234,7 +238,8 @@
 
 <section class="hero">
   <div class="container" style="text-align: center;">
-    <h1>SOLID CONNECTIONS</h1>
+    <h3>SOLID CONNECTIONS</h3>
+    <hr/>
     <p>It's Convenient.</p>
     <a href="{% url 'customer:menu' %}" style="color: white;">Market Place</a>
   </div>
@@ -352,10 +357,18 @@
       <div class="card-details">
         <div class="item-name">{{ item.name }}</div>
         <div class="item-price">ZMK {{ item.price }}</div>
+        <!-- Add WhatsApp share link icon here -->
+<a href="https://wa.me/?text=Check%20out%20this%20item:%20{{ item.name }}%20ZMK{{ item.price }}.%20Click%20to%20view:%20{{ request.build_absolute_uri }}{% url 'customer:order-search' %}?q={{ item.name }}" target="_blank" style="display: inline-block; background-color: #25D366; color: #fff; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 16px; font-weight: 600; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); transition: background-color 0.3s, transform 0.2s ease-in-out;">
+  <i class="fab fa-whatsapp" style="margin-right: 10px;"></i> Share on WhatsApp
+</a>
+
       </div>
     </div>
   {% endfor %}
 </div>
+
+
+
 
 
 
