@@ -71,14 +71,13 @@
 
 <header class="fixed-top" style="text-decoration: none; background-color: black">
   <div class="nav-container">
-    <a href="{% url 'customer:index' %}" class="logo">
-      <img src="{% static 'sc.jpeg' %}" alt="Logo">
-    </a>
-
+<a href="{% url 'customer:index' %}" style="display: inline-block; text-decoration: none; color: white; border: 2px solid black; border-radius: 50%; width: 40px; height: 40px; line-height: 40px; text-align: center;">
+  <i class="fas fa-home" style="font-size: 20px;"></i>
+</a>
     <!-- Add the new search form here -->
     <form method="GET" action="{% url 'customer:menu-search' %}" class="search-form">
       <div class="input-group mb-2">
-        <input type="text" class="form-control rounded-pill" name="q" placeholder="Search sc Marketplace" aria-label="Search" value="{{ request.GET.q }}">
+        <input type="text" class="form-control rounded-pill" name="q" placeholder=  " What are you looking for?" aria-label="Search" value="{{ request.GET.q }}">
         <div class="input-group-append">
           <button class="btn btn-outline-secondary rounded-pill" type="submit"><i class="fas fa-search"></i></button>
         </div>
@@ -88,9 +87,9 @@
     <nav class="nav-menu">
       <ul>
         <li>
-          <a href="{% url 'blog-about' %}" class="btn btn-primary mb-2 btn-sm rounded-pill" style="text-decoration: none; background-color: navy;">
-            <i class="fas fa-info-circle about-icon"></i>
-          </a>
+          <a href="{% url 'blog-about' %}" style="display: inline-block; text-decoration: none; color: white; border: 2px solid black; border-radius: 50%; width: 40px; height: 40px; line-height: 40px; text-align: center;">
+  <i class="fas fa-info-circle" style="font-size: 20px;"></i>
+</a>
         </li>
       </ul>
     </nav>
