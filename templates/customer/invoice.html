@@ -2,93 +2,64 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>CEAJAM Invoice</title>
+    <title>NAMI ACADEMY - Quotation</title>
     <style>
-        /* Add CSS styles for the invoice */
+        /* Add CSS styles for the quotation */
         /* ... (your existing CSS styles) ... */
 
-        .invoice-header {
+        .quotation-header {
             text-align: center;
             margin-bottom: 20px;
         }
 
-        .invoice-header p {
+        .quotation-header p {
             margin: 5px 0;
         }
 
-        .invoice-table {
+        .quotation-table {
             width: 100%;
             margin-top: 20px;
         }
 
-        .invoice-table th, .invoice-table td {
+        .quotation-table th, .quotation-table td {
             border: 1px solid #dddddd;
             padding: 8px;
             text-align: left;
+        }
+
+        .quotation-footer {
+            margin-top: 20px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
     {% load static %}
-    <div class="invoice-container">
-        <div class="invoice-header">
-            <h2>SOLID CONNECTIONS (Z) LTD</h2>
-            <p>C/O Dambwa North Livingstone, Zambia.</p>
-            <p>Plot NO.</p>
-            <p>CELL: +260970349470</p>
-            <p>TPIN NO. 10000000000897</p>
-            <p>Email: solidconnections@gmail.com</p>
-        </div>
-        <div class="option-container" style="text-align: center; margin-top: 20px;">
-            <label for="quotation">Quotation</label>
-            <input type="checkbox" id="quotation" name="document_type" value="quotation">
-            <label for="invoice">Invoice</label>
-            <input type="checkbox" id="invoice" name="document_type" value="invoice">
-            <label for="receipt">Receipt</label>
-            <input type="checkbox" id="receipt" name="document_type" value="receipt">
+    <div class="quotation-container">
+        <div class="quotation-header">
+            <h2>{% if order.agent %}
+<p>{{ order.agent.username }}</p>
+{% endif %} - Quotation</h2>
+            <p>Livingstone, Zambia.</p>
+
         </div>
         <div class="customer-details">
             <h2>Customer Details</h2>
             <p>Name: {{ name }}</p>
-            <p>Specifics: {{ specifics }}</p>
-            {% if order.agent %}
-                <p>Agent ID: {{ order.agent.username }}</p>
-            {% endif %}
+            <p> {{ specifics }}</p>
+
             <p>Street: {{ street }}</p>
             <p>{{ location.name }}</p>
         </div>
-        <div class="order-details">
-            <h2>Order Details</h2>
-            <table>
+        <div class="quotation-details">
+            <h2>Quotation Details</h2>
+            <table class="quotation-table">
                 <tr>
-                    <th>Page No.</th>
-                    <td>100{{ pk }}</td>
-                </tr>
-
-
-
-<style>
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-    }
-
-    th, td {
-        border: 1px solid #dddddd;
-        padding: 8px;
-        text-align: left;
-    }
-</style>
-
-        <div class="order-details">
-            <table>
-                <tr>
-                    <th>No.</th>
+                    <th>Item No.</th>
                     <th>Description</th>
                     <th>Unit Price</th>
                     <th>Quantity</th>
-                    <th>Received Item</th>
+                    <th>Subtotal</th>
                 </tr>
                 {% for order_item in items %}
                     <tr>
@@ -96,49 +67,31 @@
                         <td>{{ order_item.item.name }} ({{ order_item.item.description }})</td>
                         <td>{{ order_item.item.price }}</td>
                         <td>{{ order_item.quantity }}</td>
-                        <td> <!-- Calculate and display amount here if needed --> </td>
+                        <td>{{ order_item.item.price|floatformat:2 }}</td>
                     </tr>
                 {% endfor %}
             </table>
-            </div>
-
-
+        </div>
+        <div class="quotation-total">
+            <h2>Total</h2>
             <table>
                 <tr>
                     <th>Total Price</th>
-                    <td class="total">{{ price }}</td>
+                    <td>{{ price }}</td>
                 </tr>
                 <tr>
-                    <th>Delivery Fee Cost</th>
-                    <td class="delivery-fee">{{ delivery_fee }} % off on Deliveries + [{{ discount_amount|floatformat:2 }}]</td>
+                    <th>Additional Charges</th>
+                    <td>{{ delivery_fee }} % off on Deliveries + [{{ discount_amount|floatformat:2 }}]</td>
                 </tr>
-
                 <tr>
-                    <th>Total (Including Delivery Fee)</th>
-                    <td class="total-with-delivery">{{ total_price|floatformat:2 }}</td>
+                    <th>Total Amount (Including Charges)</th>
+                    <td>{{ total_price|floatformat:2 }}</td>
                 </tr>
             </table>
         </div>
-
-            </table>
+        <div class="quotation-footer">
+            <p>&copy; {{ current_year }} Nami Academy<span style="color: red;"> </span></p>
         </div>
     </div>
-        <hr/>
-        <div class="footer">
-            <p class="text-center footer">
-                &copy; {{ current_year }} SolidConnections<span style="color: red;"> </span>
-            </p>
-        </div>
-        <div class="stamp">
-            ORDERED ON <br>
-            <span id="date"></span>
-        </div>
-    </div>
-
-    <script>
-        var today = new Date();
-        var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-        document.getElementById("date").innerHTML = date;
-    </script>
 </body>
 </html>

@@ -200,11 +200,8 @@
     }
 </style>
 
-
-
 {% for item in items %}
 <div class="menu-item">
-
     <div class="row">
         <div class="col-md-2 col-sm-12">
             <a href="{{ item.image.url }}" target="_blank">
@@ -218,6 +215,12 @@
                         <!-- Use label to style checkbox as a button -->
                         <input type="checkbox" name="items[]" class="form-check-input" value="{{ item.pk }}" id="item_{{ item.pk }}">
                         {{ item.name }}
+
+  <ul>
+    {% for category in item.category.all %}
+      <li>{{ category.name }}</li>
+    {% endfor %}
+  </ul>
                     </label>
                     <div class="d-flex justify-content-between">
                         <div class="input-group">

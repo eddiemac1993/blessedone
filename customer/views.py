@@ -13,7 +13,18 @@ from django.db.models.functions import Coalesce
 from decimal import Decimal
 import random
 
+class UpdateOrderQuantities(View):
+    def post(self, request, pk, *args, **kwargs):
+        order = OrderModel.objects.get(pk=pk)
 
+        for item in order.order_items.all():
+            quantity_key = f'quantity_{item.id}'
+            if quantity_key in request.POST:
+                new_quantity = int(request.POST[quantity_key])
+                item.quantity = new_quantity
+                item.save()
+
+        return redirect('customer:order-confirmation', pk=order.pk)
 
 class Index(ListView):
     model = MenuItem
@@ -111,7 +122,7 @@ class OrderConfirmation(View):
         order = OrderModel.objects.get(pk=pk)
 
         # Calculate the discount amount (8% of the total price)
-        discount_percentage = Decimal('0.08')  # Use Decimal for precise arithmetic
+        discount_percentage = Decimal('0.5')  # Use Decimal for precise arithmetic
         discount_amount = discount_percentage * order.price
 
         total_price = order.price + order.location.delivery_fee + discount_amount
@@ -134,7 +145,7 @@ def get_invoice(request, pk):
     items = order.order_items.all()
 
     # Calculate the total price with discount
-    discount_percentage = Decimal('0.08')  # 5% discount
+    discount_percentage = Decimal('0.5')  # 5% discount
     discount_amount = discount_percentage * order.price
     price = sum((item.item.price * item.quantity for item in items))
     total_price = price + order.location.delivery_fee + discount_amount
