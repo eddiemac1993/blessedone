@@ -1,0 +1,18 @@
+{% extends 'hrms/base.html' %}
+
+{% block title %}Employee Detail{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Employee Detail</h1>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">{{ employee.user.get_full_name }}</h5>
+        <p class="card-text"><strong>Employee ID:</strong> {{ employee.employee_id }}</p>
+        <p class="card-text"><strong>Department:</strong> {{ employee.department }}</p>
+        <p class="card-text"><strong>Position:</strong> {{ employee.position }}</p>
+        <p class="card-text"><strong>Hire Date:</strong> {{ employee.hire_date }}</p>
+        <a href="{% url 'employee_update' employee.pk %}" class="btn btn-warning">Edit</a>
+        <a href="{% url 'employee_list' %}" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>
+{% endblock %}

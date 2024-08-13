@@ -1,0 +1,14 @@
+{% extends 'educationbase.html' %}
+
+{% block title %}Free Trial{% endblock %}
+
+{% block content %}
+<h1>Free Trial</h1>
+<p>Sign up for a free trial class to experience our teaching methods.</p>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}

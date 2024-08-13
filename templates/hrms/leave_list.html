@@ -1,0 +1,38 @@
+{% extends 'hrms/base.html' %}
+
+{% block title %}Leave Requests{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Leave Requests</h1>
+<a href="{% url 'leave_create' %}" class="btn btn-primary mb-3">Request Leave</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Employee</th>
+            <th>Leave Type</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for leave in leaves %}
+        <tr>
+            <td>{{ leave.employee.user.get_full_name }}</td>
+            <td>{{ leave.get_leave_type_display }}</td>
+            <td>{{ leave.start_date }}</td>
+            <td>{{ leave.end_date }}</td>
+            <td>{{ leave.status }}</td>
+            <td>
+                <a href="{% url 'leave_update' leave.pk %}" class="btn btn-sm btn-warning">Edit</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">No leave requests found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

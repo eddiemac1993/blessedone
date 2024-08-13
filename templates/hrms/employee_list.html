@@ -1,0 +1,37 @@
+{% extends 'hrms/base.html' %}
+
+{% block title %}Employees{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Employee List</h1>
+<a href="{% url 'employee_create' %}" class="btn btn-primary mb-3">Add New Employee</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Employee ID</th>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Position</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for employee in employees %}
+        <tr>
+            <td>{{ employee.employee_id }}</td>
+            <td>{{ employee.user.get_full_name }}</td>
+            <td>{{ employee.department }}</td>
+            <td>{{ employee.position }}</td>
+            <td>
+                <a href="{% url 'employee_detail' employee.pk %}" class="btn btn-sm btn-info">View</a>
+                <a href="{% url 'employee_update' employee.pk %}" class="btn btn-sm btn-warning">Edit</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No employees found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

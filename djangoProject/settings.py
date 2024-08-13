@@ -41,6 +41,8 @@ AUTHENTICATION_BACKENDS = [
 
 INSTALLED_APPS = [
     'django.contrib.admin',
+    'education',
+    'hrms',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',

@@ -312,33 +312,25 @@
 </head>
 
 <body>
-<header class="fixed-top">
-  <div class="nav-container">
-    <a href="{% url 'customer:index' %}" class="logo">
-      <img src="{% static 'logo.png' %}" alt="logo" class="logo-img rounded-circle">
-    </a>
-  </div>
-      <nav class="nav-menu">
-      <ul>
-        <li>
-          <a href="{% url 'pdf_manager:pdf_upload' %}" class="btn btn-warning mb-2 btn-sm rounded-pill position-relative" style="text-decoration: none; display: flex; align-items: center;">
-            <span>Upload</span>
-            <i class="fas fa-cloud-upload-alt" style="margin-left: 5px;"></i>
-            <i class="far fa-file-pdf pdf-icon" style="margin-left: 5px;"></i>
-          </a>
-        </li>
-      </ul>
-    </nav>
-</header>
+
+  <header class="fixed-top">
+    <div class="nav-container">
+      <a href="/" class="logo">
+        <span class="logo-text">
+          <span class="logo-nami" style="color: white;">Nami</span>
+          <span class="logo-academy" style="color: orange;">Academy</span>
+        </span>
+      </a>
+    </div>
+  </header>
 
 
-  <br/>
+<br/>
   <br/>
   <br/>
 
   <div class="container">
 <div class="card">
-        <img src="{% static 'download.png' %}" alt="Image" class="rounded-circle img-responsive mx-auto d-block" style="border: 2px solid #000; max-width: 200px; padding: 10px;">
   <div class="navbar">
     <form method="GET" action="{% url 'pdf_manager:pdf_list' %}" class="search-form">
       <div class="search-container">
@@ -354,7 +346,7 @@
       </button>
     </a>
   </div>
-  <h1 style="background-color: rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px); padding: 10px; border-radius: 10px; color: black; text-shadow: 2px 2px white;">The PDF Education Resource Library<br>for Abeka School</h1>
+  <h1 style="background-color: rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px); padding: 10px; border-radius: 10px; color: black; text-shadow: 2px 2px white;">The PDF Education Resource Library</h1>
 </div>
 
 <style>
@@ -442,17 +434,17 @@
       <div class="file-card">
         <img src="{% static 'education.png' %}" alt="education" class="file-image">
         <div class="file-details">
-          <div class="file-title">{{ pdf_file.title }} <i class="far fa-file-pdf pdf-icon"></i> </div>
+          <div class="file-title"><i class="fas fa-download"></i>{{ pdf_file.title }} <i class="far fa-file-pdf pdf-icon"></i> </div>
           <p class="file-category">{{ pdf_file.category.name }}</p>
           <p class="file-date">Uploaded on {{ pdf_file.upload_date|date:"Y-m-d" }}</p>  <!-- Add this line -->
         </div>
       </div>
     </a>
-    <a class="share-btn" href="whatsapp://send?text={{ request.build_absolute_uri }} - {{ pdf_file.title|urlencode }} {{ pdf_file.pdf.url|urlencode }}&image={% static 'education.png' %}">
-      <i class="fab fa-whatsapp share-icon"></i>
-      <div class="file-date">Share</div>
-      <span class="share-badge"></span>
-    </a>
+    <a class="share-btn" href="whatsapp://send?text={{ request.build_absolute_uri }}{% url 'pdf_manager:pdf_list' %}?q={{ category.name }}">
+    <i class="fab fa-whatsapp share-icon"></i>
+    <div class="file-date">Share</div>
+    <span class="share-badge"></span>
+</a>
   </div>
   {% endfor %}
   {% else %}

@@ -1,0 +1,45 @@
+{% extends 'hrms/base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">HRMS Dashboard</h1>
+<div class="row">
+    <div class="col-md-3 mb-4">
+        <div class="card text-center shadow-sm" style="background-color: #e3f2fd;">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-users"></i> Total Employees</h5>
+                <p class="card-text display-4">{{ employees.count }}</p>
+                <a href="{% url 'employee_list' %}" class="btn btn-custom mt-3" data-bs-toggle="tooltip" data-bs-placement="top" title="View all employees">View Employees</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-4">
+        <div class="card text-center shadow-sm" style="background-color: #e8f5e9;">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-calendar-check"></i> Today's Attendance</h5>
+                <p class="card-text display-4">{{ today_attendance.count }}</p>
+                <a href="{% url 'attendance_list' %}" class="btn btn-custom mt-3" data-bs-toggle="tooltip" data-bs-placement="top" title="View today's attendance">View Attendance</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-4">
+        <div class="card text-center shadow-sm" style="background-color: #fff3e0;">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-plane"></i> Pending Leaves</h5>
+                <p class="card-text display-4">{{ pending_leaves.count }}</p>
+                <a href="{% url 'leave_list' %}" class="btn btn-custom mt-3" data-bs-toggle="tooltip" data-bs-placement="top" title="View pending leaves">View Leaves</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-4">
+        <div class="card text-center shadow-sm" style="background-color: #f3e5f5;">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-chart-line"></i> Recent Performance Reviews</h5>
+                <p class="card-text display-4">{{ recent_reviews.count }}</p>
+                <a href="{% url 'performance_list' %}" class="btn btn-custom mt-3" data-bs-toggle="tooltip" data-bs-placement="top" title="View recent performance reviews">View Performance</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

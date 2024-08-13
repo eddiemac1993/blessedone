@@ -1,0 +1,44 @@
+{% extends 'hrms/base.html' %}
+
+{% block title %}HR Dashboard{% endblock %}
+
+{% block content %}
+<h1>HR Dashboard</h1>
+<div class="row">
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Total Employees</h5>
+                <p class="card-text">{{ total_employees }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Average Salary</h5>
+                <p class="card-text">${{ avg_salary|floatformat:2 }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Open Positions</h5>
+                <p class="card-text">{{ open_positions }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Upcoming Trainings</h5>
+                <p class="card-text">{{ upcoming_trainings }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mt-4">
+    <a href="{% url 'generate_payroll_report' %}" class="btn btn-primary">Generate Payroll Report</a>
+</div>
+{% endblock %}

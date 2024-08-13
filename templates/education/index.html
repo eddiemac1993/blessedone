@@ -1,0 +1,27 @@
+{% extends 'educationbase.html' %}
+
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<h1>Welcome to Our Tuition Center</h1>
+<p>Prepare for your exams with our expert guidance!</p>
+
+<h2>PDF Resources</h2>
+<ul>
+    {% for pdf in pdf_resources %}
+        <li><a href="{% url 'view_pdf' pdf.file.name %}">{{ pdf.title }}</a> - {{ pdf.description }}</li>
+    {% endfor %}
+</ul>
+
+<h2>Blog Posts</h2>
+<ul>
+    {% for post in blog_posts %}
+        <li>{{ post.title }} - {{ post.created_at }}</li>
+        <p>{{ post.content|truncatewords:30 }}</p>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'free_trial' %}"><button>Sign up for a Free Trial</button></a>
+{% endblock %}
+

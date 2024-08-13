@@ -1,0 +1,14 @@
+<!-- pdf_view.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}PDF Viewer{% endblock %}
+
+{% block content %}
+<h1>PDF Viewer</h1>
+
+{% for image in images %}
+    <img src="{{ image }}" alt="PDF Page">
+{% endfor %}
+
+{% endblock %}

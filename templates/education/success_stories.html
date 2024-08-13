@@ -1,0 +1,14 @@
+{% extends 'educationbase.html' %}
+
+{% block title %}Success Stories{% endblock %}
+
+{% block content %}
+<h1>Success Stories</h1>
+<p>Read about our students' success stories!</p>
+<ul>
+    {% for story in success_stories %}
+        <li>{{ story.student_name }} - {{ story.created_at }}</li>
+        <p>{{ story.content }}</p>
+    {% endfor %}
+</ul>
+{% endblock %}
