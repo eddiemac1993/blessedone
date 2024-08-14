@@ -1,0 +1,153 @@
+{% extends 'finances/base.html' %}
+{% load humanize %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-6">
+        <h1>Financial Dashboard</h1>
+    </div>
+    <div class="col-md-6 text-end">
+        <a href="{% url 'expense_list' %}" class="btn btn-primary">
+            <i class="fas fa-list"></i> View All Expenses
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Total Expenses (Last 30 days)</h5>
+                <p class="card-text h2">K{{ total_last_30_days|floatformat:2|intcomma }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Average Daily Expense (Last 30 days)</h5>
+                <p class="card-text h2">K{{ avg_daily_expense|floatformat:2|intcomma }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Total Expenses (All time)</h5>
+                <p class="card-text h2">K{{ total_all_time|floatformat:2|intcomma }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<div class="row">
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Expense Trends</h5>
+            </div>
+            <div class="card-body">
+                <div id="expense-trend-chart" style="height: 300px;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Expense Distribution</h5>
+            </div>
+            <div class="card-body">
+                <div id="category-distribution-chart" style="height: 300px;"></div>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Top Spending Categories</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    {% for category in top_categories %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ category.category }}
+                        <span class="badge bg-primary rounded-pill">K{{ category.total|floatformat:2 }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Recent Expenses</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    {% for expense in recent_expenses %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong>{{ expense.date }}</strong> - {{ expense.reason }}
+                            <br>
+                            <small>{{ expense.get_company_display }} - {{ expense.category }}</small>
+                        </div>
+                        <span class="badge bg-primary rounded-pill">K{{ expense.amount|floatformat:2 }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script>
+    // Expense Trend Chart
+    var trendOptions = {
+        series: [{
+            name: 'Expenses',
+            data: {{ trend_data|safe }}
+        }],
+        chart: {
+            type: 'line',
+            height: 300
+        },
+        xaxis: {
+            type: 'datetime'
+        },
+        yaxis: {
+            title: {
+                text: 'Amount (K)'
+            }
+        },
+        title: {
+            text: 'Monthly Expenses',
+            align: 'left'
+        }
+    };
+    var trendChart = new ApexCharts(document.querySelector("#expense-trend-chart"), trendOptions);
+    trendChart.render();
+
+    // Category Distribution Chart
+    var distributionOptions = {
+        series: {{ category_data|safe }},
+        chart: {
+            type: 'pie',
+            height: 300
+        },
+        labels: {{ category_labels|safe }},
+        title: {
+            text: 'Expense Distribution by Category',
+            align: 'left'
+        }
+    };
+    var distributionChart = new ApexCharts(document.querySelector("#category-distribution-chart"), distributionOptions);
+    distributionChart.render();
+</script>
+{% endblock %}

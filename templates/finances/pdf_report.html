@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Expense Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        h2 {
+            font-size: 20px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        .summary-table th, .summary-table td {
+            text-align: center;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 12px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <h1>Expense Report</h1>
+    <h2>Report Type: {{ filter_type|title }} {% if company != 'all' %}({{ company }}){% endif %}</h2>
+
+    <h3>Summary</h3>
+    <table class="summary-table">
+        <thead>
+            <tr>
+                <th>SC</th>
+                <th>CMM</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>K{{ summaries.SC|floatformat:2 }}</td>
+                <td>K{{ summaries.CMM|floatformat:2 }}</td>
+                <td>K{{ summaries.Total|floatformat:2 }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Expenses</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Company</th>
+                <th>Reason</th>
+                <th>Category</th>
+                <th>Amount (K)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for expense in expenses %}
+            <tr>
+                <td>{{ expense.date }}</td>
+                <td>{{ expense.get_company_display }}</td>
+                <td>{{ expense.reason }}</td>
+                <td>{{ expense.category }}</td>
+                <td>K{{ expense.amount|floatformat:2 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="footer">
+        Generated on {{ current_date }} | Expense Tracker
+    </div>
+</body>
+</html>
